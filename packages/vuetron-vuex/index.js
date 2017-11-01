@@ -1,21 +1,22 @@
 const io = require('socket.io-client');
 
 const VuetronVuex = store => {
-  
-      const socket = io('http://localhost:3000');
-      // socket.on('connect', () => {
-          socket.emit('state', store.state);
-          // console.log('emitted');
-      // });
-      console.log('initial state', store.state);
-      console.log('initial store', store.state);
 
-      store.subscribe((mutation, state) => {
-        socket.emit('updateState', state);
-          console.log('mutation', mutation);
-          console.log('state', state);
-          // The mutation comes in the format of `{ type, payload }`.
-      })
-  }
+    // initialize socket connection
+    const socket = io('http://localhost:3000');
+
+    // emit initial state to server
+    socket.emit('clientStateInit', store.state);
+    console.log('initial state', store.state);
+    console.log('initial store', store.state);
+
+    // subscribe to store mutations
+    store.subscribe((mutation, state) => {
+        // on mutation, emit update event to server
+        socket.emit('clientStateUpdate', state);
+        console.log('mutation', mutation);
+        console.log('state', state);
+    })
+}
 
 module.exports = VuetronVuex;
