@@ -7,15 +7,11 @@ const VuetronVuex = store => {
 
     // emit initial state to server
     socket.emit('clientStateInit', store.state);
-    console.log('initial state', store.state);
-    console.log('initial store', store.state);
 
     // subscribe to store mutations
     store.subscribe((mutation, state) => {
         // on mutation, emit update event to server
         socket.emit('clientStateUpdate', state);
-        console.log('mutation', mutation);
-        console.log('state', state);
     })
 }
 
