@@ -13,7 +13,6 @@ import Subscription from './components/Subscription.vue';
 import Stateview from './components/Stateview.vue';
 
 export default {
-  name: 'app',
   components: {
     Timeline,
     Subscription,
