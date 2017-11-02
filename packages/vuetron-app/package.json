@@ -1,0 +1,38 @@
+{
+  "name": "vuetron-app",
+  "version": "1.0.0",
+  "description": "Vue/Vuex debugging app built on Electron",
+  "main": "electron.js",
+  "scripts": {
+    "dev-server": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --quiet --port 3000",
+    "dev": "cross-env NODE_ENV=development electron ./",
+    "build": "cross-env NODE_ENV=production webpack --progress --profile --colors",
+    "start": "cross-env NODE_ENV=production electron ./",
+    "package": "npm run build; npm run package-osx; npm run package-win; npm run package-linux;",
+    "package-osx": "electron-packager ./ --platform=darwin --arch=x64 --icon=assets/app.icns --out=package --asar=true --overwrite=force",
+    "package-win": "electron-packager ./ --platform=win32 --arch=ia32 --icon=assets/app.ico --out=package --asar=true --overwrite=force",
+    "package-linux": "electron-packager ./ --platform=linux --arch=ia32 --icon=assets/app.ico --out=package --asar=true --overwrite=force"
+  },
+  "author": "Samantha Salley",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.7.9",
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "cross-env": "^5.1.1",
+    "css-loader": "^0.28.7",
+    "electron-packager": "^9.1.0",
+    "electron-reload": "^1.2.2",
+    "file-loader": "^1.1.5",
+    "path": "^0.12.7",
+    "vue-loader": "^13.3.0",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
+  }
+}
