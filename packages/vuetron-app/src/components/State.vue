@@ -7,12 +7,9 @@
  <script>
  export default {
    data() {
-     return{
-       msg: 'Hello Kelly'
+     return { 
+       msg: 'Hello Sam'
      }
-   },
-   methods: {
-       
    }
  }
  </script>

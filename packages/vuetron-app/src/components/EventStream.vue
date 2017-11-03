@@ -1,6 +1,7 @@
 <template>
   <div>
-   <h1>{{ msg }}</h1>
+      <h1>{{ msg }}</h1>
+
   </div>
 </template>
  
@@ -8,11 +9,9 @@
  export default {
    data() {
      return{
-       msg: 'Hello Kelly'
+       msg: 'Hello Louis'
      }
    },
-   methods: {
-       
-   }
  }
  </script>
+ 

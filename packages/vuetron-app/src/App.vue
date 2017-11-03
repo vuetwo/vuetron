@@ -1,22 +1,17 @@
 <template>
   <div id="app">
-  <div id="sidebar-wrapper">
-      <ul><button v-on:click="timeline">Timeline</button></ul>
-      <ul><button v-on:click="selectedPage">Subscription</button></ul>
-      <ul><button v-on:click="stateView">Stateview</button></ul>
+      <display></display>
+      <navbar></navbar>
   </div>
 </template>
 
 <script>
-import Timeline from './components/Timeline.vue';
-import Subscription from './components/Subscription.vue';
-import Stateview from './components/Stateview.vue';
-
+import Display from './components/Display.vue';
+import Navbar from './components/Navbar.vue';
 export default {
   components: {
-    Timeline,
-    Subscription,
-    Stateview
-  },
-};
+    display: Display,
+    navbar: Navbar
+    }
+  }
 </script>
