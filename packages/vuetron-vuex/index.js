@@ -1,7 +1,7 @@
 const io = require('socket.io-client');
 
 const VuetronVuex = function (port = 9090) {
-  store => {
+  return store => {
     // initialize socket connection
     const socket = io('http://localhost:' + port);
 
