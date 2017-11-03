@@ -1,5 +1,8 @@
 const electron = require('electron')
 
+// initialize Vuetron server w/ sockets
+const { server } = require('vuetron-server');
+
 const app = electron.app
 
 const BrowserWindow = electron.BrowserWindow
