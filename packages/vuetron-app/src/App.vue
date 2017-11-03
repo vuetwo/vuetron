@@ -1,20 +1,17 @@
 <template>
   <div id="app">
-    <Test :msg="msg" />
+      <display></display>
+      <navbar></navbar>
   </div>
 </template>
 
 <script>
-import Test from "./components/Test.vue";
-
+import Display from './components/Display.vue';
+import Navbar from './components/Navbar.vue';
 export default {
   components: {
-    Test,
-  },
-  data() {
-    return {
-      msg: "Successful Test!"
-    };
-  },
-};
+    display: Display,
+    navbar: Navbar
+    }
+  }
 </script>

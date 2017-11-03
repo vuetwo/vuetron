@@ -8,3 +8,4 @@ new Vue({
   components: { App },
   store,
 });
+
