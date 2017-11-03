@@ -29,6 +29,13 @@ module.exports = function (server) {
       currentState = state;
     });
 
+    socket.on('vuetronStateUpdate', function (state) {
+      // Update currentState to Vuetron state update
+      currentState = JSON.parse(state);
+      // Pass reverted/changed state back to client
+      socket.broadcast.emit('updateClientState', state);
+    });
+
   });
 
   return io;
