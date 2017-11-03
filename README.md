@@ -42,13 +42,13 @@ Please submit issues/pull requests if you have feedback or would like to contrib
 
 ## Authors
 
-Samantha Salley (https://github.com/samanthasalley)
+Samantha Salley ([https://github.com/samanthasalley](https://github.com/samanthasalley))
 
-Louis Rouaze (https://github.com/louisrouaze)
+Louis Rouaze ([https://github.com/louisrouaze](https://github.com/louisrouaze))
 
-Kelly Gilliam (https://github.com/KellyGilliam)
+Kelly Gilliam ([https://github.com/KellyGilliam](https://github.com/KellyGilliam))
 
-Brandon Danh (https://github.com/brandondanh)
+Brandon Danh ([https://github.com/brandondanh](https://github.com/brandondanh))
 
 ## Contact
 
