@@ -12,7 +12,7 @@ const VuetronVue = {
         //check if event (cb[0]) is a user emitted event
         if (typeof cb[0] === 'string' && !cb[0].includes('hook:')) {
           // socket emit that a user event has been emitted
-          socket.emit('emitEvent', cb[0]);
+          socket.emit('clientEmitEvent', cb[0]);
           // find the context that has the correct event
           while (!currThis._events.hasOwnProperty(cb[0]) && this._context !== undefined) {
             currThis = currThis._context;
