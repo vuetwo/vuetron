@@ -17,7 +17,18 @@ const VuetronVuex = function (port = 9090) {
     //  with mutation log
     socket.on('stateUpdate', function(mutation, newState){
       // add mutation to mutation log
+      // store.state.mutations.unshift(mutation);
+      store.state.events.unshift(mutation);
       // update client's current state to newState
+      store.state.clientState = newState;
+    });
+
+    socket.on('sendEvent', function(event){
+      store.state.events.unshift(event);
+    });
+
+    socket.on('sendMutation', function(mutation){
+      store.state.events.unshift(mutation);
     });
 
     // subscribe to store mutations
@@ -34,11 +45,11 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        clientState: {},  //state from client
-        mutations: [],    //history of mutations from client
+        clientState: {key: 'value'},  //state from client
+        // mutations: [],    //history of mutations from client
         messages: ['Store works!', 'Chicken wings are delicious'],
         tests: ['hardCodeTest', 'test2'],
-        events: []
+        events: ['connected to app', 'state change', 'state initialized']
     },
     plugins: [VuetronVuex()],
     // mutations: {
