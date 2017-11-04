@@ -5,7 +5,8 @@ import { store } from './store';
 new Vue({
   el: '#vuetron',
   template: '<App/>',
-  components: { App },
   store,
+  components: { App }
+  
 });
 
