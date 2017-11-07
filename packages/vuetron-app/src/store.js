@@ -9,27 +9,33 @@ const VuetronVuex = function (port = 9090) {
     // initialize socket connection
     const socket = io('http://localhost:' + port);
 
-    // emit initial state to server
-    socket.emit('vuetronStateUpdate', store.state);
+    // request current client state on socket connection
+    socket.emit('requestClientState');
+
+    socket.on('setInitState', function(state) {
+      store.commit('updateClientState', state);
+    });
 
     // listen for state changes from client and update
     //  vuetron's client state store accordingly along
     //  with mutation log
     socket.on('stateUpdate', function(mutation, newState){
-      // add mutation to mutation log
-      // store.state.mutations.unshift(mutation);
-      let updatedState = {
-        title: 'STATE CHANGE',
-        mutation: mutation,
-        newState: newState
-      };
-      store.state.events.unshift(updatedState);
-      // update client's current state to newState
-      store.state.clientState = newState;
+      console.log('got state update', mutation, newState);
+      // // add mutation to mutation log
+      // // store.state.mutations.unshift(mutation);
+      // let updatedState = {
+      //   title: 'STATE CHANGE',
+      //   mutation: mutation,
+      //   newState: newState
+      // };
+      // store.state.events.unshift(updatedState);
+      // // update client's current state to newState
+      // store.state.clientState = newState;
     });
 
     socket.on('sendEvent', function(event){
-      store.state.events.unshift(event);
+      console.log('got new event', event);
+      // store.state.events.unshift(event);
     });
 
 
