@@ -18,7 +18,12 @@ const VuetronVuex = function (port = 9090) {
     socket.on('stateUpdate', function(mutation, newState){
       // add mutation to mutation log
       // store.state.mutations.unshift(mutation);
-      store.state.events.unshift(mutation);
+      let updatedState = {
+        title: 'STATE CHANGE',
+        mutation: mutation,
+        newState: newState
+      };
+      store.state.events.unshift(updatedState);
       // update client's current state to newState
       store.state.clientState = newState;
     });
@@ -27,8 +32,27 @@ const VuetronVuex = function (port = 9090) {
       store.state.events.unshift(event);
     });
 
-    socket.on('sendMutation', function(mutation){
-      store.state.events.unshift(mutation);
+
+    //TESTING WITH DUMMY DATA:
+
+    //get state change:
+    socket.on('sendMutation', function(mutation, newState){
+      let updatedStateItem = {
+        title: 'STATE CHANGE',
+        display: JSON.stringify(mutation),
+        newState: JSON.stringify(newState)
+      };
+      store.state.events.unshift(updatedStateItem);
+    });
+
+    //get client event:
+    socket.on('sendClientEvent', function(type, payload){
+      let clientStateItem = {
+        title: 'ACTION',
+        display: JSON.stringify(payload),                
+        type: type
+      }
+      store.state.events.unshift(clientStateItem);
     });
 
     // subscribe to store mutations
@@ -45,14 +69,8 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        clientState: {key: 'value'},  //state from client
-        // mutations: [],    //history of mutations from client
-        messages: ['Store works!', 'Chicken wings are delicious'],
-        tests: ['hardCodeTest', 'test2'],
-        events: ['connected to app', 'state change', 'state initialized']
+        clientState: {},  //state from client
+        events: [{title:'CONNECTED TO APP'}, {title:'STATE INITIALIZED'}]
     },
     plugins: [VuetronVuex()],
-    // mutations: {
-        
-    // }
 });
