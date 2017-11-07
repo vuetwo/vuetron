@@ -69,8 +69,13 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        clientState: {},  //state from client
+        clientState: null,  //state from client
         events: [{title:'CONNECTED TO APP'}, {title:'STATE INITIALIZED'}]
+    },
+    mutations: {
+      updateClientState (state, newClientState) {
+        state.clientState = newClientState;
+      }
     },
     plugins: [VuetronVuex()],
 });
