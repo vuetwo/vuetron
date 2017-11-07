@@ -7,6 +7,5 @@ new Vue({
   template: '<App/>',
   store,
   components: { App }
-  
 });
 

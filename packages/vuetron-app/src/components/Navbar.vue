@@ -10,10 +10,10 @@
 
 <script>
 export default {
-    data() {
-        return {
-        }
-    },
+    // data() {
+    //     return {
+    //     }
+    // },
   methods: {
       eventstream() {
           alert('eventstream is active');
