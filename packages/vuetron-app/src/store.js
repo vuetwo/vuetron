@@ -21,16 +21,17 @@ const VuetronVuex = function (port = 9090) {
     //  with mutation log
     socket.on('stateUpdate', function(mutation, newState){
       console.log('got state update', mutation, newState);
-      // // add mutation to mutation log
-      // // store.state.mutations.unshift(mutation);
-      // let updatedState = {
-      //   title: 'STATE CHANGE',
-      //   mutation: mutation,
-      //   newState: newState
-      // };
-      // store.state.events.unshift(updatedState);
-      // // update client's current state to newState
-      // store.state.clientState = newState;
+      // add mutation to mutation log
+      // store.state.mutations.unshift(mutation);
+      let updatedState = {
+        title: 'STATE CHANGE',
+        mutation: mutation,
+        newState: JSON.stringify(newState),
+        show: false
+      };
+      store.commit('addNewEvent', updatedState);
+      // update client's current state to newState
+      store.commit('updateClientState', newState);
     });
 
     socket.on('sendEvent', function(event){
@@ -48,7 +49,7 @@ const VuetronVuex = function (port = 9090) {
         display: JSON.stringify(mutation),
         newState: JSON.stringify(newState)
       };
-      store.state.events.unshift(updatedStateItem);
+      store.commit('addNewEvent', updatedStateItem);
     });
 
     //get client event:
@@ -58,7 +59,7 @@ const VuetronVuex = function (port = 9090) {
         display: JSON.stringify(payload),                
         type: type
       }
-      store.state.events.unshift(clientStateItem);
+      store.commit('addNewEvent', clientStateItem);
     });
 
     // subscribe to store mutations
@@ -81,7 +82,13 @@ export const store = new Vuex.Store({
     mutations: {
       updateClientState (state, newClientState) {
         state.clientState = newClientState;
-      }
+      },
+      addNewEvent(state, newEvent) {
+        state.events.unshift(newEvent);
+      },
+      toggleEventShow(state, evIdx){
+        state.events[evIdx].show = !state.events[evIdx].show;
+      },
     },
     plugins: [VuetronVuex()],
 });
