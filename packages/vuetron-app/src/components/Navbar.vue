@@ -1,9 +1,9 @@
-<template>
-<div>
+<template id="template">
+<div id="navContainer">
     <div>
-        <button v-on:click="eventstream">EventStream</button>
-        <button v-on:click="subscription">Subscription</button> 
-        <button v-on:click="state">State</button> 
+        <button class="navButton" v-on:click="eventstream">EventStream</button>
+        <button class="navButton" v-on:click="subscription">Subscription</button> 
+        <button class="navButton" v-on:click="state">State</button> 
     </div>   
 </div>
 </template>
@@ -27,3 +27,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+    /* #template {
+        height: 100%;
+    }
+    #navContainer {
+        height: 100%;
+    } */
+</style>        

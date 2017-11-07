@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-      <display></display>
-      <navbar></navbar>
+      <display id="display"></display>
+      <navbar id="navbar"></navbar>
   </div>
 </template>
 
@@ -15,3 +15,21 @@ export default {
     }
   }
 </script>
+<style>
+  #app {
+    height: 100%;
+  }
+  #navbar {
+    float: left;
+    height: 100%;
+    width: 20%;
+    background-color:#2F4B5C;
+  }
+  #display {
+    float: right;
+    height: 100%;
+    width: 80%;
+    background-color: #31B689;
+    overflow: scroll;
+  }
+</style>
