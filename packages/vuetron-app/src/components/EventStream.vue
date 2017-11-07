@@ -4,7 +4,7 @@
       <div class="row" v-for="(event, index) in events" v-bind:event="event" v-bind:key="index">
         <h1 @click="() => {emitEventToggle(index)}">{{ event.title }}</h1>
         <div v-show="event.show">
-          <p>{{ event.mutation }}</p>
+          <p>{{ event.display }}</p>
         </div>
       </div>
   </div>
