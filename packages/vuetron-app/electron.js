@@ -13,9 +13,13 @@ if (process.env.NODE_ENV === 'development') {
 
 let mainWindow
 
-function createWindow () {
+function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600, icon: './cpu.png'})
+    mainWindow = new BrowserWindow({ width: 800, height: 600, icon: './cpu.png' })
+    const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer');
+    installExtension(VUEJS_DEVTOOLS)
+        .then((name) => console.log(`Added Extension:  ${name}`))
+        .catch((err) => console.log('An error occurred: ', err));
 
     // and load the index.html of the app.
     if (process.env.NODE_ENV === 'development') {
