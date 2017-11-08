@@ -1,32 +1,21 @@
 
 <template id="eventStreamTemplate">
   <div>
-    <header id="eventStreamHeader">Event Stream</header>      
-    <h1>{{ msg }}</h1>    
-      <div class="row" v-for="(event, index) in events" v-bind:event="event" v-bind:key="event.id">
-        <h1 v-on:click="alertChanges(event)">{{ event.title }}</h1>  
-        <div>
-          <b-modal>I am a Button</b-modal>
-          <!-- <b-button href="#">I am a Link</b-button> -->
-        </div> 
-      </div>    
+    <h1>{{ msg }}</h1>
+      <div class="row" v-for="(event, index) in events" v-bind:event="event" v-bind:key="index">
+        <h1 @click="() => {emitEventToggle(index)}">{{ event.title }}</h1>
+        <div v-show="event.show">
+          <p>{{ event.display }}</p>
+        </div>
+      </div>
   </div>
 </template>
  
  <script>
-//  import BootstrapVue from 'bootstrap-vue';
-//  import 'bootstrap/dist/css/bootstrap.css'
-//  import 'bootstrap-vue/dist/bootstrap-vue.css'
-
-//  Vue.use(BootstrapVue);
- import bButton from 'bootstrap-vue/es/components/button/button'
-//  import bButtonDirective from 'bootstrap-vue/es/directives/modal/modal'
-
  export default {
    data() {
         return {
-          msg: 'Hello Louis',
-          checked: true       //n3 component library
+          msg: 'Hello Louis'
         }
     },
    computed: {
@@ -35,17 +24,10 @@
      }
    },
    methods: {
-     alertChanges(event) {
-       console.log('DISPLAY: ', event.display);
-       return alert(event.display);
-     },
-   },
-   components: {
-     'b-modal': bButton
-   },
-  //  directives: {
-  //    'b-modal': bModalDirective
-  //  }
+     emitEventToggle(evIdx) {
+      this.$store.commit("toggleEventShow", evIdx);
+    }
+   }
   }
  </script>
  <style scoped>
@@ -80,4 +62,5 @@
      
    } */
  </style>
+
  

@@ -1,14 +1,25 @@
 // Socket Handling
 module.exports = function (server) {
-  const io = require("socket.io")(server);
+  const io = require('socket.io')(server);
   const diff = require('deep-diff');
-  
+
   // Create the socket connection
   io.on('connection', function (socket) {
-
     // Holder variable for current state in order to compare differences
     // with new incoming states
     let currentState;
+
+    // Listen for request for client state from Vuetron
+    socket.on('requestClientState', function () {
+      // If we have yet to store a state from client
+      if (!currentState) {
+        // emit event to request the current state.
+        socket.broadcast.emit('requestClientState');
+      } else {
+        // otherwise just respond with currently cached state
+        socket.broadcast.emit('setInitState', currentState);
+      }
+    });
 
     // Listens for the create of a Vuex Store and saves initial state
     socket.on('clientStateInit', function (state) {
@@ -40,7 +51,6 @@ module.exports = function (server) {
       // Pass new emitted event from user app to Vuetron frontend
       socket.broadcast.emit('eventUpdate', event);
     });
-
   });
 
   return io;

@@ -8,32 +8,55 @@ const VuetronVuex = function (port = 9090) {
   return store => {
     // initialize socket connection
     const socket = io('http://localhost:' + port);
+    // register event noting connection to sockets (client app)
+    let initEvent = {
+      title: 'CONNECTED TO APP',
+      display: {
+        msg: 'Successfully connected Vuetron to client'
+      }
+    };
+    store.commit('addNewEvent', initEvent);
 
-    // emit initial state to server
-    socket.emit('vuetronStateUpdate', store.state);
+    // request current client state on socket connection
+    socket.emit('requestClientState');
+
+    socket.on('setInitState', function (state) {
+      let event = {
+        title: 'STATE INITIALIZED',
+        display: state
+      };
+      // register event noting receipt of initial client state
+      store.commit('addNewEvent', event);
+      // initialize client state value
+      store.commit('updateClientState', state);
+    });
 
     // listen for state changes from client and update
     //  vuetron's client state store accordingly along
     //  with mutation log
-    socket.on('stateUpdate', function(mutation, newState){
-      // add mutation to mutation log
-      // store.state.mutations.unshift(mutation);
+    socket.on('stateUpdate', function (mutation, newState) {
       let updatedState = {
         title: 'STATE CHANGE',
-        mutation: mutation,
-        newState: newState
+        display: {
+          mutation: mutation,
+          newState: JSON.stringify(newState),
+        }
       };
-      store.state.events.unshift(updatedState);
+      // register event for state change
+      store.commit('addNewEvent', updatedState);
       // update client's current state to newState
-      store.state.clientState = newState;
+      store.commit('updateClientState', newState);
+       // check if any of the mutations are subscribed
+       for (let change of mutation) {
+        const stringifiedPath = JSON.stringify(change.path);
+        // if subscribed, push to that path's array for display
+        for (let key of Object.keys(store.state.subscriptions)) {
+          if (key === stringifiedPath) {
+            store.commit('addEventToSubscription', mutation.path);
+          }
+        }
+      }
     });
-
-    socket.on('sendEvent', function(event){
-      store.state.events.unshift(event);
-    });
-
-
-    //TESTING WITH DUMMY DATA:
 
     //get state change:
     socket.on('emitDummyMutation', function(dummyMutation, dummyNewState){
@@ -52,30 +75,51 @@ const VuetronVuex = function (port = 9090) {
         display: JSON.stringify(payload),                
         type: type
       }
-      store.state.events.unshift(clientStateItem);
     });
-
-    // subscribe to store mutations
-    store.subscribe((mutation, state) => {
-      // on mutation, check if mutation is updating
-      // client's state
-        // if so, emit update event to server
-          // socket.emit('vuetronStateUpdate', state);
-    })
   }
-}
+};
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-    state: {
-        clientState: null,  //state from client
-        events: [{title:'CONNECTED TO APP'}, {title:'STATE INITIALIZED'}]
+  state: {
+    clientState: {},  // state from client
+    events: [],
+    subscriptions: {
+      /*
+      formatted as:
+      stringified path array: [array of previous values of the property, listed, in, order]
+      another path array: [array, listed, in, order]
+      */
+    }
+  },
+  mutations: {
+    updateClientState (state, newClientState) {
+      state.clientState = newClientState;
     },
-    mutations: {
-      updateClientState (state, newClientState) {
-        state.clientState = newClientState;
+    addNewEvent (state, newEvent) {
+      if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
+      if (!newEvent.show) newEvent.show = false;
+      state.events.unshift(newEvent);
+    },
+    toggleEventShow (state, evIdx) {
+      state.events[evIdx].show = !state.events[evIdx].show;
+    },
+    addSubscription (state, path) {
+      const stringifiedPath = JSON.stringify(path);
+      if (!state.subscriptions.hasOwnProperty(stringifiedPath)) {
+        state.subscriptions = path;
       }
     },
-    plugins: [VuetronVuex()],
+    removeSubscription (state, path) {
+      const stringifiedPath = JSON.stringify(path);
+      if (!state.subscriptions.hasOwnProperty(stringifiedPath)) {
+        delete state.subscriptions.stringifiedPath;
+      }
+    },
+    addEventToSubscription (state, path) {
+      eval('state.subscription[key].push(state.' + path.join('.')); // eslint-disable-line
+    }
+  },
+  plugins: [VuetronVuex()]
 });

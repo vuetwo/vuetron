@@ -22,6 +22,13 @@ const router = new VueRouter({
   routes
 })
 
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+Vue.use(BootstrapVue);
+
+/* eslint-disable no-new */
 new Vue({
   el: '#vuetron',
   template: '<App/>',
@@ -29,4 +36,4 @@ new Vue({
   router,
   components: { App }
 });
-
+/* eslint-disable-line no-new */
