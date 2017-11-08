@@ -1,5 +1,5 @@
 
-<template>
+<template id="eventStreamTemplate">
   <div>
     <header id="eventStreamHeader">Event Stream</header>      
     <h1>{{ msg }}</h1>    
@@ -14,13 +14,13 @@
 </template>
  
  <script>
- import BootstrapVue from 'bootstrap-vue';
- import 'bootstrap/dist/css/bootstrap.css'
- import 'bootstrap-vue/dist/bootstrap-vue.css'
+//  import BootstrapVue from 'bootstrap-vue';
+//  import 'bootstrap/dist/css/bootstrap.css'
+//  import 'bootstrap-vue/dist/bootstrap-vue.css'
 
- Vue.use(BootstrapVue);
- import bModal from 'bootstrap-vue/es/components/modal/modal'
- import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+//  Vue.use(BootstrapVue);
+ import bButton from 'bootstrap-vue/es/components/button/button'
+//  import bButtonDirective from 'bootstrap-vue/es/directives/modal/modal'
 
  export default {
    data() {
@@ -41,11 +41,11 @@
      },
    },
    components: {
-     'b-modal': bModal
+     'b-modal': bButton
    },
-   directives: {
-     'b-modal': bModalDirective
-   }
+  //  directives: {
+  //    'b-modal': bModalDirective
+  //  }
   }
  </script>
  <style scoped>
@@ -60,6 +60,22 @@
     color: #0B9BD7;
     background-color: #2F4B5C;
    }
+   #eventStreamTemplate {
+    float: right;
+    height: 100%;
+    width: 80%;
+    background-color: #31B689;
+    overflow: scroll;
+  }
+
+   /* #display {
+    float: right;
+    height: 100%;
+    width: 80%;
+    background-color: #31B689;
+    overflow: scroll;
+  } */
+
    /* #eventStreamBody {
      
    } */

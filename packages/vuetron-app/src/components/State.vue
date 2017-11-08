@@ -1,7 +1,11 @@
 <template>
-  <div v-if="show && clientState">
-    <VueObjectView :value="clientState" />
+  <div>
+      <button>HI IM A BUTTON IN STATE!</button>
   </div>
+    
+  <!-- <div v-if="show && clientState">
+    <VueObjectView :value="clientState" /> 
+  </div> -->
 </template>
  
  <script>

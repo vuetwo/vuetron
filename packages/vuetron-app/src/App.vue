@@ -18,7 +18,7 @@ export default {
 <style>
   #app {
     height: 100%;
-    background-color: #2F4B5C
+    /* background-color: #2F4B5C */
   }
   #navbar {
     float: left;
