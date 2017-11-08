@@ -46,63 +46,26 @@ const VuetronVuex = function (port = 9090) {
       store.commit('addNewEvent', updatedState);
       // update client's current state to newState
       store.commit('updateClientState', newState);
-    });
 
-    //check if any of the mutations are subscribed
-    const stringifiedPath = JSON.stringify(mutation.path);
-    for (let change of mutation) {
-      const stringifiedPath = JSON.stringify(change.path);
-      //if subscribed, push to that path's array for display
-      for (let key of Object.keys(state.state.subscriptions)) {
-        if (key === stringifiedPath) {
-          eval('store.state.subscription[key].push(store.state.' + mutation.path.join('.'));
+      // check if any of the mutations are subscribed
+      for (let change of mutation) {
+        const stringifiedPath = JSON.stringify(change.path);
+        // if subscribed, push to that path's array for display
+        for (let key of Object.keys(store.state.subscriptions)) {
+          if (key === stringifiedPath) {
+            store.commit('addEventToSubscription', mutation.path);
+          }
         }
       }
-    }
-
-    // socket.on('sendEvent', function(event){
-    //   console.log('got new event', event);
-    //   // store.state.events.unshift(event);
-    // });
-
-
-    // //TESTING WITH DUMMY DATA:
-
-    // //get state change:
-    // socket.on('sendMutation', function(mutation, newState){
-    //   let updatedStateItem = {
-    //     title: 'STATE CHANGE',
-    //     display: JSON.stringify(mutation),
-    //     newState: JSON.stringify(newState)
-    //   };
-    //   store.commit('addNewEvent', updatedStateItem);
-    // });
-
-    // //get client event:
-    // socket.on('sendClientEvent', function(type, payload){
-    //   let clientStateItem = {
-    //     title: 'ACTION',
-    //     display: JSON.stringify(payload),                
-    //     type: type
-    //   }
-    //   store.commit('addNewEvent', clientStateItem);
-    // });
-
-    // // subscribe to store mutations
-    // store.subscribe((mutation, state) => {
-    //   // on mutation, check if mutation is updating
-    //   // client's state
-    //     // if so, emit update event to server
-    //       // socket.emit('vuetronStateUpdate', state);
-    // })
-  }
-}
+    });
+  };
+};
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    clientState: {},  //state from client
+    clientState: {},  // state from client
     events: [],
     subscriptions: {
       /*
@@ -113,29 +76,32 @@ export const store = new Vuex.Store({
     }
   },
   mutations: {
-    updateClientState(state, newClientState) {
+    updateClientState (state, newClientState) {
       state.clientState = newClientState;
     },
-    addNewEvent(state, newEvent) {
+    addNewEvent (state, newEvent) {
       if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
       if (!newEvent.show) newEvent.show = false;
       state.events.unshift(newEvent);
     },
-    toggleEventShow(state, evIdx) {
+    toggleEventShow (state, evIdx) {
       state.events[evIdx].show = !state.events[evIdx].show;
     },
-    addSubscription(state, path) {
+    addSubscription (state, path) {
       const stringifiedPath = JSON.stringify(path);
       if (!state.subscriptions.hasOwnProperty(stringifiedPath)) {
         state.subscriptions = path;
       }
     },
-    removeSubscription(state, path) {
+    removeSubscription (state, path) {
       const stringifiedPath = JSON.stringify(path);
       if (!state.subscriptions.hasOwnProperty(stringifiedPath)) {
         delete state.subscriptions.stringifiedPath;
       }
     },
+    addEventToSubscription (state, path) {
+      eval('state.subscription[key].push(state.' + path.join('.')); // eslint-disable-line
+    }
   },
-  plugins: [VuetronVuex()],
+  plugins: [VuetronVuex()]
 });
