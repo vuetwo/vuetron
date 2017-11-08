@@ -27,8 +27,8 @@ const VuetronVuex = function (port = 9090) {
     store.subscribe((mutation, state) => {
       // on mutation, emit update event to server
       socket.emit('clientStateUpdate', state);
-    })
-  }
-}
+    });
+  };
+};
 
 module.exports = VuetronVuex;
