@@ -2,6 +2,7 @@
 
 # Vuetron
 A macOS, Windows, and Linux desktop app for testing and debugging [Vue](https://vuejs.org/) + [Vuex](https://vuex.vuejs.org/en/intro.html) projects.
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
 Placeholder GIF:
 ![](./docs/images/reactotron-demo-app.gif)
