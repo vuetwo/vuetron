@@ -1,15 +1,24 @@
+
+
 <template>
 <div>
     <div>
-        <button v-on:click="eventstream">EventStream</button>
-        <button v-on:click="subscription">Subscription</button> 
-        <button v-on:click="state">State</button> 
+
+    <button  v-on:click="eventstream">EventStream</button>
+    <button  v-on:click="subscription">Subscription</button>
+    <button  v-on:click="state">State</button>
+
+
     </div>   
 </div>
 </template>
 
+
 <script>
+
 export default {
+   
+   
     // data() {
     //     return {
     //     }
@@ -27,3 +36,5 @@ export default {
   }
 }
 </script>
+
+
