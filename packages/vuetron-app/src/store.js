@@ -20,7 +20,7 @@ const VuetronVuex = function (port = 9090) {
     // request current client state on socket connection
     socket.emit('requestClientState');
 
-    socket.on('setInitState', function(state) {
+    socket.on('setInitState', function (state) {
       let event = {
         title: 'STATE INITIALIZED',
         display: state
@@ -34,7 +34,7 @@ const VuetronVuex = function (port = 9090) {
     // listen for state changes from client and update
     //  vuetron's client state store accordingly along
     //  with mutation log
-    socket.on('stateUpdate', function(mutation, newState){
+    socket.on('stateUpdate', function (mutation, newState) {
       let updatedState = {
         title: 'STATE CHANGE',
         display: {
@@ -47,6 +47,18 @@ const VuetronVuex = function (port = 9090) {
       // update client's current state to newState
       store.commit('updateClientState', newState);
     });
+
+    //check if any of the mutations are subscribed
+    const stringifiedPath = JSON.stringify(mutation.path);
+    for (let change of mutation) {
+      const stringifiedPath = JSON.stringify(change.path);
+      //if subscribed, push to that path's array for display
+      for (let key of Object.keys(state.state.subscriptions)) {
+        if (key === stringifiedPath) {
+          eval('store.state.subscription[key].push(store.state.' + mutation.path.join('.'));
+        }
+      }
+    }
 
     // socket.on('sendEvent', function(event){
     //   console.log('got new event', event);
@@ -89,22 +101,41 @@ const VuetronVuex = function (port = 9090) {
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-    state: {
-        clientState: {},  //state from client
-        events: []
+  state: {
+    clientState: {},  //state from client
+    events: [],
+    subscriptions: {
+      /*
+      formatted as:
+      stringified path array: [array of previous values of the property, listed, in, order]
+      another path array: [array, listed, in, order]
+      */
+    }
+  },
+  mutations: {
+    updateClientState(state, newClientState) {
+      state.clientState = newClientState;
     },
-    mutations: {
-      updateClientState (state, newClientState) {
-        state.clientState = newClientState;
-      },
-      addNewEvent(state, newEvent) {
-        if(!newEvent.title || !newEvent.display) throw new Error('invalid event data');
-        if(!newEvent.show) newEvent.show = false;
-        state.events.unshift(newEvent);
-      },
-      toggleEventShow(state, evIdx){
-        state.events[evIdx].show = !state.events[evIdx].show;
-      },
+    addNewEvent(state, newEvent) {
+      if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
+      if (!newEvent.show) newEvent.show = false;
+      state.events.unshift(newEvent);
     },
-    plugins: [VuetronVuex()],
+    toggleEventShow(state, evIdx) {
+      state.events[evIdx].show = !state.events[evIdx].show;
+    },
+    addSubscription(state, path) {
+      const stringifiedPath = JSON.stringify(path);
+      if (!state.subscriptions.hasOwnProperty(stringifiedPath)) {
+        state.subscriptions = path;
+      }
+    },
+    removeSubscription(state, path) {
+      const stringifiedPath = JSON.stringify(path);
+      if (!state.subscriptions.hasOwnProperty(stringifiedPath)) {
+        delete state.subscriptions.stringifiedPath;
+      }
+    },
+  },
+  plugins: [VuetronVuex()],
 });
