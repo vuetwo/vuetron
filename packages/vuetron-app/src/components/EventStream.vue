@@ -2,18 +2,31 @@
 <template>
   <div>
     <header id="eventStreamHeader">Event Stream</header>      
-    <h1>{{ msg }}</h1>
+    <h1>{{ msg }}</h1>    
       <div class="row" v-for="(event, index) in events" v-bind:event="event" v-bind:key="event.id">
-        <h1 v-on:click="alertChanges(event)">{{ event.title }}</h1>
-      </div>
+        <h1 v-on:click="alertChanges(event)">{{ event.title }}</h1>  
+        <div>
+          <b-modal>I am a Button</b-modal>
+          <!-- <b-button href="#">I am a Link</b-button> -->
+        </div> 
+      </div>    
   </div>
 </template>
  
  <script>
+ import BootstrapVue from 'bootstrap-vue';
+ import 'bootstrap/dist/css/bootstrap.css'
+ import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+ Vue.use(BootstrapVue);
+ import bModal from 'bootstrap-vue/es/components/modal/modal'
+ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+
  export default {
    data() {
         return {
-          msg: 'Hello Louis'
+          msg: 'Hello Louis',
+          checked: true       //n3 component library
         }
     },
    computed: {
@@ -25,7 +38,13 @@
      alertChanges(event) {
        console.log('DISPLAY: ', event.display);
        return alert(event.display);
-     }
+     },
+   },
+   components: {
+     'b-modal': bModal
+   },
+   directives: {
+     'b-modal': bModalDirective
    }
   }
  </script>
