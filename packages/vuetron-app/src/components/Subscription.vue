@@ -1,5 +1,8 @@
 <template>
   <div>
+    <nav class="navbar sticky-top navbar-light bg-faded">
+      <h1 id="headerStyle" class="navbar-brand mb-0">Subscription</h1>
+    </nav> 
     <div>
       <p><strong>Add Subscription</strong></p>
       <b-input-group>
@@ -22,35 +25,41 @@
   </div>
 </template>
  
- <script>
-import VueObjectView from "vue-object-view";
-export default {
-  data() {
-    return {
-      newSub: null,
-      show: true
-    };
-  },
-  computed: {
-    subscriptions() {
-      this.show = false;
-      this.$nextTick(() => (this.show = true));
-      return this.$store.state.subscriptions;
-    }
-  },
-  methods: {
-    addSub() {
-      if (this.newSub) {
-        this.$store.commit('addSubscription', this.newSub);
-        this.newSub = null;
+<script>
+  import VueObjectView from "vue-object-view";
+  export default {
+    data() {
+      return {
+        newSub: null,
+        show: true
+      };
+    },
+    computed: {
+      subscriptions() {
+        this.show = false;
+        this.$nextTick(() => (this.show = true));
+        return this.$store.state.subscriptions;
       }
     },
-    remSub(key) {
-      this.$store.commit('removeSubscription', key);
+    methods: {
+      addSub() {
+        if (this.newSub) {
+          this.$store.commit('addSubscription', this.newSub);
+          this.newSub = null;
+        }
+      },
+      remSub(key) {
+        this.$store.commit('removeSubscription', key);
+      }
+    },
+    components: {
+      VueObjectView
     }
-  },
-  components: {
-    VueObjectView
-  }
-};
+  };
 </script>
+
+<style scoped>
+  #headerStyle {
+    color: #0B9BD7;
+  }
+</style>
