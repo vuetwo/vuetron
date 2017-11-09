@@ -1,6 +1,7 @@
 <template>
   <div>
       <button>HI IM A BUTTON IN STATE!</button>
+      <b-button>HI IM A BUTTON IN STATE!</b-button>
   </div>
     
   <!-- <div v-if="show && clientState">

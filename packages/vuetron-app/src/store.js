@@ -63,7 +63,9 @@ const VuetronVuex = function (port = 9090) {
       let updatedStateItem = {
         title: 'STATE CHANGE',
         display: JSON.stringify(dummyMutation),
-        newState: JSON.stringify(dummyNewState)
+        newState: JSON.stringify(dummyNewState),
+        //id for testing clicking individual dynamically create divs
+        id: JSON.stringify(dummyMutation.id)
       };
       store.state.events.unshift(updatedStateItem);
     });

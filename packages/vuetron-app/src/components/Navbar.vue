@@ -1,17 +1,9 @@
 <template id="template">
 <div id="navContainer">
     <div>
-        <router-link to="/subscription">Subscription</router-link>
-        <router-link to="/state">State</router-link>
-        <router-link to="/eventstream">Event Stream</router-link>
-        <div>
-            <!-- <router-view></router-view> -->
-        </div>
-        
-        <!-- <router-view></router-view> -->
-        <!-- <button class="navButton" v-on:click="eventstream">EventStream</button>
-        <button class="navButton" v-on:click="subscription">Subscription</button> 
-        <button class="navButton" v-on:click="state">State</button>  -->
+        <router-link to="/subscription"><b-button class="routerButton">Subscription</b-button></router-link>
+        <router-link to="/state"><b-button class="routerButton">State</b-button></router-link>
+        <router-link to="/eventstream"><b-button class="routerButton">Event Stream</b-button></router-link>
     </div>   
 </div>
 </template>
@@ -36,6 +28,13 @@ export default {
 }
 </script>
 <style scoped>
+    .routerButton {
+        height: 100px;
+        width: 150px;
+        margin: 20px;
+        background-color: #0B9BD7;
+        border: none;
+    }
     /* #template {
         height: 100%;
     }

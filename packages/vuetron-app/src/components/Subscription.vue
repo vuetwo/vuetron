@@ -1,7 +1,7 @@
 <template id="subscriptionTemplate">
   <div>
     <!-- <h1>{{ msg }}</h1> -->
-    <button>I'm a New Button</button>
+    <button>I'm a Button in SUBSCRIPTION</button>
   </div>
 </template>
  
