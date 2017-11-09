@@ -1,8 +1,6 @@
 <template>
   <div>
-      <event-stream></event-stream>
-      <subscription></subscription>  
-      <state></state>
+      <router-view></router-view>
   </div>
 </template>
 
