@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+const pathParser = (str) => {
+  return str.split(/[^A-Za-z0-9]/).filter(elem => elem !== null && elem !== '').join('.');
+};
+
 const io = require('socket.io-client');
 
 // setup plugin to connect vuex store to server sockets
@@ -49,11 +53,11 @@ const VuetronVuex = function (port = 9090) {
 
       // check if any of the mutations are subscribed
       for (let change of mutation) {
-        const stringifiedPath = JSON.stringify(change.path);
+        const parsedPath = pathParser(JSON.stringify(change.path));
         // if subscribed, push to that path's array for display
         for (let key of Object.keys(store.state.subscriptions)) {
-          if (key === stringifiedPath) {
-            store.commit('addEventToSubscription', mutation.path);
+          if (key === parsedPath || parsedPath.search(key) !== -1) {
+            store.commit('addEventToSubscription', {key, change});
           }
         }
       }
@@ -67,14 +71,9 @@ export const store = new Vuex.Store({
   state: {
     clientState: {},  // state from client
     events: [],
-    subscriptions: {
-      /*
-      formatted as:
-      stringified path array: [array of previous values of the property, listed, in, order]
-      another path array: [array, listed, in, order]
-      */
-    }
+    subscriptions: {}
   },
+
   mutations: {
     updateClientState (state, newClientState) {
       state.clientState = newClientState;
@@ -87,10 +86,11 @@ export const store = new Vuex.Store({
     toggleEventShow (state, evIdx) {
       state.events[evIdx].show = !state.events[evIdx].show;
     },
-    addSubscription (state, path) {
-      const stringifiedPath = JSON.stringify(path);
-      if (!state.subscriptions.hasOwnProperty(stringifiedPath)) {
-        state.subscriptions = path;
+    addSubscription (state, str) {
+      let path = pathParser(str);
+      console.log('added sub for path', path);
+      if (!state.subscriptions.hasOwnProperty(path)) {
+        state.subscriptions[path] = [];
       }
     },
     removeSubscription (state, path) {
@@ -99,8 +99,10 @@ export const store = new Vuex.Store({
         delete state.subscriptions.stringifiedPath;
       }
     },
-    addEventToSubscription (state, path) {
-      eval('state.subscription[key].push(state.' + path.join('.')); // eslint-disable-line
+    addEventToSubscription (state, info) {
+      let subs = Object.assign({}, state.subscriptions);
+      subs[info.key].push(info.change);
+      state.subscriptions = subs;
     }
   },
   plugins: [VuetronVuex()]
