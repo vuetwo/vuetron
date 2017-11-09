@@ -1,23 +1,29 @@
 <template>
   <div>
-    <div v-if="show && subscriptions">
-      <ul>
-        <li v-for="(value, key, index) in subscriptions" v-bind:key="index">
-          <h3>{{ key }}</h3>
-          <VueObjectView :value="value" />
-        </li>
-      </ul>
-    </div>
     <div>
       <p><strong>Add Subscription</strong></p>
-      <input type="text" placeholder="subscription path" v-model="newSub"/>
-      <b-button @click="addSub" variant="success">Subscribe</b-button>
+      <b-input-group>
+        <b-form-input type="text" placeholder="subscription path" v-model="newSub" @keydown.native.enter="addSub"/>
+        <b-input-group-button slot="right">
+          <b-button @click="addSub" variant="success">Subscribe</b-button>
+        </b-input-group-button>
+      </b-input-group>
+    </div>
+    <div v-if="show && subscriptions">
+      <hr>
+      <b-list-group>
+        <b-list-group-item v-for="(value, key, index) in subscriptions" v-bind:key="index">
+          <h3>{{ key }} - <b-button @click="() => {remSub(key)}" variant="warning">Unsubscribe</b-button></h3>
+          <span><strong>Mutations: </strong></span>
+          <VueObjectView :value="value" />
+        </b-list-group-item>
+      </b-list-group>
     </div>
   </div>
 </template>
  
  <script>
- import VueObjectView from "vue-object-view";
+import VueObjectView from "vue-object-view";
 export default {
   data() {
     return {
@@ -28,17 +34,23 @@ export default {
   computed: {
     subscriptions() {
       this.show = false;
-      this.$nextTick(() => this.show = true);
+      this.$nextTick(() => (this.show = true));
       return this.$store.state.subscriptions;
     }
   },
   methods: {
     addSub() {
-      this.$store.commit('addSubscription', this.newSub);
+      if (this.newSub) {
+        this.$store.commit('addSubscription', this.newSub);
+        this.newSub = null;
+      }
+    },
+    remSub(key) {
+      this.$store.commit('removeSubscription', key);
     }
   },
   components: {
-    VueObjectView,
-  },
+    VueObjectView
+  }
 };
 </script>

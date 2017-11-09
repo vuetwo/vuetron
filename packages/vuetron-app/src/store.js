@@ -88,15 +88,15 @@ export const store = new Vuex.Store({
     },
     addSubscription (state, str) {
       let path = pathParser(str);
-      console.log('added sub for path', path);
       if (!state.subscriptions.hasOwnProperty(path)) {
         state.subscriptions[path] = [];
       }
     },
     removeSubscription (state, path) {
-      const stringifiedPath = JSON.stringify(path);
-      if (!state.subscriptions.hasOwnProperty(stringifiedPath)) {
-        delete state.subscriptions.stringifiedPath;
+      let subs = Object.assign({}, state.subscriptions);
+      if (subs.hasOwnProperty(path)) {
+        delete subs[path];
+        state.subscriptions = subs;
       }
     },
     addEventToSubscription (state, info) {
