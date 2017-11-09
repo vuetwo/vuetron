@@ -1,12 +1,11 @@
-
-
 <template>
 <div>
     <div>
-
-    <button  v-on:click="eventstream">EventStream</button>
-    <button  v-on:click="subscription">Subscription</button>
-    <button  v-on:click="state">State</button>
+        <div>
+            <router-link to="/eventstream"><button class="btn btn-primary btn-block">EventStream</button></router-link>
+            <router-link to="/subscription"><button class="btn btn-primary btn-block">Subscription</button></router-link>
+            <router-link to="/state"><button class="btn btn-primary btn-block">State</button></router-link>
+        </div>
 
 
     </div>   
@@ -36,5 +35,9 @@ export default {
   }
 }
 </script>
+
+<style>
+
+</style>
 
 

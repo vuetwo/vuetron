@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <b-container>
     <h1>{{ msg }}</h1>
       <div class="row" v-for="(event, index) in events" v-bind:event="event" v-bind:key="index">
         <h1 @click="() => {emitEventToggle(index)}">{{ event.title }}</h1>
@@ -7,14 +7,14 @@
           <p>{{ event.display }}</p>
         </div>
       </div>
-  </div>
+  </b-container>
 </template>
  
  <script>
 export default {
   data() {
     return {
-      msg: "Hello Louis"
+      msg: ""
     };
   },
   computed: {

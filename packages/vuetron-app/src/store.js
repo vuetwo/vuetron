@@ -60,6 +60,7 @@ const VuetronVuex = function (port = 9090) {
 
     //get state change:
     socket.on('dummyMutations', function(mutation, newState){
+      console.log('got emmiting');
       let updatedStateItem = {
         title: 'STATE CHANGE',
         display: JSON.stringify(mutation),
