@@ -1,3 +1,4 @@
+/* eslint-disable */
 const io = require('socket.io-client');
 
 const VuetronVuex = function (port = 9090) {
@@ -32,3 +33,4 @@ const VuetronVuex = function (port = 9090) {
 };
 
 module.exports = VuetronVuex;
+/* eslint-enable */
