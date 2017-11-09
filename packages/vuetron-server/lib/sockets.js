@@ -51,6 +51,11 @@ module.exports = function (server) {
       // Pass new emitted event from user app to Vuetron frontend
       socket.broadcast.emit('eventUpdate', event);
     });
+
+    socket.on('clientDomTree', function (dom) {
+      // Pass dom tree from user app to Vuetron frontend
+      socket.broadcast.emit('domUpdate', dom);
+    });
   });
 
   return io;

@@ -62,6 +62,10 @@ const VuetronVuex = function (port = 9090) {
         }
       }
     });
+
+    socket.on('domUpdate', function (dom) {
+      store.commit('updateClientDom', dom);
+    });
   };
 };
 
@@ -71,7 +75,8 @@ export const store = new Vuex.Store({
   state: {
     clientState: {},  // state from client
     events: [],
-    subscriptions: {}
+    subscriptions: {},
+    domTree: {}
   },
 
   mutations: {
@@ -103,6 +108,9 @@ export const store = new Vuex.Store({
       let subs = Object.assign({}, state.subscriptions);
       subs[info.key].push(info.change);
       state.subscriptions = subs;
+    },
+    updateClientDom (state, newDom) {
+      state.domTree = newDom;
     }
   },
   plugins: [VuetronVuex()]
