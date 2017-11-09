@@ -50,8 +50,7 @@ const VuetronVuex = function (port = 9090) {
       store.commit('addNewEvent', updatedState);
       // update client's current state to newState
       store.commit('updateClientState', newState);
-
-      // check if any of the mutations are subscribed
+       // check if any of the mutations are subscribed
       for (let change of mutation) {
         const parsedPath = pathParser(JSON.stringify(change.path));
         // if subscribed, push to that path's array for display
@@ -66,6 +65,26 @@ const VuetronVuex = function (port = 9090) {
     socket.on('domUpdate', function (dom) {
       store.commit('updateClientDom', dom);
     });
+    // get state change:
+    socket.on('emitDummyMutation', function (dummyMutation, dummyNewState) {
+      let updatedStateItem = {
+        title: 'STATE CHANGE',
+        display: JSON.stringify(dummyMutation),
+        newState: JSON.stringify(dummyNewState),
+        // id for testing clicking individual dynamically create divs
+        id: JSON.stringify(dummyMutation.id)
+      };
+      store.state.events.unshift(updatedStateItem);
+    });
+
+    // // get client event:
+    // socket.on('sendClientEvent', function(type, payload){
+    //   let clientStateItem = {
+    //     title: 'ACTION',
+    //     display: JSON.stringify(payload),
+    //     type: type
+    //   }
+    // });
   };
 };
 
