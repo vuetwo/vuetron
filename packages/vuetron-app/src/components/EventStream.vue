@@ -11,20 +11,19 @@
        </div>
   </div>
 </template> -->
-<template id="eventStreamTemplate">
+<template>
 
     <!-- <b-row class="row2" cols="8" md="9" lg="10">
         <header id="eventStreamHeader">Event Stream</header>
       </b-row> -->
     
-    <b-container>
-        <nav class="navbar navbar-light bg-faded">
-            <h1 id="navbarStyle" class="navbar-brand mb-0">Navbar</h1>
+    <b-container class="padding-0">
+        <nav class="navbar sticky-top navbar-light bg-faded">
+            <h1 id="headerStyle" class="navbar-brand mb-0">Event Stream</h1>
           </nav>
-      <!-- <h1>{{ msg }}</h1> -->
         <div class="row" v-for="(event, index) in events" v-bind:event="event" v-bind:key="index">
             <b-btn class="eventBtn" @click="() => {emitEventToggle(index)}">{{ event.title }}</b-btn>
-            <div class ="eventCardWrapper"v-show="event.show">
+            <div class="eventCardWrapper"v-show="event.show">
               <b-card class="eventCard">
                 <h5>{{ event.title }}</h5>
                 {{ event.display }}
@@ -34,7 +33,7 @@
          </div>
     </b-container>
   </template>
- 
+  
  <script>
  export default {
    data() {
@@ -55,7 +54,7 @@
   }
  </script>
  <style scoped>
-   #eventStreamHeader {
+   /* #eventStreamHeader {
     /* position: fixed;
     top: 0;
     width: 100%;
@@ -63,24 +62,15 @@
     font-size: 30px;
     text-align: center;
     line-height: 60px;    /* center text vertically */
-    color: #0B9BD7; 
-    background-color: #2F4B5C;
-   }
-   #eventStreamTemplate {
-    float: right;
-    height: 100%;
-    width: 80%;
-    background-color: #31B689;
-    overflow: scroll;
-  }
-  #navbarStyle {
+    /* color: #0B9BD7;  */
+    /* background-color: #2F4B5C; */
+   /* } */
+  #headerStyle {
     color: #0B9BD7;
   }
   .eventBtn {
-    /* margin-top: 1px; */
     margin-left: 3.5%;
     margin-right: 3.5%;
-    /* position: relative; */
     margin-top: -1px;     /* removes overlapping borders */ 
     margin-bottom: -1px;  /* removes overlapping borders */
     width: 100%;
@@ -108,17 +98,10 @@
     margin-right: 3.5%;
     width: 100%;
   }
-   /* #display {
-    float: right;
-    height: 100%;
-    width: 80%;
-    background-color: #31B689;
-    overflow: scroll;
-  } */
-
-   /* #eventStreamBody {
-     
-   } */
+  .padding-0 {
+    padding-right:0;
+    padding-left:0;
+  }
  </style>
 
  

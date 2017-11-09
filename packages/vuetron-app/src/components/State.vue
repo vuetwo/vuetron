@@ -1,9 +1,10 @@
 <template>
   <div>
-      <button>HI IM A BUTTON IN STATE!</button>
-      <b-button>HI IM A BUTTON IN STATE!</b-button>
+      <nav class="navbar sticky-top navbar-light bg-faded">
+          <h1 id="headerStyle" class="navbar-brand mb-0">State</h1>
+        </nav>
+      <b-button>HI I'M A BUTTON IN STATE!</b-button>
   </div>
-    
   <!-- <div v-if="show && clientState">
     <VueObjectView :value="clientState" /> 
   </div> -->
@@ -32,3 +33,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+   #headerStyle {
+    color: #0B9BD7;
+  }
+</style>

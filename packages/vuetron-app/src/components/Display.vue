@@ -1,11 +1,6 @@
-<!-- <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> -->
-
 <template>
   <div>
       <router-view></router-view>
-      <!-- <event-stream></event-stream>
-      <subscription></subscription>   -->
-      <!-- <state></state> -->
   </div>
 </template>
 

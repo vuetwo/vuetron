@@ -1,28 +1,19 @@
-<template id="subscriptionTemplate">
+<template>
   <div>
-    <!-- <h1>{{ msg }}</h1> -->
-    <button>I'm a Button in SUBSCRIPTION</button>
+    <nav class="navbar sticky-top navbar-light bg-faded">
+      <h1 id="headerStyle" class="navbar-brand mb-0">Subscription</h1>
+    </nav>    
+    <b-button>HI I'M A BUTTON IN SUBSCRIPTION</b-button>
   </div>
 </template>
  
  <script>
  export default {
-  //  data() {
-  //    return {
-  //      msg: 'Hello Kelly'
-  //   }
-  //  },
-  //  methods: {
 
-  //  }
  }
  </script>
  <style scoped>
-   #subscriptionTemplate {
-    float: right;
-    height: 800px;
-    width: 80%;
-    background-color: red;
-    overflow: scroll;
+  #headerStyle {
+    color: #0B9BD7;
   }
  </style>
