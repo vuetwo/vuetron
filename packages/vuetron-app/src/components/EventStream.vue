@@ -65,7 +65,8 @@
         this.$store.commit('toggleEventShow', evIdx);
       },
       recoverState(event) {
-        this.$store.commit('updateClientState', event.display.newState);
+        let recoverState = event.title === 'STATE CHANGE' ? event.state : JSON.stringify(event.display);
+        this.$store.commit('revertClientState', recoverState);
       }
     },
     filters: {
