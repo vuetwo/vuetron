@@ -1,13 +1,10 @@
 <template>
 <div>
+    <h1 id="appTitle">Vuetron</h1>
     <div>
-        <div>
-            <router-link to="/eventstream"><button class="btn btn-primary btn-block">EventStream</button></router-link>
-            <router-link to="/subscription"><button class="btn btn-primary btn-block">Subscription</button></router-link>
-            <router-link to="/state"><button class="btn btn-primary btn-block">State</button></router-link>
-        </div>
-
-
+        <router-link to="/subscription"><b-button class="routerButton">Subscription</b-button></router-link>
+        <router-link to="/state"><b-button class="routerButton">State</b-button></router-link>
+        <router-link to="/eventstream"><b-button class="routerButton">Event Stream</b-button></router-link>
     </div>   
 </div>
 </template>
@@ -16,12 +13,6 @@
 <script>
 
 export default {
-   
-   
-    // data() {
-    //     return {
-    //     }
-    // },
   methods: {
       eventstream() {
           alert('eventstream is active');
@@ -35,9 +26,22 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
-
-
+<style scoped>
+    .routerButton {
+        height: 50px;
+        width: 200px;
+        margin-top: 20px;
+        background-color: #0B9BD7;
+        border: none;
+        /* display: inline-block; */
+        float: none;
+        /* position: absolute;
+        left: 50%;
+        transform: translate(-50%,-50%); */
+    }
+    #appTitle {
+        position: absolute;
+        top: 0px;
+        color: #0B9BD7;
+    } 
+</style>        

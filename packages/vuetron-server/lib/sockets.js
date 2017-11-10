@@ -51,6 +51,10 @@ module.exports = function (server) {
       // Pass new emitted event from user app to Vuetron frontend
       socket.broadcast.emit('eventUpdate', event);
     });
+    socket.on('newState', function (newState) {
+      console.log(newState);
+      socket.broadcast.emit('')
+    })
   });
 
   return io;

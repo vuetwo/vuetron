@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+const pathParser = (str) => {
+  return str.split(/[^A-Za-z0-9]/).filter(elem => elem !== null && elem !== '').join('.');
+};
+
 const io = require('socket.io-client');
 
 // setup plugin to connect vuex store to server sockets
@@ -46,36 +50,28 @@ const VuetronVuex = function (port = 9090) {
       store.commit('addNewEvent', updatedState);
       // update client's current state to newState
       store.commit('updateClientState', newState);
-      // check if any of the mutations are subscribed
+       // check if any of the mutations are subscribed
       for (let change of mutation) {
-        const stringifiedPath = JSON.stringify(change.path);
+        const parsedPath = pathParser(JSON.stringify(change.path));
         // if subscribed, push to that path's array for display
         for (let key of Object.keys(store.state.subscriptions)) {
-          if (key === stringifiedPath) {
-            store.commit('addEventToSubscription', mutation.path);
+          if (key === parsedPath || parsedPath.search(key) !== -1) {
+            store.commit('addEventToSubscription', {key, change});
           }
         }
       }
     });
 
-    //get state change:
-    socket.on('dummyMutations', function(mutation, newState){
-      console.log('got emmiting');
+    // get state change:
+    socket.on('emitDummyMutation', function (dummyMutation, dummyNewState) {
       let updatedStateItem = {
         title: 'STATE CHANGE',
-        display: JSON.stringify(mutation),
-        newState: JSON.stringify(newState)
+        display: JSON.stringify(dummyMutation),
+        newState: JSON.stringify(dummyNewState),
+        // id for testing clicking individual dynamically create divs
+        id: JSON.stringify(dummyMutation.id)
       };
       store.state.events.unshift(updatedStateItem);
-    });
-
-    //get client event:
-    socket.on('sendClientEvent', function(type, payload){
-      let clientStateItem = {
-        title: 'ACTION',
-        display: JSON.stringify(payload),                
-        type: type
-      }
     });
   };
 };
@@ -86,17 +82,16 @@ export const store = new Vuex.Store({
   state: {
     clientState: {},  // state from client
     events: [],
-    subscriptions: {
-      /*
-      formatted as:
-      stringified path array: [array of previous values of the property, listed, in, order]
-      another path array: [array, listed, in, order]
-      */
-    }
+    subscriptions: {}
   },
+
   mutations: {
     updateClientState (state, newClientState) {
       state.clientState = newClientState;
+      let port = 9090;
+        const socket = io('http://localhost:' + port);
+        console.log('vuetronStateUpdate', newClientState);
+        socket.emit('vuetronStateUpdate', newClientState);
     },
     addNewEvent (state, newEvent) {
       if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
@@ -106,21 +101,30 @@ export const store = new Vuex.Store({
     toggleEventShow (state, evIdx) {
       state.events[evIdx].show = !state.events[evIdx].show;
     },
-    addSubscription (state, path) {
-      const stringifiedPath = JSON.stringify(path);
-      if (!state.subscriptions.hasOwnProperty(stringifiedPath)) {
-        state.subscriptions = path;
+    addSubscription (state, str) {
+      let path = pathParser(str);
+      if (!state.subscriptions.hasOwnProperty(path)) {
+        state.subscriptions[path] = [];
       }
     },
     removeSubscription (state, path) {
-      const stringifiedPath = JSON.stringify(path);
-      if (!state.subscriptions.hasOwnProperty(stringifiedPath)) {
-        delete state.subscriptions.stringifiedPath;
+      let subs = Object.assign({}, state.subscriptions);
+      if (subs.hasOwnProperty(path)) {
+        delete subs[path];
+        state.subscriptions = subs;
       }
     },
-    addEventToSubscription (state, path) {
-      eval('state.subscription[key].push(state.' + path.join('.')); // eslint-disable-line
+    addEventToSubscription (state, info) {
+      let subs = Object.assign({}, state.subscriptions);
+      subs[info.key].push(info.change);
+      state.subscriptions = subs;
     }
+    // fetchPreviousState (state, newState) {
+    //   let port = 9090
+    //   const socket = io('http://localhost:' + port);
+    //   console.log('newState', newState);
+    //   socket.emit('newState', newState)
+    // }
   },
   plugins: [VuetronVuex()]
 });
