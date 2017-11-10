@@ -3,25 +3,31 @@
     <nav class="navbar sticky-top navbar-light bg-faded">
       <h1 id="headerStyle" class="navbar-brand mb-0">Subscription</h1>
     </nav> 
-    <div>
-      <p><strong>Add Subscription</strong></p>
-      <b-input-group>
-        <b-form-input type="text" placeholder="subscription path" v-model="newSub" @keydown.native.enter="addSub"/>
-        <b-input-group-button slot="right">
-          <b-button @click="addSub" variant="success">Subscribe</b-button>
-        </b-input-group-button>
-      </b-input-group>
-    </div>
-    <div v-if="show && subscriptions">
-      <hr>
-      <b-list-group>
-        <b-list-group-item v-for="(value, key, index) in subscriptions" v-bind:key="index">
-          <h3>{{ key }} - <b-button @click="() => {remSub(key)}" variant="warning">Unsubscribe</b-button></h3>
-          <span><strong>Mutations: </strong></span>
-          <VueObjectView :value="value" />
-        </b-list-group-item>
-      </b-list-group>
-    </div>
+    <b-container>
+      <b-row>
+        <b-col cols="12">
+          <p><strong>Add Subscription</strong></p>
+          <b-input-group>
+            <b-form-input type="text" placeholder="subscription path" v-model="newSub" @keydown.native.enter="addSub"/>
+            <b-input-group-button slot="right">
+              <b-button @click="addSub" variant="success" size="sm">Subscribe</b-button>
+            </b-input-group-button>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <b-row v-if="show && subscriptions">
+        <hr>
+        <b-col cols="12">
+          <b-list-group>
+            <b-list-group-item v-for="(value, key, index) in subscriptions" v-bind:key="index">
+              <h3>{{ key }} - <b-button @click="() => {remSub(key)}" variant="warning" size="sm">Unsubscribe</b-button></h3>
+              <span><strong>Mutations: </strong></span>
+              <VueObjectView :value="value" />
+            </b-list-group-item>
+          </b-list-group>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
  

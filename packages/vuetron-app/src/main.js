@@ -7,28 +7,27 @@ import EventStream from './components/EventStream.vue';
 import ComponentTree from './components/ComponentTree.vue';
 import State from './components/State.vue';
 
-// import BootstrapVue from 'bootstrap-vue';
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
-
-// Vue.use(BootstrapVue);
-Vue.use(VueRouter);
-
-const routes = [
-  { path: '/subscription', component: Subscription },
-  { path: '/state', component: State },
-  { path: '/eventstream', component: EventStream },
-  { path: '/componentTree', component: ComponentTree }
-];
-const router = new VueRouter({
-  routes
-});
-
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
+import Icon from 'vue-awesome/components/Icon.vue';
+import 'vue-awesome/icons';
+
+Vue.use(VueRouter);
 Vue.use(BootstrapVue);
+Vue.component('icon', Icon);
+
+const routes = [
+  { path: '/eventstream', component: EventStream },
+  { path: '/subscription', component: Subscription },
+  { path: '/state', component: State },
+  { path: '/componentTree', component: ComponentTree }
+];
+
+const router = new VueRouter({
+  routes
+});
 
 /* eslint-disable no-new */
 new Vue({
