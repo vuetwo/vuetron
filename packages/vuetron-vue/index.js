@@ -21,6 +21,39 @@ const VuetronVue = {
         original.apply(currThis, cb);
       };
     }(Vue.prototype.$emit));
+
+    function buildObject (component) {
+      if (!component || !component.$vnode || !component.$vnode.hasOwnProperty('tag')) { return };
+      let obj = {};
+      // console.log('tag should be here', component.$vnode);
+      obj.name = component.$vnode.tag;
+      if (component.hasOwnProperty('$children') && component.$children.length > 0) {
+        obj.children = [];
+        for (let childComponent of component.$children) {
+          // console.log('child', childComponent);
+          obj.children.push(buildObject(childComponent));
+        }
+      }
+      return obj;
+    }
+    Vue.mixin({
+      mounted () {
+        let parents = document.body.children;
+        const children = [];
+        for (let node of parents) {
+          if (node.hasOwnProperty('__vue__') && node.__vue__.hasOwnProperty('$children') && node.__vue__.$children.length > 0) {
+            console.log('vue', node.__vue__);
+            children.push('mounted', node.__vue__.$children[0]);
+            const firstComp = node.__vue__.$children[0];
+            console.log('tree obj', buildObject(firstComp));
+            socket.emit('clientDomTree', buildObject(firstComp));
+          }
+        }
+      },
+      destroyed () {
+        console.log('destroyed');
+      }
+    });
   }
 };
 
