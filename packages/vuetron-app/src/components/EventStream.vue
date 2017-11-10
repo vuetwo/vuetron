@@ -27,6 +27,9 @@
           <div class="eventCardWrapper" v-show="event.show">
             <b-card class="eventCard">
               <h5>{{ event.title }}</h5>
+              <div v-if="event.title ==='STATE CHANGE' || event.title ==='STATE INITIALIZED' ">
+                <b-btn class="reverseBtn" @click="() => {recoverState(event)}">Recover State</b-btn>
+              </div>
               <div>{{ event.display }}</div>
             </b-card>
           </div>
@@ -60,6 +63,9 @@
     methods: {
       emitEventToggle(evIdx) {
         this.$store.commit('toggleEventShow', evIdx);
+      },
+      recoverState(event) {
+        this.$store.commit('updateClientState', event.display.newState);
       }
     },
     filters: {
@@ -91,6 +97,10 @@
   .fa-icon:hover {
     opacity: 0.6;
     cursor: pointer;
+  }
+
+  .reverseBtn {
+    width: 100%;
   }
 
   .eventBtn {

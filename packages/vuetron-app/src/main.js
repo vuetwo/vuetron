@@ -33,6 +33,7 @@ const router = new VueRouter({
 new Vue({
   el: '#vuetron',
   template: '<App/>',
+  router,
   store,
   router,
   components: { App }

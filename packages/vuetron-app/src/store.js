@@ -472,6 +472,10 @@ export const store = new Vuex.Store({
     },
     updateClientState (state, newClientState) {
       state.clientState = newClientState;
+      let port = 9090;
+        const socket = io('http://localhost:' + port);
+        console.log('vuetronStateUpdate', newClientState);
+        socket.emit('vuetronStateUpdate', newClientState);
     },
     addNewEvent (state, newEvent) {
       if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
@@ -499,6 +503,12 @@ export const store = new Vuex.Store({
     updateClientDom (state, newDom) {
       state.domTree = newDom;
     }
+    // fetchPreviousState (state, newState) {
+    //   let port = 9090
+    //   const socket = io('http://localhost:' + port);
+    //   console.log('newState', newState);
+    //   socket.emit('newState', newState)
+    // }
   },
   plugins: [VuetronVuex()]
 });
