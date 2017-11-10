@@ -20,7 +20,7 @@
       <b-col cols="12">
         <div class="row" v-for="(event, index) in filteredEvents" 
           v-bind:event="event" v-bind:key="index">
-          <b-btn class="eventBtn" @click="() => {emitEventToggle(index)}">{{ event.title }}</b-btn>
+          <b-btn class="eventBtn" @click="() => {emitEventToggle(index)}">{{ event.title }} - {{ event.timestamp | formatTime }}</b-btn>
           <div class="eventCardWrapper" v-show="event.show">
             <b-card class="eventCard">
               <h5>{{ event.title }}</h5>
@@ -57,6 +57,16 @@
     methods: {
       emitEventToggle(evIdx) {
         this.$store.commit('toggleEventShow', evIdx);
+      }
+    },
+    filters: {
+      formatTime: function (ISODate) {
+        let date = new Date(ISODate);
+        let time = '';
+        time += date.getHours();
+        time += ':' + ('0' + date.getMinutes()).slice(-2);
+        time += ':' + ('0' + date.getSeconds()).slice(-2);
+        return time;
       }
     }
   };
