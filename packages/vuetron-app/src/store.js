@@ -47,8 +47,8 @@ const VuetronVuex = function (port = 9090) {
         title: 'STATE CHANGE',
         display: {
           mutation: mutation,
-          newState: JSON.stringify(newState)
         },
+        state: JSON.stringify(newState),
         timestamp: new Date(Date.now()).toISOString()
       };
       // register event for state change
@@ -459,10 +459,17 @@ export const store = new Vuex.Store({
       ],
       "id": 0,
       "name": "DiscogsClient"
-    }
+    },
+    displayNavbar: true
   },
 
   mutations: {
+    toggleNavbarDisplay (state) {
+      state.displayNavbar = !state.displayNavbar;
+    },
+    toggleEventShow (state, evIdx) {
+      state.events[evIdx].show = !state.events[evIdx].show;
+    },
     updateClientState (state, newClientState) {
       state.clientState = newClientState;
     },
@@ -470,9 +477,6 @@ export const store = new Vuex.Store({
       if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
       if (!newEvent.show) newEvent.show = false;
       state.events.unshift(newEvent);
-    },
-    toggleEventShow (state, evIdx) {
-      state.events[evIdx].show = !state.events[evIdx].show;
     },
     addSubscription (state, str) {
       let path = pathParser(str);

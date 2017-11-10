@@ -2,7 +2,10 @@
 <template id="eventStreamTemplate">
   <div>
     <nav class="navbar sticky-top navbar-light bg-faded">
-      <h1 id="headerStyle" class="navbar-brand mb-0">Event Stream</h1>
+      <b-btn @click="() => {this.$store.commit('toggleNavbarDisplay')}" variant="transparent" id="toggle-nav-btn">
+        <icon name="navicon" />
+      </b-btn>
+      <h1 class="nav-header navbar-brand mb-0">Event Stream</h1>
       <b-dropdown no-caret variant="transparent"
         v-b-popover.hover.auto.left="'Filter events'">
         <template slot="button-content">
@@ -83,16 +86,13 @@
 
 <style scoped>
   .fa-icon {
-    color: #0b9bd7;
+    color: #31B689;
   }
   .fa-icon:hover {
     opacity: 0.6;
     cursor: pointer;
   }
 
-  #headerStyle {
-    color: #0b9bd7;
-  }
   .eventBtn {
     margin-left: 3.5%;
     margin-right: 3.5%;
@@ -102,21 +102,28 @@
     padding-top: 10px;
     padding-bottom: 10px;
     color: #2f4b5c;
-    background-color: #31b689;
+    background-color: #EDDBB4;
     border: 1px solid #2f4b5c;
     border-radius: 0px;
     border-left: none;
     border-right: none;
   }
   .eventBtn:focus {
-    border-bottom: none;
+    color: #2f4b5c !important;
+    box-shadow: none;
   }
+  .eventBtn:active {
+    color: #2f4b5c !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+  }
+
   .eventCard {
     width: 100%;
     border-radius: 0px;
     border-bottom: 1px solid #2f4b5c;
     color: #2f4b5c;
-    background-color: #ebebeb;
+    background-color: #fcf9f2;
   }
   .eventCardWrapper {
     margin-left: 3.5%;

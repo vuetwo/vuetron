@@ -1,7 +1,14 @@
 <template>
   <div>
     <nav class="navbar sticky-top navbar-light bg-faded">
-      <h1 id="headerStyle" class="navbar-brand mb-0">State</h1>
+      <b-btn @click="() => {this.$store.commit('toggleNavbarDisplay')}" variant="transparent" id="toggle-nav-btn">
+        <icon name="navicon" />
+      </b-btn>
+      <div class="navbar-middle">
+        <h1 class="nav-header navbar-brand mb-0">State</h1>
+      </div>
+      <div class="navbar-right">
+      </div>
     </nav>
     <b-container v-if="show && clientState">
       <VueObjectView :value="clientState" /> 
@@ -33,7 +40,5 @@ export default {
 };
 </script>
 <style scoped>
-   #headerStyle {
-    color: #0B9BD7;
-  }
+   
 </style>

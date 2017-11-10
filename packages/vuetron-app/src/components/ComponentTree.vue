@@ -1,7 +1,18 @@
 <template>
-  <div v-if="show && domTree">
-    <p>ksdfjhdksfhdskfjhdskfjhskfjdhsfkjdsh</p>
-    <tree ref="tree" :identifier="getId" :zoomable="zoomable" :data="domTree" :node-text="nodeText" :layout-type="layoutType" class="tree" />
+  <div>
+    <nav class="navbar sticky-top navbar-light bg-faded">
+      <b-btn @click="() => {this.$store.commit('toggleNavbarDisplay')}" variant="transparent" id="toggle-nav-btn">
+        <icon name="navicon" />
+      </b-btn>
+      <div class="navbar-middle">
+        <h1 class="nav-header navbar-brand mb-0">Vue Vision</h1>
+      </div>
+      <div class="navbar-right">
+      </div>
+    </nav>
+    <b-row class="tree-container" v-if="show && domTree">
+      <tree ref="tree" :identifier="getId" :zoomable="zoomable" :data="domTree" :node-text="nodeText" :layout-type="layoutType" :margin-y="textMarginY" class="tree" />
+    </b-row>
   </div>
 </template>
  
@@ -16,7 +27,8 @@ export default {
       layoutType: "euclidean",
       nodeText: "name",
       zoomable: true,
-      isLoading: false
+      isLoading: false,
+      textMarginY: 1000
     };
   },
   computed: {
@@ -40,10 +52,18 @@ export default {
 </script>
 
 <style>
-.tree {
-  height: 600px;
-  width: 100%;
-  z-index: 10000;
-}
+  .tree-container {
+    width: 100%;
+    height: 100%;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
 
+  .tree {
+    height: 115vh;
+    width: 100vh;
+  }
 </style>
