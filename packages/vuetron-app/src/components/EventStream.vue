@@ -30,6 +30,8 @@
               <div v-if="event.title ==='STATE CHANGE' || event.title ==='STATE INITIALIZED' ">
                 <b-btn class="reverseBtn" @click="() => {recoverState(event)}">Recover State</b-btn>
               </div>
+              <p v-if="event.title === 'STATE CHANGE'"><strong>Mutations:</strong></p>
+              <p v-if="event.title === 'EVENT EMITTED'"><strong>Event name:</strong></p>
               <div>{{ event.display }}</div>
             </b-card>
           </div>

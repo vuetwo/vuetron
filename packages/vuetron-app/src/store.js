@@ -67,6 +67,15 @@ const VuetronVuex = function (port = 9090) {
       }
     });
 
+    socket.on('eventUpdate', function (event) {
+      let newEvent = {
+        title: 'EVENT EMITTED',
+        display: event,
+        timestamp: new Date(Date.now()).toISOString()
+      };
+      store.commit('addNewEvent', newEvent);
+    });
+
     socket.on('domUpdate', function (dom) {
       store.commit('updateClientDom', dom);
     });
