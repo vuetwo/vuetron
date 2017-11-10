@@ -4,6 +4,7 @@ import App from './App.vue';
 import { store } from './store';
 import Subscription from './components/Subscription.vue';
 import EventStream from './components/EventStream.vue';
+import ComponentTree from './components/ComponentTree.vue';
 import State from './components/State.vue';
 
 // import BootstrapVue from 'bootstrap-vue';
@@ -16,11 +17,12 @@ Vue.use(VueRouter);
 const routes = [
   { path: '/subscription', component: Subscription },
   { path: '/state', component: State },
-  { path: '/eventstream', component: EventStream}
-]
+  { path: '/eventstream', component: EventStream },
+  { path: '/componentTree', component: ComponentTree }
+];
 const router = new VueRouter({
   routes
-})
+});
 
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';

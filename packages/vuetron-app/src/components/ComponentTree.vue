@@ -1,5 +1,6 @@
 <template>
   <div v-if="show && domTree">
+    <p>ksdfjhdksfhdskfjhdskfjhskfjdhsfkjdsh</p>
     <tree ref="tree" :identifier="getId" :zoomable="zoomable" :data="domTree" :node-text="nodeText" :layout-type="layoutType" class="tree" />
   </div>
 </template>
@@ -41,10 +42,8 @@ export default {
 <style>
 .tree {
   height: 600px;
-  width: 500px;
-}
-.nodetree circle {
-  r: 5;
+  width: 100%;
+  z-index: 10000;
 }
 
 </style>
