@@ -47,8 +47,8 @@ const VuetronVuex = function (port = 9090) {
         title: 'STATE CHANGE',
         display: {
           mutation: mutation,
-          newState: JSON.stringify(newState)
         },
+        state: JSON.stringify(newState),
         timestamp: new Date(Date.now()).toISOString()
       };
       // register event for state change
@@ -459,20 +459,30 @@ export const store = new Vuex.Store({
       ],
       "id": 0,
       "name": "DiscogsClient"
-    }
+    },
+    displayNavbar: true
   },
 
   mutations: {
+    toggleNavbarDisplay (state) {
+      state.displayNavbar = !state.displayNavbar;
+    },
+    toggleEventShow (state, evIdx) {
+      state.events[evIdx].show = !state.events[evIdx].show;
+    },
     updateClientState (state, newClientState) {
       state.clientState = newClientState;
+    },
+    revertClientState (state, revertedState) {
+      state.clientState = revertedState;
+      let port = 9090;
+      const socket = io('http://localhost:' + port);
+      socket.emit('vuetronStateUpdate', revertedState);
     },
     addNewEvent (state, newEvent) {
       if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
       if (!newEvent.show) newEvent.show = false;
       state.events.unshift(newEvent);
-    },
-    toggleEventShow (state, evIdx) {
-      state.events[evIdx].show = !state.events[evIdx].show;
     },
     addSubscription (state, str) {
       let path = pathParser(str);
@@ -495,6 +505,12 @@ export const store = new Vuex.Store({
     updateClientDom (state, newDom) {
       state.domTree = newDom;
     }
+    // fetchPreviousState (state, newState) {
+    //   let port = 9090
+    //   const socket = io('http://localhost:' + port);
+    //   console.log('newState', newState);
+    //   socket.emit('newState', newState)
+    // }
   },
   plugins: [VuetronVuex()]
 });

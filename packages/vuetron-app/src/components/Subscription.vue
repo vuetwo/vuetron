@@ -1,12 +1,23 @@
 <template>
-  <div>
+  <div id="subscriptions">
     <nav class="navbar sticky-top navbar-light bg-faded">
-      <h1 id="headerStyle" class="navbar-brand mb-0">Subscription</h1>
+      <div class="navbar-left">
+        <b-btn @click="() => {this.$store.commit('toggleNavbarDisplay')}" variant="transparent" id="toggle-nav-btn">
+          <icon name="navicon" />
+        </b-btn>
+      </div>
+      <div class="navbar-middle">
+        <h1 class="nav-header navbar-brand mb-0">Subscriptions</h1>
+      </div>
+      <div class="navbar-right">
+      </div>
     </nav> 
-    <b-container>
+    <b-container id="subs-content" fluid>
       <b-row>
         <b-col cols="12">
           <p><strong>Add Subscription</strong></p>
+        </b-col>
+        <b-col cols="12" md="6" lg="4">
           <b-input-group>
             <b-form-input type="text" placeholder="subscription path" v-model="newSub" @keydown.native.enter="addSub"/>
             <b-input-group-button slot="right">
@@ -20,9 +31,22 @@
         <b-col cols="12">
           <b-list-group>
             <b-list-group-item v-for="(value, key, index) in subscriptions" v-bind:key="index">
-              <h3>{{ key }} - <b-button @click="() => {remSub(key)}" variant="warning" size="sm">Unsubscribe</b-button></h3>
-              <span><strong>Mutations: </strong></span>
-              <VueObjectView :value="value" />
+              <b-row>
+                <b-col cols="10" md="11">
+                  <h3>{{ key }}</h3>
+                </b-col>
+                <b-col cols="2" md="1" class="text-right">
+                  <h3><icon name="times" id="unsub-btn"
+                    @click.native="() => {remSub(key)}" 
+                    v-b-popover.hover.auto="'Unsubscribe'" /></h3>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12">
+                  <span><strong>Mutations: </strong></span>
+                  <VueObjectView :value="value" />    
+                </b-col>
+              </b-row>
             </b-list-group-item>
           </b-list-group>
         </b-col>
@@ -65,7 +89,35 @@
 </script>
 
 <style scoped>
-  #headerStyle {
-    color: #0B9BD7;
+  #subscriptions {
+    color: #2f4b5c;
+  }
+
+  #subs-content {
+    margin-top: 10px;
+  }
+
+  #unsub-btn {
+    color: red;
+  }
+
+  .fa-icon {
+    cursor: pointer;
+  }
+
+  .form-control {
+    background: #fcf9f2;
+  }
+  .form-control:focus {
+      border: none;
+      box-shadow: none;
+  }
+
+  .list-group {
+    margin-top: 20px;
+  }
+  .list-group-item {
+    background-color: #fcf9f2;
+    margin-bottom: 10px;
   }
 </style>
