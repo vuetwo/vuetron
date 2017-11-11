@@ -35,7 +35,6 @@ new Vue({
   template: '<App/>',
   router,
   store,
-  router,
   components: { App }
 });
 /* eslint-disable-line no-new */
