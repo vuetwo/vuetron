@@ -14,9 +14,9 @@ const VuetronVuex = function (port = 9090) {
     const socket = io('http://localhost:' + port);
     // register event noting connection to sockets (client app)
     let initEvent = {
-      title: 'CONNECTED TO APP',
+      title: 'CONNECTED TO SERVER',
       display: {
-        msg: 'Successfully connected Vuetron to client'
+        msg: 'Successfully connected Vuetron to server. Waiting for client connection.'
       },
       timestamp: new Date(Date.now()).toISOString()
     };
