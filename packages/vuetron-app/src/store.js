@@ -87,11 +87,77 @@ const VuetronVuex = function (port = 9090) {
 
 Vue.use(Vuex);
 
+import fetchIntercept from 'fetch-intercept';
+import 'whatwg-fetch'  //not in entry point. Will give error/not work?
+
+const unregister = fetchIntercept.register({
+    // let reqUrl = 'https://codesmith-precourse.firebaseio.com/instagram/-JqL35o8u6t3dTQaFXSV.json';
+    request: function (url, config) {
+        // Modify the url or config here 
+        return [url, config];
+    },
+ 
+    requestError: function (error) {
+        // Called when an error occured during another 'request' interceptor call 
+        return Promise.reject(error);
+    },
+ 
+    response: function (response) {
+        // Modify the reponse object 
+        // console.log('RESPONSE:', response);
+        // console.log('RESPONSE BODY', response.body);
+        // console.log('RESPONSE LENGTH:', response.length);
+        
+        return response;
+    },
+ 
+    responseError: function (error) {
+        // Handle an fetch error 
+        return Promise.reject(error);
+    }
+});
+
+
+let getRequest = new Request('https://codesmith-precourse.firebaseio.com/instagram/-JqL35o8u6t3dTQaFXSV.json', {
+  method: 'GET',
+  mode: 'cors',
+  headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json'
+  },
+});
+
+let instaPicsArr = [];
+
+fetch(getRequest).then(response => response.json())
+  .then(data => {
+    // console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      // console.log(data[i]);
+      instaPicsArr.push(data[i]);
+      // console.log('INSTA PICS: ', instaPicsArr);
+    }
+});
+
+// fetch('https://codesmith-precourse.firebaseio.com/instagram/-JqL35o8u6t3dTQaFXSV.json', {
+//   method: 'get'
+// }).then(function(response){
+//   for (let m = 0; m < response.length; m++) {
+//     console.log(response[m]);
+//   }
+// }).catch(function(err){
+//   console.log(err);
+// });
+
+// Unregister your interceptor 
+unregister();
+
 export const store = new Vuex.Store({
   state: {
     clientState: {},  // state from client
     events: [],
-    subscriptions: {}
+    subscriptions: {},
+    instaPics: instaPicsArr
   },
 
   mutations: {

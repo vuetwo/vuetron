@@ -9,6 +9,8 @@ const VuetronVue = {
     Vue.prototype.$emit = (function (original) {
       return function (...cb) {
         let currThis = this;
+        //DELETE AFTER TEST:
+        console.log(this);
         // check if event (cb[0]) is a user emitted event
         if (typeof cb[0] === 'string' && !cb[0].includes('hook:')) {
           // socket emit that a user event has been emitted
@@ -21,6 +23,9 @@ const VuetronVue = {
         original.apply(currThis, cb);
       };
     }(Vue.prototype.$emit));
+
+    
+
   }
 };
 
