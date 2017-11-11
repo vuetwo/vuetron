@@ -483,7 +483,7 @@ export const store = new Vuex.Store({
       state.clientState = newClientState;
     },
     revertClientState (state, revertedState) {
-      state.clientState = revertedState;
+      state.clientState = JSON.parse(revertedState);
       let port = 9090;
       const socket = io('http://localhost:' + port);
       socket.emit('vuetronStateUpdate', revertedState);
