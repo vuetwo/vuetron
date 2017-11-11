@@ -16,6 +16,8 @@ const VuetronVue = {
           // socket emit that a user event has been emitted
           socket.emit('clientEmitEvent', cb[0]);
           // find the context that has the correct event
+          let temp = Object.getPrototypeOf({});
+          Object.setPrototypeOf(currThis._events, temp);
           while (!currThis._events.hasOwnProperty(cb[0]) && this._context !== undefined) {
             currThis = currThis._context;
           }
@@ -24,8 +26,39 @@ const VuetronVue = {
       };
     }(Vue.prototype.$emit));
 
-    
+    function buildObject (component) {
+      if (!component || !component.$vnode || !component.$vnode.hasOwnProperty('tag')) return;
+      let obj = {};
+      obj.name = component.$vnode.tag;
+      if (component.hasOwnProperty('$children') && component.$children.length > 0) {
+        obj.children = [];
+        for (let childComponent of component.$children) {
+          obj.children.push(buildObject(childComponent));
+        }
+      }
+      return obj;
+    }
 
+    function grabAndEmitDOM () {
+      let parents = document.body.children;
+      const children = [];
+      for (let node of parents) {
+        if (node.hasOwnProperty('__vue__') && node.__vue__.hasOwnProperty('$children') && node.__vue__.$children.length > 0) {
+          children.push('mounted', node.__vue__.$children[0]);
+          const firstComp = node.__vue__.$children[0];
+          socket.emit('clientDomTree', buildObject(firstComp));
+        }
+      }
+    }
+
+    Vue.mixin({
+      mounted () {
+        grabAndEmitDOM();
+      },
+      destroyed () {
+        grabAndEmitDOM();
+      }
+    });
   }
 };
 

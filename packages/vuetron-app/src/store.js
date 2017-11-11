@@ -17,17 +17,21 @@ const VuetronVuex = function (port = 9090) {
       title: 'CONNECTED TO APP',
       display: {
         msg: 'Successfully connected Vuetron to client'
-      }
+      },
+      timestamp: new Date(Date.now()).toISOString()
     };
     store.commit('addNewEvent', initEvent);
 
     // request current client state on socket connection
-    socket.emit('requestClientState');
+    // if (Object.keys(store.state.clientState).length < 1) {
+    //   socket.emit('requestClientState');
+    // }
 
     socket.on('setInitState', function (state) {
       let event = {
         title: 'STATE INITIALIZED',
-        display: state
+        display: state,
+        timestamp: new Date(Date.now()).toISOString()
       };
       // register event noting receipt of initial client state
       store.commit('addNewEvent', event);
@@ -43,134 +47,451 @@ const VuetronVuex = function (port = 9090) {
         title: 'STATE CHANGE',
         display: {
           mutation: mutation,
-          newState: JSON.stringify(newState),
-        }
+        },
+        state: JSON.stringify(newState),
+        timestamp: new Date(Date.now()).toISOString()
       };
       // register event for state change
       store.commit('addNewEvent', updatedState);
       // update client's current state to newState
       store.commit('updateClientState', newState);
-       // check if any of the mutations are subscribed
+      // check if any of the mutations are subscribed
       for (let change of mutation) {
         const parsedPath = pathParser(JSON.stringify(change.path));
         // if subscribed, push to that path's array for display
         for (let key of Object.keys(store.state.subscriptions)) {
           if (key === parsedPath || parsedPath.search(key) !== -1) {
-            store.commit('addEventToSubscription', {key, change});
+            store.commit('addEventToSubscription', { key, change });
           }
         }
       }
     });
 
-    // get state change:
-    socket.on('emitDummyMutation', function (dummyMutation, dummyNewState) {
-      let updatedStateItem = {
-        title: 'STATE CHANGE',
-        display: JSON.stringify(dummyMutation),
-        newState: JSON.stringify(dummyNewState),
-        // id for testing clicking individual dynamically create divs
-        id: JSON.stringify(dummyMutation.id)
+    socket.on('eventUpdate', function (event) {
+      let newEvent = {
+        title: 'EVENT EMITTED',
+        display: event,
+        timestamp: new Date(Date.now()).toISOString()
       };
-      store.state.events.unshift(updatedStateItem);
+      store.commit('addNewEvent', newEvent);
     });
 
-    // // get client event:
-    // socket.on('sendClientEvent', function(type, payload){
-    //   let clientStateItem = {
-    //     title: 'ACTION',
-    //     display: JSON.stringify(payload),
-    //     type: type
-    //   }
-    // });
+    socket.on('domUpdate', function (dom) {
+      store.commit('updateClientDom', dom);
+    });
   };
 };
 
 Vue.use(Vuex);
-
-import fetchIntercept from 'fetch-intercept';
-import 'whatwg-fetch'  //not in entry point. Will give error/not work?
-
-const unregister = fetchIntercept.register({
-    // let reqUrl = 'https://codesmith-precourse.firebaseio.com/instagram/-JqL35o8u6t3dTQaFXSV.json';
-    request: function (url, config) {
-        // Modify the url or config here 
-        return [url, config];
-    },
- 
-    requestError: function (error) {
-        // Called when an error occured during another 'request' interceptor call 
-        return Promise.reject(error);
-    },
- 
-    response: function (response) {
-        // Modify the reponse object 
-        // console.log('RESPONSE:', response);
-        // console.log('RESPONSE BODY', response.body);
-        // console.log('RESPONSE LENGTH:', response.length);
-        
-        return response;
-    },
- 
-    responseError: function (error) {
-        // Handle an fetch error 
-        return Promise.reject(error);
-    }
-});
-
-
-let getRequest = new Request('https://codesmith-precourse.firebaseio.com/instagram/-JqL35o8u6t3dTQaFXSV.json', {
-  method: 'GET',
-  mode: 'cors',
-  headers: {
-    'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json'
-  },
-});
-
-let instaPicsArr = [];
-
-fetch(getRequest).then(response => response.json())
-  .then(data => {
-    // console.log(data);
-    for (let i = 0; i < data.length; i++) {
-      // console.log(data[i]);
-      instaPicsArr.push(data[i]);
-      // console.log('INSTA PICS: ', instaPicsArr);
-    }
-});
-
-// fetch('https://codesmith-precourse.firebaseio.com/instagram/-JqL35o8u6t3dTQaFXSV.json', {
-//   method: 'get'
-// }).then(function(response){
-//   for (let m = 0; m < response.length; m++) {
-//     console.log(response[m]);
-//   }
-// }).catch(function(err){
-//   console.log(err);
-// });
-
-// Unregister your interceptor 
-unregister();
 
 export const store = new Vuex.Store({
   state: {
     clientState: {},  // state from client
     events: [],
     subscriptions: {},
-    instaPics: instaPicsArr
+    // test domTree
+    domTree: {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+
+                      ],
+                      "id": 53,
+                      "name": "DiscogsEntityType"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 50,
+                      "name": "DiscogsImageFormatType"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 52,
+                      "name": "DiscogsPaginable"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 54,
+                      "name": "DiscogsSearch"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 51,
+                      "name": "DiscogsSortInformation"
+                    }
+                  ],
+                  "id": 49,
+                  "name": "Query"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+
+                      ],
+                      "id": 14,
+                      "name": "DiscogsArtist"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 13,
+                      "name": "DiscogsArtistRelease"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 46,
+                      "name": "DiscogsArtistReleases"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 23,
+                      "name": "DiscogsArtistSortType"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 27,
+                      "name": "DiscogsCommunity"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 26,
+                      "name": "DiscogsCommunityInfo"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 15,
+                      "name": "DiscogsCommunityReleaseRating"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 28,
+                      "name": "DiscogsEntity"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 29,
+                      "name": "DiscogsFormat"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 22,
+                      "name": "DiscogsGroupOrBandMember"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 30,
+                      "name": "DiscogsIdentifier"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 16,
+                      "name": "DiscogsIdentity"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 40,
+                      "name": "DiscogsImage"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 31,
+                      "name": "DiscogsImageType"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 32,
+                      "name": "DiscogsLabel"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 17,
+                      "name": "DiscogsLabelRelease"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 48,
+                      "name": "DiscogsLabelReleases"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 24,
+                      "name": "DiscogsMaster"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 19,
+                      "name": "DiscogsPaginableResults`1"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 33,
+                      "name": "DiscogsPaginedResult"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 34,
+                      "name": "DiscogsPaginedUrls"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 25,
+                      "name": "DiscogsRating"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 41,
+                      "name": "DiscogsRelease"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 39,
+                      "name": "DiscogsReleaseArtist"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 35,
+                      "name": "DiscogsReleaseBase"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 18,
+                      "name": "DiscogsReleaseLabel"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 20,
+                      "name": "DiscogsReleaseRating"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 44,
+                      "name": "DiscogsReleaseVersion"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 47,
+                      "name": "DiscogsReleaseVersions"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 36,
+                      "name": "DiscogsSearchResult"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 42,
+                      "name": "DiscogsSearchResults"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 37,
+                      "name": "DiscogsSimplifiedLabel"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 21,
+                      "name": "DiscogsSortOrderType"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 38,
+                      "name": "DiscogsTrack"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 43,
+                      "name": "DiscogsUser"
+                    },
+                    {
+                      "children": [
+
+                      ],
+                      "id": 45,
+                      "name": "DiscogsVideo"
+                    }
+                  ],
+                  "id": 12,
+                  "name": "Result"
+                }
+              ],
+              "id": 11,
+              "name": "Data"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+
+                  ],
+                  "id": 9,
+                  "name": "DiscogsWebClient"
+                },
+                {
+                  "children": [
+
+                  ],
+                  "id": 10,
+                  "name": "IDiscogsWebClient"
+                }
+              ],
+              "id": 8,
+              "name": "Internal"
+            },
+            {
+              "children": [
+
+              ],
+              "id": 2,
+              "name": "DiscogsAuthentifierClient"
+            },
+            {
+              "children": [
+
+              ],
+              "id": 3,
+              "name": "DiscogsClient"
+            },
+            {
+              "children": [
+
+              ],
+              "id": 4,
+              "name": "DiscogsException"
+            },
+            {
+              "children": [
+
+              ],
+              "id": 5,
+              "name": "IDiscogsDataBaseClient"
+            },
+            {
+              "children": [
+
+              ],
+              "id": 6,
+              "name": "IDiscogsReleaseRatingClient"
+            },
+            {
+              "children": [
+
+              ],
+              "id": 7,
+              "name": "IDiscogsUserIdentityClient"
+            }
+          ],
+          "id": 1,
+          "name": "DiscogsClient"
+        }
+      ],
+      "id": 0,
+      "name": "DiscogsClient"
+    },
+    displayNavbar: true
   },
 
   mutations: {
+    toggleNavbarDisplay (state) {
+      state.displayNavbar = !state.displayNavbar;
+    },
+    toggleEventShow (state, evIdx) {
+      state.events[evIdx].show = !state.events[evIdx].show;
+    },
     updateClientState (state, newClientState) {
       state.clientState = newClientState;
+    },
+    revertClientState (state, revertedState) {
+      state.clientState = JSON.parse(revertedState);
+      let port = 9090;
+      const socket = io('http://localhost:' + port);
+      socket.emit('vuetronStateUpdate', revertedState);
     },
     addNewEvent (state, newEvent) {
       if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
       if (!newEvent.show) newEvent.show = false;
       state.events.unshift(newEvent);
-    },
-    toggleEventShow (state, evIdx) {
-      state.events[evIdx].show = !state.events[evIdx].show;
     },
     addSubscription (state, str) {
       let path = pathParser(str);
@@ -189,7 +510,16 @@ export const store = new Vuex.Store({
       let subs = Object.assign({}, state.subscriptions);
       subs[info.key].push(info.change);
       state.subscriptions = subs;
+    },
+    updateClientDom (state, newDom) {
+      state.domTree = newDom;
     }
+    // fetchPreviousState (state, newState) {
+    //   let port = 9090
+    //   const socket = io('http://localhost:' + port);
+    //   console.log('newState', newState);
+    //   socket.emit('newState', newState)
+    // }
   },
   plugins: [VuetronVuex()]
 });
