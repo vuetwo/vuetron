@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import SocketPlugin from './sockets/SocketPlugin';
 
+const io = require('socket.io-client');
+
 Vue.use(Vuex);
 
 const pathParser = (str) => {
