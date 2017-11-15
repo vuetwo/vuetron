@@ -58,16 +58,6 @@ export default {
     margin-bottom: 20px;
   }
 
-  /* .tree-container {
-    width: 100%;
-    height: 100%;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-  } */
-
   .tree {
     height: 90vh;
     width: 80vw;
