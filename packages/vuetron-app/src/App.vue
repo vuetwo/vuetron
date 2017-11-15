@@ -5,16 +5,13 @@
         <navbar></navbar>
       </b-col>
       <main v-bind:class="{ 'display padding-0 col-8 col-lg-10': showNavbar, 'display padding-0 col-xs-12 col-lg-12': !showNavbar }">
-        <display></display>
+        <router-view></router-view>
       </main>
     </b-row>
   </b-container>
 </template>
 
-
-
 <script>
-  import Display from './components/Display.vue';
   import Navbar from './components/Navbar.vue';
   export default {
     computed: {
@@ -23,7 +20,6 @@
       }
     },
     components: {
-      display: Display,
       navbar: Navbar
     }
   }
