@@ -1,71 +1,155 @@
-![](./docs/images/tands-logo.png)
+<h1 align="center">
+<img align="center" src="./docs/images/tands-logo.png">
+<br>
+Vuetron *NOT READY FOR DEPLOYMENT 
+<a href="http://twitter.com/home?status=Check out Vuetron! Testing and debugging for Vue https://git.io/vFwOq"><img src="https://img.shields.io/twitter/url/https/github.com/talls-and-smalls/vuetron/.svg?style=social"></a>
+</h1>
 
-# Vuetron
-A macOS, Windows, and Linux desktop app for testing and debugging [Vue](https://vuejs.org/) + [Vuex](https://vuex.vuejs.org/en/intro.html) projects.
-[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+<p align="center">A <a href="https://vuejs.org/" target="_blank">Vue</a> testing and debugging desktop app built on top of <a href="http://electron.atom.io" target="_blank">Electron</a>.</p>
 
-Placeholder GIF:
-![](./docs/images/reactotron-demo-app.gif)
+<h4 align="center"><a href="https://google.com"><img src="https://img.shields.io/github/release/talls-and-smalls/vuetron/all.svg"></a>
+<a href="https://google.com"><img src="https://img.shields.io/npm/v/vuetron.svg"></a>
+<a href="https://google.com"><img src="https://img.shields.io/jenkins/c/https/jenkins.qa.ubuntu.com/view/Utopic/view/All/job/address-book-service-utopic-i386-ci.svg"></a>
+<a href="https://standardjs.com/"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg"></a>
+<a href="https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/talls-and-smalls/vuetron.svg"></a></h4>
+<!-- 
+[![Release](https://img.shields.io/github/release/talls-and-smalls/vuetron/all.svg)](https://google.com)
+[![npm Version](https://img.shields.io/npm/v/vuetron.svg)](https://google.com) 
+[![Standard JS code style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com/)
+[![Standard JS code style](https://img.shields.io/github/license/talls-and-smalls/vuetron.svg)](https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt) -->
 
-Current features include:
+## Key Features
 
-TODO: update features (currently copied from reactotron)
+#### Eventstream with Time Travel Debugging:
+![](./docs/images/eventstream.gif)
 
-* view your application state
-* show API requests & responses
-* perform quick performance benchmarks
-* subscribe to parts of your application state
-* display messages similar to console.log
-* track global errors with source-mapped stack traces including saga stack traces!
-* dispatch actions like a government-run mind control experiment
-* hot swap your app's state
+#### Variable Subscription:
+![](./docs/images/subscription.gif)
 
-## Available packages
-- Vuetron App: The desktop app.
-- Vuetron-Vuex: A plugin enabling Vuetron to access and edit the client's Vuex store.
-- Vuetron Server: Server to establish connection between client app and Vuetron app.
+#### Component Tree Visualization:
+![](./docs/images/visualization.png)
 
-# Documentation
+* View your Vuex store's state
+  - Instantly time travel between previous application states
+* Subscribe to parts of your application's state
+  - While you type, LivePreview will automatically scroll to the current location you're editing.
+* GitHub Flavored Markdown  
+* Dark/Light mode
+* Emoji support in preview :tada:
+* App will keep alive in tray for quick usage
+* Cross platform
+  - Windows, Mac, and Linux ready.
 
-* [Installing]()
-* Quick Start for [Vue]()
-* Quick Start for [Vuex]()
+## Getting Started
 
-## Why Vuetron?
+To use Vuetron, you will need both the desktop application and install the library in your Vue project
 
-TODO
+
+### Installing Vuetron desktop app
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/talls-and-smalls/vuetron.git
+
+# Go into the repository
+$ cd vuetron
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm start
+```
+
+A step by step series of examples that tell you have to get a development env running
+
+### Adding Vuetron plugins in your application
+
+In order for Vuetron to access the application, the vuetron library must be included
+
+Installing the Vuetron npm module
+```bash
+$ npm install vuetron
+```
+
+In Vue:
+```js
+import Vue from 'vue'
+import App from './App.vue'
+
+import { VuetronVue } from 'vuetron';
+
+Vue.use(VuetronVue);
+```
+
+In Vuex Store:
+```js
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { VuetronVuex } from 'vuetron';
+
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+  // ...
+  plugins: [VuetronVuex]
+})
+```
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Built With
+
+* [Vue.js](https://vuejs.org/) - The web framework used
+* [Vuex](https://vuex.vuejs.org/en/intro.html) - State Management
+* [Electron](https://electron.atom.io/) - Used to build desktop app
+* [Socket.io](https://socket.io/) - Used communicate between Vuetron and client's application
 
 ## Contributing
 
-Found a bug? Have a suggestion?
+Found a bug? Have a suggestion? Feel free to submit issues!
 
-Please submit issues/pull requests if you have feedback or would like to contribute. If you're interested in joining the Vuetron team as a contributor, feel free to message one of us directly.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests if you're interesting in contributing to this project!
 
 ## Authors
 
-Samantha Salley ([https://github.com/samanthasalley](https://github.com/samanthasalley))
+* **Samantha Salley** - [https://github.com/samanthasalley](https://github.com/samanthasalley)
 
-Louis Rouaze ([https://github.com/louisrouaze](https://github.com/louisrouaze))
+* **Louis Rouaze** - [https://github.com/louisrouaze](https://github.com/louisrouaze)
 
-Kelly Gilliam ([https://github.com/KellyGilliam](https://github.com/KellyGilliam))
+* **Kelly Gilliam** - [https://github.com/KellyGilliam](https://github.com/KellyGilliam)
 
-Brandon Danh ([https://github.com/brandondanh](https://github.com/brandondanh))
+* **Brandon Danh** - [https://github.com/brandondanh](https://github.com/brandondanh)
 
-## Contact
-
-Like our app? Found a bug? 
-
-Tell us what you think! Submit an issue or message us directly!
-
-## Roadmap 
-
-Here's our top development priorities
-
-1. Build a thing
-2. Make it better
-3. ???
-4. PROFIT
+See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* the Vue team for a great framework
+* vued3tree library
+* Support from other open source developers
+* And the entire Vue developer community
