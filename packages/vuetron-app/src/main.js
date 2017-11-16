@@ -4,10 +4,11 @@ import VueRouter from 'vue-router';
 import { store } from './store';
 // import all components
 import App from './App.vue';
-import Subscription from './components/Subscription.vue';
+import Home from './components/Home.vue';
 import EventStream from './components/EventStream.vue';
-import ComponentTree from './components/ComponentTree.vue';
+import Subscription from './components/Subscription.vue';
 import State from './components/State.vue';
+import ComponentTree from './components/ComponentTree.vue';
 // import styles and icons
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -22,10 +23,12 @@ Vue.component('icon', Icon);
 
 // define Router routes and instantiate router
 const routes = [
+  { path: '/', component: Home },
   { path: '/eventstream', component: EventStream },
   { path: '/subscription', component: Subscription },
   { path: '/state', component: State },
-  { path: '/componentTree', component: ComponentTree }
+  { path: '/componentTree', component: ComponentTree },
+  { path: '*', redirect: '/' }
 ];
 const router = new VueRouter({
   routes
