@@ -7,7 +7,7 @@
       </b-btn>
       <h1 class="nav-header navbar-brand mb-0">Event Stream</h1>
       <b-dropdown no-caret variant="transparent"
-        v-b-popover.hover.auto.left="'Filter events'">
+        v-b-popover.hover.auto.left="filterBtnHelpText">
         <template slot="button-content">
           <icon name="filter"></icon>
         </template>
@@ -23,12 +23,23 @@
       <b-col cols="12">
         <div class="row" v-for="(event, index) in filteredEvents" 
           v-bind:event="event" v-bind:key="index">
-          <b-btn class="eventBtn" @click="() => {emitEventToggle(index)}">{{ event.title }} - {{ event.timestamp | formatTime }}</b-btn>
+          <b-btn class="eventBtn" :class="[ event.status === 'inactive' ? 'inactive' : '' ]" @click="() => {emitEventToggle(index)}">{{ event.title }} - {{ event.timestamp | formatTime }}</b-btn>
           <div class="eventCardWrapper" v-show="event.show">
             <b-card class="eventCard">
               <h5>{{ event.title }}</h5>
-              <div v-if="event.title ==='STATE CHANGE' || event.title ==='STATE INITIALIZED' ">
-                <b-btn class="reverseBtn" @click="() => {recoverState(event)}">Recover State</b-btn>
+              <div v-if="(event.title ==='STATE CHANGE' || event.title ==='STATE INITIALIZED') && event.status === 'active' ">
+                <b-btn class="reverseBtn" 
+                  v-b-popover.hover.auto="revertBtnHelpText"
+                  @click="() => {revertState(event, index)}">
+                  Revert State
+                </b-btn>
+              </div>
+              <div v-if="event.title === 'STATE CHANGE' && event.status === 'inactive'">
+                <b-btn class="mutateBtn" variant="transparent"
+                  v-b-popover.hover.auto="mutateBtnHelpText"
+                  @click="() => {mutateState(event, index)}">
+                  <icon name="undo" />
+                </b-btn>
               </div>
               <p v-if="event.title === 'STATE CHANGE'"><strong>Mutations:</strong></p>
               <p v-if="event.title === 'EVENT EMITTED'"><strong>Event name:</strong></p>
@@ -46,7 +57,9 @@
     data() {
       return {
         eventTypes: new Set(),
-        selected: []
+        selected: [],
+        filterBtnHelpText: 'Filter events',
+        revertBtnHelpText: 'Reverts application\'s Vuex state back to selected point.'
       };
     },
     computed: {
@@ -66,9 +79,8 @@
       emitEventToggle(evIdx) {
         this.$store.commit('toggleEventShow', evIdx);
       },
-      recoverState(event) {
-        let recoverState = event.title === 'STATE CHANGE' ? event.state : JSON.stringify(event.display);
-        this.$store.commit('revertClientState', recoverState);
+      revertState(event, evIdx) {
+        this.$store.commit('revertClientState', {event, evIdx});
       }
     },
     filters: {
@@ -129,6 +141,11 @@
     color: #2f4b5c !important;
     box-shadow: none !important;
     background-color: transparent !important;
+  }
+
+  .eventBtn.inactive {
+    color: darkgray;
+    text-decoration: line-through;
   }
 
   .eventCard {
