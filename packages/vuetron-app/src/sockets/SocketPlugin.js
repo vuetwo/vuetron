@@ -15,6 +15,7 @@ const SocketPlugin = function (port = 9090) {
       display: {
         msg: 'Successfully connected Vuetron to server. Waiting for client connection.'
       },
+      status: 'active',
       timestamp: new Date(Date.now()).toISOString()
     };
     store.commit('addNewEvent', initEvent);
@@ -28,6 +29,7 @@ const SocketPlugin = function (port = 9090) {
       let event = {
         title: 'STATE INITIALIZED',
         display: state,
+        status: 'active',
         timestamp: new Date(Date.now()).toISOString()
       };
       // register event noting receipt of initial client state
@@ -39,13 +41,15 @@ const SocketPlugin = function (port = 9090) {
     // listen for state changes from client and update
     //  vuetron's client state store accordingly along
     //  with mutation log
-    socket.on('stateUpdate', function (mutation, newState) {
+    socket.on('stateUpdate', function (changes, mutation, newState) {
       let updatedState = {
         title: 'STATE CHANGE',
         display: {
-          mutation: mutation,
+          changes
         },
+        mutation,
         state: JSON.stringify(newState),
+        status: 'active',
         timestamp: new Date(Date.now()).toISOString()
       };
       // register event for state change
@@ -53,7 +57,7 @@ const SocketPlugin = function (port = 9090) {
       // update client's current state to newState
       store.commit('updateClientState', newState);
       // check if any of the mutations are subscribed
-      for (let change of mutation) {
+      for (let change of changes) {
         const parsedPath = pathParser(JSON.stringify(change.path));
         // if subscribed, push to that path's array for display
         for (let key of Object.keys(store.state.subscriptions)) {
@@ -68,6 +72,7 @@ const SocketPlugin = function (port = 9090) {
       let newEvent = {
         title: 'EVENT EMITTED',
         display: event,
+        status: 'active',
         timestamp: new Date(Date.now()).toISOString()
       };
       store.commit('addNewEvent', newEvent);

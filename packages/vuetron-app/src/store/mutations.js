@@ -16,11 +16,23 @@ const mutations = {
   updateClientState (state, newClientState) {
     state.clientState = newClientState;
   },
-  revertClientState (state, revertedState) {
-    state.clientState = JSON.parse(revertedState);
+  revertClientState (state, data) {
+    const events = state.events.slice(0);
+    const payload = {};
+    payload.mutationLog = [];
+    for (let i = 0; i < events.length; i++) {
+      if (i < data.evIdx && events[i].title === 'STATE CHANGE') {
+        events[i].status = 'inactive';
+      } else if (i >= data.evIdx && events[i].title === 'STATE CHANGE' && !payload.initState) {
+        payload.mutationLog.unshift(events[i].mutation);
+      } else if (i >= data.evIdx && events[i].title === 'STATE INITIALIZED' && !payload.initState) {
+        payload.initState = events[i].display;
+      }
+    }
+    state.events = events;
     let port = 9090;
     const socket = io('http://localhost:' + port);
-    socket.emit('vuetronStateUpdate', revertedState);
+    socket.emit('vuetronStateUpdate', payload);
   },
   // Event mutations
   addNewEvent (state, newEvent) {
