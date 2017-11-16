@@ -11,7 +11,9 @@
       </div>
     </nav>
     <b-row class="tree-container" v-if="show && domTree">
-      <tree ref="tree" :identifier="getId" :zoomable="zoomable" :data="domTree" :node-text="nodeText" :layout-type="layoutType" :margin-y="textMarginY" class="tree" />
+      <b-col cols="12">
+        <tree ref="tree" :identifier="getId" :zoomable="zoomable" :data="domTree" :node-text="nodeText" :layout-type="layoutType" :margin-y="textMarginY" class="tree" />
+      </b-col>
     </b-row>
   </div>
 </template>
@@ -23,12 +25,12 @@ export default {
   data() {
     return {
       show: true, // required for properly re-rendering object view on change
-      type: "tree",
+      type: "cluster",
       layoutType: "euclidean",
       nodeText: "name",
       zoomable: true,
       isLoading: false,
-      textMarginY: 1000
+      textMarginY: 700
     };
   },
   computed: {
@@ -51,19 +53,13 @@ export default {
 };
 </script>
 
-<style>
-  .tree-container {
-    width: 100%;
-    height: 100%;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
+<style scoped>
+  .navbar {
+    margin-bottom: 20px;
   }
 
   .tree {
-    height: 115vh;
-    width: 100vh;
+    height: 90vh;
+    width: 80vw;
   }
 </style>
