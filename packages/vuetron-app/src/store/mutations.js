@@ -16,20 +16,41 @@ const mutations = {
   updateClientState (state, newClientState) {
     state.clientState = newClientState;
   },
-  revertClientState (state, data) {
+  revertClientState (state, evIdx) {
     const events = state.events.slice(0);
     const payload = {};
     payload.mutationLog = [];
     for (let i = 0; i < events.length; i++) {
-      if (i < data.evIdx && events[i].title === 'STATE CHANGE') {
+      if (i < evIdx && events[i].title === 'STATE CHANGE') {
         events[i].status = 'inactive';
-      } else if (i >= data.evIdx && events[i].title === 'STATE CHANGE' && !payload.initState) {
+      } else if (i >= evIdx && events[i].title === 'STATE CHANGE' && !payload.initState) {
         payload.mutationLog.unshift(events[i].mutation);
-      } else if (i >= data.evIdx && events[i].title === 'STATE INITIALIZED' && !payload.initState) {
+      } else if (i >= evIdx && events[i].title === 'STATE INITIALIZED' && !payload.initState) {
         payload.initState = events[i].display;
       }
     }
     state.events = events;
+    let port = 9090;
+    const socket = io('http://localhost:' + port);
+    socket.emit('vuetronStateUpdate', payload);
+  },
+  mutateClientState (state, evIdx) {
+    state.events[evIdx].status = 'active';
+    let port = 9090;
+    const socket = io('http://localhost:' + port);
+    socket.emit('vuetronMutateState', state.events[evIdx].mutation);
+  },
+  deactivateStateEvent (state, evIdx) {
+    const payload = {};
+    payload.mutationLog = [];
+    for (let i = 0; i < state.events.length; i++) {
+      if (i !== evIdx && state.events[i].title === 'STATE CHANGE' && !payload.initState) {
+        payload.mutationLog.unshift(state.events[i].mutation);
+      } else if (i > evIdx && state.events[i].title === 'STATE INITIALIZED' && !payload.initState) {
+        payload.initState = state.events[i].display;
+      }
+    }
+    state.events[evIdx].status = 'inactive';
     let port = 9090;
     const socket = io('http://localhost:' + port);
     socket.emit('vuetronStateUpdate', payload);

@@ -47,6 +47,12 @@ module.exports = function (server) {
       socket.broadcast.emit('updateClientState', payload);
     });
 
+    socket.on('vuetronMutateState', function (payload) {
+      // Trigger client mutation from Vuetron
+      // Pass mutation payload back to client
+      socket.broadcast.emit('commitClientMutation', payload);
+    });
+
     socket.on('clientEmitEvent', function (event) {
       // Pass new emitted event from user app to Vuetron frontend
       socket.broadcast.emit('eventUpdate', event);

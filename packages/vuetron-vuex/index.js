@@ -5,6 +5,7 @@ const VuetronVuex = function (port = 9090) {
   return store => {
     // initialize socket connection
     const socket = io('http://localhost:' + port);
+    const mutationCache = {};
 
     // Immediately emit current state in case Vuetron is started first
     socket.emit('clientStateInit', store.state);
@@ -20,10 +21,20 @@ const VuetronVuex = function (port = 9090) {
     socket.on('updateClientState', function (payload) {
       // replace state with initial state
       store.replaceState(payload.initState);
-      // loop through all mutations, and recall those mutations
+      // loop through all mutations
       for (let i = 0; i < payload.mutationLog.length; i++) {
+        // add mutation to mutationCache
+        if (!mutationCache[payload.mutationLog[i].type]) mutationCache[payload.mutationLog[i].type] = 0;
+        mutationCache[payload.mutationLog[i].type] += 1;
+        // recall mutation
         store.commit(payload.mutationLog[i].type, payload.mutationLog[i].payload);
       }
+    });
+
+    socket.on('commitClientMutation', function (mutation) {
+      if (!mutationCache[mutation.type]) mutationCache[mutation.type] = 0;
+      mutationCache[mutation.type] += 1;
+      store.commit(mutation.type, mutation.payload);
     });
     // socket.on('updateClientState', function (newState) {
     //   // parse the stringified new state passed from Vuetron
@@ -34,8 +45,11 @@ const VuetronVuex = function (port = 9090) {
 
     // subscribe to store mutations
     store.subscribe((mutation, state) => {
-      // on mutation, emit update event to server
-      socket.emit('clientStateUpdate', state, mutation);
+      // check if mutation is in mutationCache
+      // if yes, remove from cache
+      if (mutationCache[mutation.type]) mutationCache[mutation.type] -= 1;
+      // if not, emit update event to server
+      else socket.emit('clientStateUpdate', state, mutation);
     });
   };
 };
