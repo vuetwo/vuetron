@@ -53,13 +53,15 @@ const VuetronVue = {
       }
     }
 
-    let reqType = 'type'
-    //monkey patch fetch API
+    // initialize requestObject for use in unregister's 'request' and 'response' functions
+    let requestObject = {}
+    // monkey patch fetch API with Fetch Intercept
     const unregister = fetchIntercept.register({
       request: function (url, config) {
           // Modify the url or config here
-          //redefine reqType to the config method (i.e. 'get' or 'post') to add to response object sent over sockets
-          reqType = config;
+          // redefine requestObject to the config method (e.g. 'get' or 'post') for use in unregister's 'response' function
+          console.log('CONFIG', config);
+          requestObject = config;
           return [url, config];
       },
       requestError: function (error) {
@@ -70,13 +72,14 @@ const VuetronVue = {
       },
       response: function (response) {
           // Modify the reponse object 
-          //reconstruct object to emit. Otherwise we will recieve an empty object
+          // reconstruct object for emit. Otherwise we will recieve an empty object
           var reconstructedResponse = {}
           for(let property in response) {
               reconstructedResponse[property] = response[property];
           }
-          //modify the response object by adding the request type
-          reconstructedResponse['TYPE'] = [reqType];
+          // modify the response object by adding requestObject ( this was redefined in unregister's 'request' function above )
+          // ..this will allow Vuetron to show standard and user-made custom request objects in addition to just the response object received back from the request
+          reconstructedResponse['requestObject'] = [requestObject];
           socket.emit('sendFetchResponse', reconstructedResponse);          
           return response;
       },
@@ -90,7 +93,6 @@ const VuetronVue = {
   Vue.mixin({
     mounted () {
       grabAndEmitDOM();
-      console.log('mounted');
     },
     destroyed () {
       grabAndEmitDOM();

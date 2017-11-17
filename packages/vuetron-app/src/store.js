@@ -80,17 +80,18 @@ const VuetronVuex = function (port = 9090) {
       store.commit('updateClientDom', dom);
     });
 
-    //listen for API responses made from FETCH and add to Event Stream
+    // listen for API responses made from FETCH requests and add to Event Stream
     socket.on('apiRequestResponse', function (response) {
       let updatedState = {
         title: 'API RESPONSE',
         display: {
           URL: response.url,
           Redirected: response.redirected,
-          Method: response.TYPE[0].method
+          Method: response.requestObject[0].method,
         },
-        state: null,
-        timestamp: new Date(Date.now()).toISOString()
+        responseObj: response,
+        requestObj: response.requestObject,
+        timestamp: new Date(Date.now()).toISOString(),
       };
       store.commit('addFetchResponseToEvents', updatedState);
     })
@@ -494,6 +495,12 @@ export const store = new Vuex.Store({
     toggleEventShow (state, evIdx) {
       state.events[evIdx].show = !state.events[evIdx].show;
     },
+    toggleEventCollapseForReqObj (state, evIdx) {
+      state.events[evIdx].reqObjCollapse = !state.events[evIdx].reqObjCollapse;
+    },
+    toggleEventCollapseForResObj (state, evIdx) {
+      state.events[evIdx].resObjCollapse = !state.events[evIdx].resObjCollapse;
+    },
     updateClientState (state, newClientState) {
       state.clientState = newClientState;
     },
@@ -529,8 +536,13 @@ export const store = new Vuex.Store({
     updateClientDom (state, newDom) {
       state.domTree = newDom;
     },
-    addFetchResponseToEvents (state, response) {           
-      if (!response.show) response.show = false;
+    addFetchResponseToEvents (state, response) {
+      if (!response.title || !response.display) throw new Error('invalid event data'); 
+      if (!response.show) response.show = false; 
+      // enable toggling to show / hide request object
+      if (!response.reqObjCollapse) response.reqObjCollapse = false;
+      // enable toggling to show / hide request object
+      if (!response.resObjCollapse) response.resObjCollapse = false;
       state.events.unshift(response);
     }
   },

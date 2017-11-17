@@ -33,6 +33,22 @@
               <p v-if="event.title === 'STATE CHANGE'"><strong>Mutations:</strong></p>
               <p v-if="event.title === 'EVENT EMITTED'"><strong>Event name:</strong></p>
               <div>{{ event.display }}</div>
+              <div v-if="event.title === 'API RESPONSE'">
+                <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForReqObj(index)}">Request Object</b-btn>
+                <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForResObj(index)}" >Response Object</b-btn>
+              </div>
+              <div v-show="event.reqObjCollapse">
+                <b-card class="apiInfoCard">
+                  <strong>Request Object:</strong>
+                  <div>{{ event.requestObj }}</div>
+                </b-card>
+              </div>
+              <div v-show="event.resObjCollapse">
+                  <b-card class="apiInfoCard">
+                    <strong>Response Object:</strong>
+                    <div>{{ event.responseObj }}</div>
+                  </b-card>
+              </div>
             </b-card>
           </div>
         </div>
@@ -46,7 +62,7 @@
     data() {
       return {
         eventTypes: new Set(),
-        selected: []
+        selected: [],
       };
     },
     computed: {
@@ -60,16 +76,25 @@
           this.eventTypes.add(name);
         });
         return Array.from(this.eventTypes);
+      },
+      activeWatcher() {
+        return this.active;
       }
     },
     methods: {
       emitEventToggle(evIdx) {
         this.$store.commit('toggleEventShow', evIdx);
       },
+      emitEventCollapseToggleForReqObj(evIdx) {
+        this.$store.commit('toggleEventCollapseForReqObj', evIdx);
+      },
+      emitEventCollapseToggleForResObj(evIdx) {
+        this.$store.commit('toggleEventCollapseForResObj', evIdx);
+      },
       recoverState(event) {
         let recoverState = event.title === 'STATE CHANGE' ? event.state : JSON.stringify(event.display);
         this.$store.commit('revertClientState', recoverState);
-      }
+      },
     },
     filters: {
       formatTime: function (ISODate) {
@@ -80,7 +105,7 @@
         time += ':' + ('0' + date.getSeconds()).slice(-2);
         return time;
       }
-    }
+    },
   };
 </script>
 
@@ -143,6 +168,12 @@
     margin-right: 3.5%;
     width: 100%;
   }
+
+  .showMoreRespBtn {
+    margin-left: 3.5%;
+    margin-right: 3.5%;
+  }
+
   .padding-0 {
     padding-right: 0;
     padding-left: 0;
