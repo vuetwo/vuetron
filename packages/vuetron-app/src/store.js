@@ -80,23 +80,18 @@ const VuetronVuex = function (port = 9090) {
       store.commit('updateClientDom', dom);
     });
 
+    //listen for API responses made from FETCH and add to Event Stream
     socket.on('apiRequestResponse', function (response) {
-      // console.log('RESPONSE FROM INSIDE SOCKET LISTENER:', response) 
-      // let newResp = response;     
-      // var a = {}
-      // for(let i in newResp) {
-      //     a[i] = newResp[i];
-      // }
-
       let updatedState = {
-        title: 'FETCH REQUEST',
+        title: 'API RESPONSE',
         display: {
-          mutation: response,
+          URL: response.url,
+          Redirected: response.redirected,
+          Method: response.TYPE[0].method
         },
         state: null,
         timestamp: new Date(Date.now()).toISOString()
       };
-
       store.commit('addFetchResponseToEvents', updatedState);
     })
   };
@@ -512,7 +507,6 @@ export const store = new Vuex.Store({
       if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
       if (!newEvent.show) newEvent.show = false;
       state.events.unshift(newEvent);
-      // console.log('EVENTS:', state.events);
     },
     addSubscription (state, str) {
       let path = pathParser(str);
@@ -536,16 +530,9 @@ export const store = new Vuex.Store({
       state.domTree = newDom;
     },
     addFetchResponseToEvents (state, response) {           
-      // console.log('FETCH RESPONSE IN METHOD:', response)
+      if (!response.show) response.show = false;
       state.events.unshift(response);
-      // console.log('EVENTS', state.events);
     }
-    // fetchPreviousState (state, newState) {
-    //   let port = 9090
-    //   const socket = io('http://localhost:' + port);
-    //   console.log('newState', newState);
-    //   socket.emit('newState', newState)
-    // }
   },
   plugins: [VuetronVuex()]
 });

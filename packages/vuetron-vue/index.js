@@ -13,8 +13,6 @@ const VuetronVue = {
     Vue.prototype.$emit = (function (original) {
       return function (...cb) {
         let currThis = this;
-        //DELETE AFTER TEST:
-        console.log(this);
         // check if event (cb[0]) is a user emitted event
         if (typeof cb[0] === 'string' && !cb[0].includes('hook:')) {
           // socket emit that a user event has been emitted
@@ -55,127 +53,50 @@ const VuetronVue = {
       }
     }
 
+    let reqType = 'type'
     //monkey patch fetch API
     const unregister = fetchIntercept.register({
       request: function (url, config) {
           // Modify the url or config here
+          //redefine reqType to the config method (i.e. 'get' or 'post') to add to response object sent over sockets
+          reqType = config;
           return [url, config];
       },
       requestError: function (error) {
           // Called when an error occured during another 'request' interceptor call 
           console.log('there was an error:', error);
-          socket.emit('sendFetchResponse', error);
+          // socket.emit('sendFetchResponse', error);
           return Promise.reject(error);
       },
       response: function (response) {
           // Modify the reponse object 
-          console.log('RESPONSE:', response);
-          // console.log('RESPONSE BODY', response.body);
-          // console.log('RESPONSE LENGTH:', response.length);
-          // socket emit that a response has been received from a fetch request
-          // console.log('HELLO FROM INSIDE FETCH REQUEST MONKEYPATCH', response);
-          // // let stringifiedResponse = JSON.stringify(response);
-          // // console.log('STRINGED RESPONSE:', typeof stringifiedResponse)
-          // setTimeout(function(){
-          //   console.log('delayed resp')
-          //   socket.emit('sendFetchResponse', response)
-          // },3000); 
-          // console.log('im emitting')
-
-          //reconstruct object to emit. Otherwise will recieve an empty object
-          var a = {}
-          for(let i in response) {
-              a[i] = response[i];
+          //reconstruct object to emit. Otherwise we will recieve an empty object
+          var reconstructedResponse = {}
+          for(let property in response) {
+              reconstructedResponse[property] = response[property];
           }
-          // socket.emit('sendFetchResponse', a)    
-          socket.emit('sendFetchResponse', a);          
-          
-          // websocket.emit('getNavigator', a);
-          // socket.emit('sendFetchResponse', response);
+          //modify the response object by adding the request type
+          reconstructedResponse['TYPE'] = [reqType];
+          socket.emit('sendFetchResponse', reconstructedResponse);          
           return response;
       },
       responseError: function (error) {
-          // Handle an fetch error 
+          // Handle a fetch error 
           console.log('there was an error:', error);
-          socket.emit('sendFetchResponse', error);
           return Promise.reject(error);
       }
   });
 
-  // fetch('https://codesmith-precourse.firebaseio.com/instagram/-JqL35o8u6t3dTQaFXSV.json', {
-  //   method: 'get'}).then(function (response) {
-  //     console.log('hello from request')
-  //     console.log(response)
-  //     return response
-  // // return response.json()
-  //   }).catch(function (err) {
-  //     console.log(err)
-  //   })
-
   Vue.mixin({
-    created () {
-      // unregister();
-      console.log('created');
-      // console.log(fetch);
-    },
     mounted () {
       grabAndEmitDOM();
-      // unregister();
       console.log('mounted');
     },
     destroyed () {
       grabAndEmitDOM();
-    },
-    beforeUpdate () {
-      // unregister();
-    },
-    updated () {
-      // unregister();
     }
-  });
-
-  
-
-
-  // .then(function(){
-  //   console.log('HELLO FROM INSIDE FETCH REQUEST MONKEYPATCH', response);
-  //   // let { port = 9090 } = options;
-  //   // const socket = io('http://localhost:' + port);
-  //   // let stringifiedResponse = JSON.stringify(response);
-  //   // console.log('STRINGED RESPONSE:', typeof stringifiedResponse)
-  //   socket.emit('sendFetchResponse', response); 
-  // })
-
-      
-
-    // fetch()
-    
-    //access fetch API 
-
-    // fetch('https://codesmith-precourse.firebaseio.com/instagram/-JqL35o8u6t3dTQaFXSV.json', {
-    //   method: 'get'
-    // }).then(function(response){
-    //   for (let m = 0; m < response.length; m++) {
-    //     console.log(response[m]);
-    //   }
-    // }).catch(function(err){
-    //   console.log(err);
-    // });
-    // console.log('hello from index.js 2!');
-    // fetch('https://codesmith-precourse.firebaseio.com/instagram/-JqL35o8u6t3dTQaFXSV.json', {
-    //   method: 'get'
-    // }).then(function (response) {
-    //   // console.log(response.json())
-    //   return response.json()
-    // }).then(function (data) {
-    //   console.log('HELLO INSIDE FETCH RECIEVE DATA')
-    //   for (let m = 0; m < data.length; m++) {
-    //     // console.log(data[m])
-    //   }
-    // }).catch(function (err) {
-    //   console.log(err)
-    // })
-    }
+  }); 
+ }
 };
 
 // module.exports = VuetronVue;
