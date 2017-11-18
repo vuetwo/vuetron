@@ -69,6 +69,22 @@
                 <strong>Initial State:</strong>
                 <StateDisplay :info="event.display" />
               </div>
+              <div v-if="event.title === 'API RESPONSE'">
+                <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForReqObj(index)}">Request Object</b-btn>
+                <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForResObj(index)}" >Response Object</b-btn>
+              </div>
+              <div v-show="event.reqObjCollapse">
+                <b-card class="apiInfoCard">
+                  <strong>Request Object:</strong>
+                  <div>{{ event.requestObj }}</div>
+                </b-card>
+              </div>
+              <div v-show="event.resObjCollapse">
+                  <b-card class="apiInfoCard">
+                    <strong>Response Object:</strong>
+                    <div>{{ event.responseObj }}</div>
+                  </b-card>
+              </div>
             </b-card>
           </b-collapse>
         </div>
@@ -102,6 +118,9 @@
           this.eventTypes.add(name);
         });
         return Array.from(this.eventTypes);
+      },
+      activeWatcher() {
+        return this.active;
       }
     },
     methods: {
@@ -113,6 +132,12 @@
       },
       deactivateSingleEvent(evIdx) {
         this.$store.commit('deactivateStateEvent', evIdx);
+      }
+      emitEventCollapseToggleForReqObj(evIdx) {
+        this.$store.commit('toggleEventCollapseForReqObj', evIdx);
+      },
+      emitEventCollapseToggleForResObj(evIdx) {
+        this.$store.commit('toggleEventCollapseForResObj', evIdx);
       }
     },
     filters: {
@@ -256,6 +281,12 @@
     margin-right: 3.5%;
     width: 100%;
   }
+
+  .showMoreRespBtn {
+    margin-left: 3.5%;
+    margin-right: 3.5%;
+  }
+
   .padding-0 {
     padding-right: 0;
     padding-left: 0;

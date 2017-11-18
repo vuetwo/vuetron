@@ -17,6 +17,7 @@
 </template>
  
  <script>
+
 import VueObjectView from "vue-object-view";
 
 export default {
@@ -33,6 +34,13 @@ export default {
       });
       return this.$store.state.clientState;
     },
+    instaPics() {
+      console.log("CHECK ARR", this.$store.state.instaPics);
+      return this.$store.state.instaPics;
+     },
+     events () {
+      return this.$store.state.events;
+     }
   },
   components: {
     VueObjectView,

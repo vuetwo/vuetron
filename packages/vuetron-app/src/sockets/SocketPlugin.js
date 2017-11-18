@@ -79,6 +79,22 @@ const SocketPlugin = function (port = 9090) {
     socket.on('domUpdate', function (dom) {
       store.commit('updateClientDom', dom);
     });
+
+    // listen for API responses made from FETCH requests and add to Event Stream
+    socket.on('apiRequestResponse', function (response) {
+      let updatedState = {
+        title: 'API RESPONSE',
+        display: {
+          URL: response.url,
+          Redirected: response.redirected,
+          Method: response.requestObject[0].method
+        },
+        responseObj: response,
+        requestObj: response.requestObject,
+        timestamp: new Date(Date.now()).toISOString()
+      };
+      store.commit('addFetchResponseToEvents', updatedState);
+    });
   };
 };
 
