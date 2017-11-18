@@ -9,9 +9,6 @@ const mutations = {
   toggleNavbarDisplay (state) {
     state.displayNavbar = !state.displayNavbar;
   },
-  toggleEventShow (state, evIdx) {
-    state.events[evIdx].show = !state.events[evIdx].show;
-  },
   // Client State mutations
   updateClientState (state, newClientState) {
     state.clientState = newClientState;

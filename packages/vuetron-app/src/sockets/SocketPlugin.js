@@ -12,9 +12,7 @@ const SocketPlugin = function (port = 9090) {
     // register event noting connection to sockets (client app)
     let initEvent = {
       title: 'CONNECTED TO SERVER',
-      display: {
-        msg: 'Successfully connected Vuetron to server. Waiting for client connection.'
-      },
+      display: 'Successfully connected Vuetron to server.',
       status: 'active',
       timestamp: new Date(Date.now()).toISOString()
     };
