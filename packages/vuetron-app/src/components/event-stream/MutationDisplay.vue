@@ -1,6 +1,10 @@
-
 <template id="mutationDisplayTemplate">
   <div>
+    <p class="event-card-title">
+      <strong>{{ event.title }}  </strong>
+      <revert-btn v-if="event.status === 'active'" :evIdx="evIdx" />
+    </p>
+    <p><strong>Change Log:</strong></p>
     <div v-for="(item, index) in processChanges" :key="index">
       <span>Change {{ index + 1 }}</span>
       <b-btn @click="item.show=!item.show"
@@ -24,6 +28,7 @@
 </template>
   
 <script>
+  import RevertBtn from './assets/RevertBtn.vue';
   const checkType = (char) => {
     switch (char) {
       case 'E':
@@ -45,7 +50,7 @@
   };
   export default {
     name: 'MutationDisplay',
-    props: ['changes'],
+    props: ['event', 'evIdx'],
     data() {
       return {
         processedChanges: null
@@ -53,7 +58,7 @@
     },
     computed: {
       processChanges() {
-        this.processedChanges = this.changes.map(change => {
+        this.processedChanges = this.event.display.changes.map(change => {
           const newObj = {};
           newObj.show = false;
           newObj.props = {};
@@ -73,6 +78,9 @@
         });
         return this.processedChanges;
       }
+    },
+    components: {
+      'revert-btn': RevertBtn
     }
   };
 </script>

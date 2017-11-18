@@ -85,12 +85,9 @@ const SocketPlugin = function (port = 9090) {
       let updatedState = {
         title: 'API RESPONSE',
         display: {
-          URL: response.url,
-          Redirected: response.redirected,
-          Method: response.requestObject[0].method
+          requestObj: response.requestObject[0],
+          responseObj: response
         },
-        responseObj: response,
-        requestObj: response.requestObject,
         timestamp: new Date(Date.now()).toISOString()
       };
       store.commit('addFetchResponseToEvents', updatedState);

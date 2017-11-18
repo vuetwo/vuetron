@@ -34,56 +34,26 @@
               :aria-expanded="event.show ? 'true' : 'false'">
               {{ event.title }} - {{ event.timestamp | formatTime }}
             </span>
-            <b-btn v-if="event.title ==='STATE CHANGE' && event.status === 'active'"
-              class="deactivate-btn" variant="transparent"
-              v-b-popover.hover.right="deactivateBtnHelpText"
-              @click="() => {deactivateSingleEvent(index)}">
-              <icon name="times" />
-            </b-btn>
-            <b-btn v-if="event.title === 'STATE CHANGE' && event.status === 'inactive'"
-              class="mutate-btn" variant="transparent"
-              v-b-popover.hover.right="mutateBtnHelpText"
-              @click="() => {mutateState(index)}">
-              <icon name="undo" />
-            </b-btn>
+            <deactivate-btn v-if="event.title === 'STATE CHANGE' && event.status === 'active'" :evIdx="index" />
+            <mutate-btn v-if="event.title === 'STATE CHANGE' && event.status === 'inactive'" :evIdx="index" />
           </div>
           <b-collapse class="event-card-wrapper" :id="`event-${index}`" v-model="event.show">
             <b-card class="event-card">
-              <span class="event-card-title"><strong>{{ event.title }}</strong></span>
-              <b-btn v-if="(event.title ==='STATE CHANGE' || event.title ==='STATE INITIALIZED') && event.status === 'active' "
-                class="revert-btn" size="sm" variant="secondary"
-                v-b-popover.hover.right="revertBtnHelpText"
-                @click="() => {revertState(index)}">
-                <icon name="undo" />
-                <span>Revert</span>
-              </b-btn>
-              <div v-if="event.title === 'CONNECTED TO SERVER' || event.title === 'EVENT EMITTED'">
-                <strong>More Info:</strong>
-                {{ event.display }}
-              </div>
-              <div v-if="event.title === 'STATE CHANGE'">
-                <strong>Change Log:</strong>
-                <MutationDisplay :changes="event.display.changes" />
-              </div>
-              <div v-if="event.title === 'STATE INITIALIZED'">
-                <strong>Initial State:</strong>
-                <StateDisplay :info="event.display" />
-              </div>
-              <div v-if="event.title === 'API RESPONSE'">
-                <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForReqObj(index)}">Request Object</b-btn>
-                <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForResObj(index)}" >Response Object</b-btn>
-              </div>
-              <div v-show="event.reqObjCollapse">
-                <b-card class="apiInfoCard">
-                  <strong>Request Object:</strong>
-                  <div>{{ event.requestObj }}</div>
-                </b-card>
-              </div>
-              <div v-show="event.resObjCollapse">
-                  <b-card class="apiInfoCard">
-                    <strong>Response Object:</strong>
-                    <div>{{ event.responseObj }}</div>
-                  </b-card>
+              <template v-if="event.title === 'STATE INITIALIZED'">
+                <state-display :event="event" :evIdx="index" />
+              </template>
+              <template v-if="event.title === 'STATE CHANGE'">
+                <mutation-display :event="event" :evIdx="index" />
+              </template>
+              <template v-if="event.title === 'API RESPONSE'">
+                <api-display :event="event" />
+              </template>
+              <template v-if="event.title === 'EVENT EMITTED'">
+                <emit-event-display :event="event" />
+              </template>
+              <div v-if="event.title === 'CONNECTED TO SERVER'">
+                <p class="event-card-title"><strong>{{ event.title }}</strong></p>
+                <p>{{ event.display }}</p>
               </div>
             </b-card>
           </b-collapse>
@@ -94,17 +64,21 @@
 </template>
   
 <script>
+  import EmitEventDisplay from './EmitEventDisplay.vue';
   import MutationDisplay from './MutationDisplay.vue';
   import StateDisplay from './StateDisplay.vue';
+  import APIDisplay from './APIDisplay.vue';
+
+  import DeactivateBtn from './assets/DeactivateBtn.vue';
+  import MutateBtn from './assets/MutateBtn.vue';
   export default {
+    name: "EventStream",
     data() {
       return {
         eventTypes: new Set(),
         selected: [],
         filterBtnHelpText: 'Filter events',
-        revertBtnHelpText: 'Reverts application\'s Vuex state back to selected point.',
-        mutateBtnHelpText: 'Re-commits selected mutation on application.',
-        deactivateBtnHelpText: 'Updates application to reflect state if selected mutation had not occurred.'
+        eventCardClasses: []
       };
     },
     computed: {
@@ -118,26 +92,6 @@
           this.eventTypes.add(name);
         });
         return Array.from(this.eventTypes);
-      },
-      activeWatcher() {
-        return this.active;
-      }
-    },
-    methods: {
-      revertState(evIdx) {
-        this.$store.commit('revertClientState', evIdx);
-      },
-      mutateState(evIdx) {
-        this.$store.commit('mutateClientState', evIdx);
-      },
-      deactivateSingleEvent(evIdx) {
-        this.$store.commit('deactivateStateEvent', evIdx);
-      },
-      emitEventCollapseToggleForReqObj(evIdx) {
-        this.$store.commit('toggleEventCollapseForReqObj', evIdx);
-      },
-      emitEventCollapseToggleForResObj(evIdx) {
-        this.$store.commit('toggleEventCollapseForResObj', evIdx);
       }
     },
     filters: {
@@ -151,8 +105,12 @@
       }
     },
     components: {
-      MutationDisplay,
-      StateDisplay
+      'emit-event-display': EmitEventDisplay,
+      'mutation-display': MutationDisplay,
+      'state-display': StateDisplay,
+      'api-display': APIDisplay,
+      'deactivate-btn': DeactivateBtn,
+      'mutate-btn': MutateBtn
     }
   };
 </script>
@@ -164,17 +122,6 @@
   .btn-transparent:focus {
     box-shadow: none;
   }
-  /* .btn.btn-vuetron-checkbox {
-    background: #EDDBB4;
-    color: #2F4B5C;
-  }
-  .btn.btn-vuetron-checkbox.selected {
-    background: #EDDBB4;
-    color: #2F4B5C;
-  }
-  .btn.btn-vuetron-checkbox:focus {
-    box-shadow: none !important;
-  } */
   .btn-filter {
     color: #2F4B5C;
     background-color: transparent;
@@ -213,21 +160,6 @@
     color: #31B689;
   }
 
-  .deactivate-btn {
-    color: #7f7f7f;
-  }
-
-  .mutate-btn {
-    color: darkgray;
-  }
-
-  .revert-btn .fa-icon {
-    vertical-align: middle;
-  }
-  .revert-btn span {
-    padding-left: 5px;
-  }
-
   .event-btn {
     margin-left: 3.5%;
     margin-right: 3.5%;
@@ -257,16 +189,12 @@
   .event-btn span {
     font-size: 1.2rem;
   }
-  .event-btn.event-btn-open {
+  .event-btn .event-btn-open {
     font-weight: bold;
   }
-  .event-btn.inactive {
+  .event-btn .inactive {
     color: darkgray;
     text-decoration: line-through;
-  }
-
-  .event-card-title {
-    margin-right: 10px;
   }
 
   .event-card {
@@ -292,5 +220,3 @@
     padding-left: 0;
   }
 </style>
-
- 
