@@ -132,7 +132,7 @@
       },
       deactivateSingleEvent(evIdx) {
         this.$store.commit('deactivateStateEvent', evIdx);
-      }
+      },
       emitEventCollapseToggleForReqObj(evIdx) {
         this.$store.commit('toggleEventCollapseForReqObj', evIdx);
       },
