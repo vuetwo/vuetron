@@ -5,7 +5,7 @@ import { store } from './store';
 // import all components
 import App from './App.vue';
 import Home from './components/Home.vue';
-import EventStream from './components/EventStream.vue';
+import EventStream from './components/event-stream/EventStreamContainer.vue';
 import Subscription from './components/Subscription.vue';
 import State from './components/State.vue';
 import ComponentTree from './components/ComponentTree.vue';
