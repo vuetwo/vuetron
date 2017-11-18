@@ -27,8 +27,13 @@
       <b-col cols="12">
         <div class="row" v-for="(event, index) in filteredEvents" 
           v-bind:event="event" v-bind:key="index">
-          <div class="event-btn text-center" :class="[ event.status === 'inactive' ? 'inactive' : '', event.show ? 'event-btn-open' : '' ]" @click="() => {emitEventToggle(index)}">
-            <span>{{ event.title }} - {{ event.timestamp | formatTime }}</span>
+          <div class="event-btn text-center">
+            <span :class="[ event.status === 'inactive' ? 'inactive' : null, event.show ? 'event-btn-open collapsed' : null ]" 
+              @click="event.show=!event.show"
+              :aria-controls="`event-${index}`"
+              :aria-expanded="event.show ? 'true' : 'false'">
+              {{ event.title }} - {{ event.timestamp | formatTime }}
+            </span>
             <b-btn v-if="event.title ==='STATE CHANGE' && event.status === 'active'"
               class="deactivate-btn" variant="transparent"
               v-b-popover.hover.right="deactivateBtnHelpText"
@@ -42,7 +47,7 @@
               <icon name="undo" />
             </b-btn>
           </div>
-          <div class="event-card-wrapper" v-show="event.show">
+          <b-collapse class="event-card-wrapper" :id="`event-${index}`" v-model="event.show">
             <b-card class="event-card">
               <span class="event-card-title"><strong>{{ event.title }}</strong></span>
               <b-btn v-if="(event.title ==='STATE CHANGE' || event.title ==='STATE INITIALIZED') && event.status === 'active' "
@@ -52,15 +57,20 @@
                 <icon name="undo" />
                 <span>Revert</span>
               </b-btn>
-              <p v-if="event.title === 'STATE CHANGE'">
-                <strong>Mutations:</strong>
-              </p>
-              <p v-if="event.title === 'EVENT EMITTED'">
-                <strong>Event name:</strong>
-              </p>
-              <div>{{ event.display }}</div>
+              <div v-if="event.title === 'CONNECTED TO SERVER' || event.title === 'EVENT EMITTED'">
+                <strong>More Info:</strong>
+                {{ event.display }}
+              </div>
+              <div v-if="event.title === 'STATE CHANGE'">
+                <strong>Change Log:</strong>
+                <MutationDisplay :changes="event.display.changes" />
+              </div>
+              <div v-if="event.title === 'STATE INITIALIZED'">
+                <strong>Initial State:</strong>
+                <StateDisplay :info="event.display" />
+              </div>
             </b-card>
-          </div>
+          </b-collapse>
         </div>
       </b-col>
     </b-row>
@@ -68,6 +78,8 @@
 </template>
   
 <script>
+  import MutationDisplay from './MutationDisplay.vue';
+  import StateDisplay from './StateDisplay.vue';
   export default {
     data() {
       return {
@@ -93,9 +105,6 @@
       }
     },
     methods: {
-      emitEventToggle(evIdx) {
-        this.$store.commit('toggleEventShow', evIdx);
-      },
       revertState(evIdx) {
         this.$store.commit('revertClientState', evIdx);
       },
@@ -115,6 +124,10 @@
         time += ':' + ('0' + date.getSeconds()).slice(-2);
         return time;
       }
+    },
+    components: {
+      MutationDisplay,
+      StateDisplay
     }
   };
 </script>
