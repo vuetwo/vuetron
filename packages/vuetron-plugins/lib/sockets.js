@@ -29,28 +29,22 @@ module.exports = function (server) {
     });
 
     // Listens for mutations of the Vuex Store/State
-    socket.on('clientStateUpdate', function (updatedState, mutation) {
+    socket.on('clientStateUpdate', function (state) {
       // Evaluate the difference between previous state and current state
-      let changes = diff(currentState, updatedState);
+      let mutation = diff(currentState, state);
 
       // Emit the mutation and state to Vuetron frontend
-      socket.broadcast.emit('stateUpdate', changes, mutation, updatedState);
+      socket.broadcast.emit('stateUpdate', mutation, state);
 
       // Hold the most current state in server
-      currentState = updatedState;
+      currentState = state;
     });
 
-    socket.on('vuetronStateUpdate', function (payload) {
+    socket.on('vuetronStateUpdate', function (state) {
       // Update currentState to Vuetron state update
-      // currentState = state;
+      currentState = state;
       // Pass reverted/changed state back to client
-      socket.broadcast.emit('updateClientState', payload);
-    });
-
-    socket.on('vuetronMutateState', function (payload) {
-      // Trigger client mutation from Vuetron
-      // Pass mutation payload back to client
-      socket.broadcast.emit('commitClientMutation', payload);
+      socket.broadcast.emit('updateClientState', state);
     });
 
     socket.on('clientEmitEvent', function (event) {

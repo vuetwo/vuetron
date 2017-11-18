@@ -1,0 +1,33 @@
+{
+  "name": "vuetron",
+  "version": "1.0.1",
+  "description": "Plugins for the Vuetron debugging app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talls-and-smalls/vuetron.git"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "vuex",
+    "vuetron",
+    "debugging"
+  ],
+  "author": "Vuetron Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/talls-and-smalls/vuetron/issues"
+  },
+  "homepage": "https://github.com/talls-and-smalls/vuetron#readme",
+  "dependencies": {
+    "deep-diff": "^0.3.8",
+    "express": "^4.16.2",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "socket.io": "^2.0.4"
+  }
+}

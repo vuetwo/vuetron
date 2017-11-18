@@ -9,6 +9,8 @@
   "author": "Brandon Danh",
   "license": "ISC",
   "dependencies": {
-    "socket.io": "^2.0.4"
+    "fetch-intercept": "^2.2.3",
+    "socket.io": "^2.0.4",
+    "whatwg-fetch": "^2.0.3"
   }
 }
