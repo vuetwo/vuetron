@@ -62,6 +62,11 @@ module.exports = function (server) {
       // Pass dom tree from user app to Vuetron frontend
       socket.broadcast.emit('domUpdate', dom);
     });
+
+    socket.on('sendFetchResponse', function (response) {
+      // Pass response from FETCH request
+      socket.broadcast.emit('apiRequestResponse', response);
+    });
   });
 
   return io;

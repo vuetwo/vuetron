@@ -83,7 +83,7 @@ const VuetronVue = {
       request: function (url, config) {
           // Modify the url or config here
           // redefine requestObject to the config method (e.g. 'get' or 'post') for use in unregister's 'response' function
-          console.log('CONFIG', config);
+          // console.log('CONFIG', config);
           requestObject = config;
           return [url, config];
       },
@@ -100,8 +100,11 @@ const VuetronVue = {
           for(let property in response) {
               reconstructedResponse[property] = response[property];
           }
-          // modify the response object by adding requestObject ( this was redefined in unregister's 'request' function above )
-          // ..this will allow Vuetron to show standard and user-made custom request objects in addition to just the response object received back from the request
+          console.log('THERE HAS BEEN A RESPONSE!!', reconstructedResponse)
+          // modify the response object by adding requestObject ( this was redefined in unregister's 'request' function above )..
+          // ..this will allow Vuetron to show standard and user-made custom request objects in addition to just the response object received back from the request..
+          // ..this will be deleted from the modified response object in SocketPlugin.js (in 'apiRequestResponse) before it is displayed under event stream's 'API RESPONSE' Response Object' toggle button.. 
+          // ..in order to show the original response object
           reconstructedResponse['requestObject'] = [requestObject];
           socket.emit('sendFetchResponse', reconstructedResponse);          
           return response;

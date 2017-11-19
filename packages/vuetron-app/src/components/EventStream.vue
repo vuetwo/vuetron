@@ -70,6 +70,10 @@
                 <StateDisplay :info="event.display" />
               </div>
               <div v-if="event.title === 'API RESPONSE'">
+                <div>{{ event.display }}</div>
+                <!-- <div v-for="display in events.display">
+                  <div>{{ display }}</div>
+                </div> -->
                 <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForReqObj(index)}">Request Object</b-btn>
                 <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForResObj(index)}" >Response Object</b-btn>
               </div>
@@ -132,13 +136,13 @@
       },
       deactivateSingleEvent(evIdx) {
         this.$store.commit('deactivateStateEvent', evIdx);
-      }
+      },
       emitEventCollapseToggleForReqObj(evIdx) {
         this.$store.commit('toggleEventCollapseForReqObj', evIdx);
       },
       emitEventCollapseToggleForResObj(evIdx) {
         this.$store.commit('toggleEventCollapseForResObj', evIdx);
-      }
+      },
     },
     filters: {
       formatTime: function (ISODate) {

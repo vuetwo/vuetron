@@ -60,11 +60,13 @@ const mutations = {
   },
   // Event mutations
   addNewEvent (state, newEvent) {
+    console.log('A NEW EVENT!', newEvent)
     if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
     if (!newEvent.show) newEvent.show = false;
     state.events.unshift(newEvent);
   },
   addFetchResponseToEvents (state, response) {
+    console.log('FETCH RESPONSE ADDED!')
     if (!response.title || !response.display) throw new Error('invalid event data');
     if (!response.show) response.show = false;
     // enable toggling to show / hide request object
