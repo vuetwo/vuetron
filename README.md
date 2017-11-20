@@ -9,14 +9,12 @@ Vuetron *NOT READY FOR DEPLOYMENT
 
 <h4 align="center"><a href="https://google.com"><img src="https://img.shields.io/github/release/talls-and-smalls/vuetron/all.svg"></a>
 <a href="https://google.com"><img src="https://img.shields.io/npm/v/vuetron.svg"></a>
-<a href="https://google.com"><img src="https://img.shields.io/jenkins/c/https/jenkins.qa.ubuntu.com/view/Utopic/view/All/job/address-book-service-utopic-i386-ci.svg"></a>
-<a href="https://standardjs.com/"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg"></a>
-<a href="https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/talls-and-smalls/vuetron.svg"></a></h4>
-<!-- 
-[![Release](https://img.shields.io/github/release/talls-and-smalls/vuetron/all.svg)](https://google.com)
-[![npm Version](https://img.shields.io/npm/v/vuetron.svg)](https://google.com) 
-[![Standard JS code style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com/)
-[![Standard JS code style](https://img.shields.io/github/license/talls-and-smalls/vuetron.svg)](https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt) -->
+<a href="https://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg"></a>
+<a href="https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/talls-and-smalls/vuetron.svg"></a>
+<br/ >
+<a href="https://codeclimate.com/github/talls-and-smalls/vuetron/maintainability"><img src="https://api.codeclimate.com/v1/badges/6170d4ec90fa5cec78ae/maintainability" /></a>
+<a href="https://codeclimate.com/github/talls-and-smalls/vuetron/test_coverage"><img src="https://api.codeclimate.com/v1/badges/6170d4ec90fa5cec78ae/test_coverage" /></a>
+</h4>
 
 ## Key Features
 

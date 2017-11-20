@@ -64,6 +64,9 @@
     color: #2F4B5C;
     cursor: pointer;
   }
+  .vue-object-view-open:focus {
+    outline: none;
+  }
   .vue-object-view-expand {
     background: transparent;
     color: #2F4B5C;
