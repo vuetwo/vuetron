@@ -64,7 +64,7 @@ module.exports = function (server) {
     });
 
     socket.on('sendFetchResponse', function (response) {
-      // Pass new FETCH request responses from user app to Vuetron frontend
+      // Pass response from FETCH request
       socket.broadcast.emit('apiRequestResponse', response);
     });
   });

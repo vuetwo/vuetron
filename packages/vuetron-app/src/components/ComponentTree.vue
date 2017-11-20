@@ -29,7 +29,7 @@
             <div class="form-group">
               <label for="margin-y" class="control-label col-sm-3">margin Y</label>
               <div class="col-sm-7">
-                <input id="margin-y" class="form-control" type="range" min="0" max="400" v-model="MarginY">
+                <input id="margin-y" class="form-control" type="range" min="0" max="400" v-model.number="MarginY">
                 <p>{{MarginY}}px</p>       
               </div> 
             </div>        
