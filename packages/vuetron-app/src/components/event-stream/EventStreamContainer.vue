@@ -92,7 +92,6 @@
           this.eventTypes.add(name);
         });
         return Array.from(this.eventTypes);
-<<<<<<< HEAD:packages/vuetron-app/src/components/EventStream.vue
       },
       activeWatcher() {
         return this.active;
@@ -113,8 +112,6 @@
       },
       emitEventCollapseToggleForResObj(evIdx) {
         this.$store.commit('toggleEventCollapseForResObj', evIdx);
-=======
->>>>>>> 7fd0262769ac08cc8960b115414eea5f9447a264:packages/vuetron-app/src/components/event-stream/EventStreamContainer.vue
       }
     },
     filters: {
