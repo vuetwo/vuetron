@@ -2,8 +2,6 @@ const io = require('socket.io-client');
 import fetchIntercept from 'fetch-intercept';
 // import 'whatwg-fetch'  //not in entry point. Will give error/not work?
 
-console.log('hello from index.js 1!');
-
 const VuetronVue = {
   install (Vue, options = {}) {
     // set socket port to options or 9090 by default
@@ -77,14 +75,13 @@ const VuetronVue = {
     }
 
     // initialize requestObject for use in unregister's 'request' and 'response' functions
-    let requestObject = {}
+    let requestConfig = {}
     // monkey patch fetch API with Fetch Intercept
     const unregister = fetchIntercept.register({
       request: function (url, config) {
           // Modify the url or config here
           // redefine requestObject to the config method (e.g. 'get' or 'post') for use in unregister's 'response' function
-          // console.log('CONFIG', config);
-          requestObject = config;
+          requestConfig = config;
           return [url, config];
       },
       requestError: function (error) {
@@ -100,12 +97,11 @@ const VuetronVue = {
           for(let property in response) {
               reconstructedResponse[property] = response[property];
           }
-          console.log('THERE HAS BEEN A RESPONSE!!', reconstructedResponse)
           // modify the response object by adding requestObject ( this was redefined in unregister's 'request' function above )..
           // ..this will allow Vuetron to show standard and user-made custom request objects in addition to just the response object received back from the request..
           // ..this will be deleted from the modified response object in SocketPlugin.js (in 'apiRequestResponse) before it is displayed under event stream's 'API RESPONSE' Response Object' toggle button.. 
           // ..in order to show the original response object
-          reconstructedResponse['requestObject'] = [requestObject];
+          reconstructedResponse['requestConfig'] = [requestConfig];
           socket.emit('sendFetchResponse', reconstructedResponse);          
           return response;
       },

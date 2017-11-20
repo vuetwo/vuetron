@@ -71,16 +71,13 @@
               </div>
               <div v-if="event.title === 'API RESPONSE'">
                 <div>{{ event.display }}</div>
-                <!-- <div v-for="display in events.display">
-                  <div>{{ display }}</div>
-                </div> -->
-                <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForReqObj(index)}">Request Object</b-btn>
+                <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForReqConfig(index)}">Request Configuration</b-btn>
                 <b-btn class="showMoreRespBtn" @click="() => {emitEventCollapseToggleForResObj(index)}" >Response Object</b-btn>
               </div>
-              <div v-show="event.reqObjCollapse">
+              <div v-show="event.reqConfigCollapse">
                 <b-card class="apiInfoCard">
-                  <strong>Request Object:</strong>
-                  <div>{{ event.requestObj }}</div>
+                  <strong>Request Configuration:</strong>
+                  <div>{{ event.requestConfig }}</div>
                 </b-card>
               </div>
               <div v-show="event.resObjCollapse">
@@ -137,8 +134,8 @@
       deactivateSingleEvent(evIdx) {
         this.$store.commit('deactivateStateEvent', evIdx);
       },
-      emitEventCollapseToggleForReqObj(evIdx) {
-        this.$store.commit('toggleEventCollapseForReqObj', evIdx);
+      emitEventCollapseToggleForReqConfig(evIdx) {
+        this.$store.commit('toggleEventCollapseForReqConfig', evIdx);
       },
       emitEventCollapseToggleForResObj(evIdx) {
         this.$store.commit('toggleEventCollapseForResObj', evIdx);
