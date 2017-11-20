@@ -45,7 +45,7 @@
               <template v-if="event.title === 'STATE CHANGE'">
                 <mutation-display :event="event" :evIdx="index" />
               </template>
-              <template v-if="event.title === 'API RESPONSE'">
+              <template v-if="event.title === 'API REQUEST / RESPONSE'">
                 <api-display :event="event" />
               </template>
               <template v-if="event.title === 'EVENT EMITTED'">

@@ -9,12 +9,6 @@ const mutations = {
   toggleNavbarDisplay (state) {
     state.displayNavbar = !state.displayNavbar;
   },
-  toggleEventCollapseForReqObj (state, evIdx) {
-    state.events[evIdx].reqObjCollapse = !state.events[evIdx].reqObjCollapse;
-  },
-  toggleEventCollapseForResObj (state, evIdx) {
-    state.events[evIdx].resObjCollapse = !state.events[evIdx].resObjCollapse;
-  },
   // Client State mutations
   updateClientState (state, newClientState) {
     state.clientState = newClientState;
@@ -63,15 +57,6 @@ const mutations = {
     if (!newEvent.title || !newEvent.display) throw new Error('invalid event data');
     if (!newEvent.show) newEvent.show = false;
     state.events.unshift(newEvent);
-  },
-  addFetchResponseToEvents (state, response) {
-    if (!response.title || !response.display) throw new Error('invalid event data');
-    if (!response.show) response.show = false;
-    // enable toggling to show / hide request object
-    if (!response.reqObjCollapse) response.reqObjCollapse = false;
-    // enable toggling to show / hide request object
-    if (!response.resObjCollapse) response.resObjCollapse = false;
-    state.events.unshift(response);
   },
   // Subscription mutations
   addSubscription (state, str) {
