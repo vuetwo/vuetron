@@ -6,7 +6,7 @@ import { store } from './store';
 import App from './App.vue';
 import Home from './components/Home.vue';
 import EventStream from './components/event-stream/EventStreamContainer.vue';
-import Subscription from './components/Subscription.vue';
+import Subscription from './components/subscriptions/SubscriptionContainer.vue';
 import State from './components/State.vue';
 import ComponentTree from './components/ComponentTree.vue';
 // import styles and icons

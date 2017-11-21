@@ -20,20 +20,20 @@
         <b-col cols="12" md="6" lg="4">
           <b-input-group>
             <b-form-input type="text" placeholder="subscription path" v-model="newSub" @keydown.native.enter="addSub"/>
-            <AddSubscriptionButton :subscription="newSub" v-on:click.native="clearForm"></AddSubscriptionButton>
+            <add-sub-btn :subscription="newSub" v-on:click.native="clearForm"></add-sub-btn>
           </b-input-group>
         </b-col>
       </b-row>
       <b-row v-if="show">
-          <hr>
-        <DisplaySubscriptions></DisplaySubscriptions>
+        <hr>
+        <display-subscriptions />
       </b-row>
     </b-container>
   </div>
 </template>
  
 <script>
-  import AddSubscriptionButton from "./AddSubscriptionButton.vue"
+  import AddSubBtn from "./assets/AddSubBtn.vue"
   import DisplaySubscriptions from "./DisplaySubscriptions.vue"
 
   export default {
@@ -57,8 +57,8 @@
       },
     },
     components: {
-      AddSubscriptionButton,
-      DisplaySubscriptions
+      'add-sub-btn': AddSubBtn,
+      'display-subscriptions': DisplaySubscriptions
     }
   };
 </script>
