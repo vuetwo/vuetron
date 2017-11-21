@@ -95,6 +95,26 @@
           this.eventTypes.add(name);
         });
         return Array.from(this.eventTypes);
+      },
+      activeWatcher() {
+        return this.active;
+      }
+    },
+    methods: {
+      revertState(evIdx) {
+        this.$store.commit('revertClientState', evIdx);
+      },
+      mutateState(evIdx) {
+        this.$store.commit('mutateClientState', evIdx);
+      },
+      deactivateSingleEvent(evIdx) {
+        this.$store.commit('deactivateStateEvent', evIdx);
+      },
+      emitEventCollapseToggleForReqObj(evIdx) {
+        this.$store.commit('toggleEventCollapseForReqObj', evIdx);
+      },
+      emitEventCollapseToggleForResObj(evIdx) {
+        this.$store.commit('toggleEventCollapseForResObj', evIdx);
       }
     },
     filters: {
