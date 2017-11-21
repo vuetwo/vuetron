@@ -1,15 +1,6 @@
 <template>
   <div>
-    <nav class="navbar sticky-top navbar-light bg-faded">
-      <b-btn @click="() => {this.$store.commit('toggleNavbarDisplay')}" variant="transparent" id="toggle-nav-btn">
-        <icon name="navicon" />
-      </b-btn>
-      <div class="navbar-middle">
-        <h1 class="nav-header navbar-brand mb-0">Vue Vision</h1>
-      </div>
-      <div class="navbar-right">
-      </div>
-    </nav>
+    <navbar title="Vue Vision" />
     <div class="panel panel-default">
         <div class="panel-heading">Props</div>
 
@@ -45,47 +36,44 @@
   </div>
 </template>
  
- <script>
-import { tree } from "vued3tree";
-
-export default {
-  data() {
-    return {
-      show: true, // required for properly re-rendering object view on change
-      type: "cluster",
-      layoutType: "euclidean",
-      nodeText: "name",
-      zoomable: true,
-      isLoading: false,
-      MarginY: 200,
-      MarginX: 350,
-    };
-  },
-  computed: {
-    domTree() {
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
-      return this.$store.state.domTree;
+<script>
+  import Navbar from './navigation/Navbar.vue';
+  import { tree } from "vued3tree";
+  export default {
+    data() {
+      return {
+        show: true, // required for properly re-rendering object view on change
+        type: "cluster",
+        layoutType: "euclidean",
+        nodeText: "name",
+        zoomable: true,
+        isLoading: false,
+        MarginY: 200,
+        MarginX: 350,
+      };
+    },
+    computed: {
+      domTree() {
+        this.show = false;
+        this.$nextTick(() => {
+          this.show = true;
+        });
+        return this.$store.state.domTree;
+      }
+    },
+    components: {
+      'navbar': Navbar,
+      tree
+    },
+    methods: {
+      getId(node) {
+        return node.name;
+      }
     }
-  },
-  components: {
-    tree
-  },
-  methods: {
-    getId(node) {
-      return node.name;
-    }
-  }
 };
 </script>
 
 <style scoped>
-  .navbar {
-    margin-bottom: 20px;
-  }
-
   .tree {
     height: 90vh;
     width: 80vw;

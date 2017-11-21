@@ -1,8 +1,9 @@
 <template id="revertBtnTemplate">
-  <b-btn class="revert-btn" size="sm" variant="secondary"
+  <b-btn class="revert-btn text-center" size="sm" variant="danger"
     v-b-popover.hover.right="revertBtnHelpText"
     @click="revertState">
-    <icon name="undo" />
+    <icon name="fast-backward" />
+    <br>
     <span>Revert</span>
   </b-btn>
 </template>
@@ -13,7 +14,7 @@
     props: ['evIdx'],
     data() {
       return {
-        revertBtnHelpText: 'Reverts application\'s Vuex state back to selected point.'
+        revertBtnHelpText: 'Revert application\'s Vuex state back to selected point.'
       };
     },
     computed: {
@@ -38,8 +39,5 @@
   }
   .revert-btn .fa-icon {
     vertical-align: middle;
-  }
-  .revert-btn span {
-    padding-left: 5px;
   }
 </style>

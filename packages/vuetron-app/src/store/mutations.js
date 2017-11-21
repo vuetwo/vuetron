@@ -6,8 +6,8 @@ const pathParser = (str) => {
 
 const mutations = {
   // UI mutations
-  toggleNavbarDisplay (state) {
-    state.displayNavbar = !state.displayNavbar;
+  toggleSidebarDisplay (state) {
+    state.displaySidebar = !state.displaySidebar;
   },
   // Client State mutations
   updateClientState (state, newClientState) {

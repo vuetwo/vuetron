@@ -1,17 +1,6 @@
 <template>
   <div id="subscriptions">
-    <nav class="navbar sticky-top navbar-light bg-faded">
-      <div class="navbar-left">
-        <b-btn @click="() => {this.$store.commit('toggleNavbarDisplay')}" variant="transparent" id="toggle-nav-btn">
-          <icon name="navicon" />
-        </b-btn>
-      </div>
-      <div class="navbar-middle">
-        <h1 class="nav-header navbar-brand mb-0">Subscriptions</h1>
-      </div>
-      <div class="navbar-right">
-      </div>
-    </nav> 
+    <navbar title="Subscriptions" />
     <b-container id="subs-content" fluid>
       <b-row>
         <b-col cols="12">
@@ -33,8 +22,10 @@
 </template>
  
 <script>
-  import AddSubBtn from "./assets/AddSubBtn.vue"
-  import DisplaySubscriptions from "./DisplaySubscriptions.vue"
+  import VueObjectView from "vue-object-view";
+  import Navbar from '../navigation/Navbar.vue';
+  import AddSubBtn from "./assets/AddSubBtn.vue";
+  import DisplaySubscriptions from "./DisplaySubscriptions.vue";
 
   export default {
     data() {
@@ -57,7 +48,9 @@
       },
     },
     components: {
+      'navbar': Navbar,
       'add-sub-btn': AddSubBtn,
+      'vue-object-view': VueObjectView,
       'display-subscriptions': DisplaySubscriptions
     }
   };

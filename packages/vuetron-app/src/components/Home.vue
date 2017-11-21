@@ -1,12 +1,6 @@
 <template id="homeTemplate">
   <div>
-    <nav class="navbar sticky-top navbar-light bg-faded">
-      <b-btn @click="() => {this.$store.commit('toggleNavbarDisplay')}" variant="transparent" id="toggle-nav-btn">
-        <icon name="navicon" />
-      </b-btn>
-      <h1 class="nav-header navbar-brand mb-0">Home</h1>
-      <div></div>
-    </nav>
+    <navbar title="Home" />
     <div class="home-content">
       <b-row id="welcome-banner">
         <b-col cols="12">
@@ -47,8 +41,12 @@
 </template>
   
 <script>
+  import Navbar from './navigation/Navbar.vue';
   export default {
-    name: "Home"
+    name: "Home",
+    components: {
+      navbar: Navbar
+    }
   };
 </script>
 
@@ -57,12 +55,8 @@
     margin-bottom: 30px;
   }
 
-  .navbar {
-    margin-bottom: 20px;
-  }
-
   .home-content {
-    color: #2F4B5C;
+    color: #001453;
     padding: 0 30px 0 45px;
   }
 

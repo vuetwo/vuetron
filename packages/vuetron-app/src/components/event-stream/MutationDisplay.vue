@@ -90,7 +90,14 @@
 </style>
 
 <style scoped>
-  
+  .card {
+    background: transparent;
+    border: none;
+  }
+  .card-body {
+    padding: 0;
+
+  }
 </style>
 
  

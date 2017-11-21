@@ -1,11 +1,8 @@
 
 <template id="eventStreamTemplate">
   <div>
-    <nav class="navbar sticky-top navbar-light bg-faded">
-      <b-btn @click="() => {this.$store.commit('toggleNavbarDisplay')}" variant="transparent" id="toggle-nav-btn">
-        <icon name="navicon" />
-      </b-btn>
-      <h1 class="nav-header navbar-brand mb-0">Event Stream</h1>
+    <navbar title="Event Stream" />
+    <div class="text-right event-filter-container">
       <b-dropdown no-caret variant="transparent"
         v-b-popover.hover.auto.left="filterBtnHelpText">
         <template slot="button-content">
@@ -22,20 +19,24 @@
           </b-form-checkbox-group>
         </b-container>
       </b-dropdown>
-    </nav>
-    <b-row>
+    </div>
+    <div>
       <b-col cols="12">
         <div class="row" v-for="(event, index) in filteredEvents" 
           v-bind:event="event" v-bind:key="index">
-          <div class="event-btn text-center">
-            <span :class="[ event.status === 'inactive' ? 'inactive' : null, event.show ? 'event-btn-open collapsed' : null ]" 
-              @click="event.show=!event.show"
-              :aria-controls="`event-${index}`"
-              :aria-expanded="event.show ? 'true' : 'false'">
-              {{ event.title }} - {{ event.timestamp | formatTime }}
-            </span>
-            <deactivate-btn v-if="event.title === 'STATE CHANGE' && event.status === 'active'" :evIdx="index" />
-            <mutate-btn v-if="event.title === 'STATE CHANGE' && event.status === 'inactive'" :evIdx="index" />
+          <div class="event-btn"
+            :class="[event.show ? 'open collapsed' : null]">
+            <div class="event-btn-content">
+              <span class="event-btn-text"
+                @click="event.show=!event.show"
+                :class="[ event.status === 'inactive' ? 'inactive' : null, event.show ? 'collapsed' : null]" 
+                :aria-controls="`event-${index}`"
+                :aria-expanded="event.show ? 'true' : 'false'">
+                {{ event.title }} - {{ event.timestamp | formatTime }}
+              </span>
+              <deactivate-btn v-if="event.title === 'STATE CHANGE' && event.status === 'active'" :evIdx="index" />
+              <mutate-btn v-if="event.title === 'STATE CHANGE' && event.status === 'inactive'" :evIdx="index" />
+            </div>
           </div>
           <b-collapse class="event-card-wrapper" :id="`event-${index}`" v-model="event.show">
             <b-card class="event-card">
@@ -59,11 +60,13 @@
           </b-collapse>
         </div>
       </b-col>
-    </b-row>
+    </div>
   </div>
 </template>
   
 <script>
+  import Navbar from '../navigation/Navbar.vue';
+
   import EmitEventDisplay from './EmitEventDisplay.vue';
   import MutationDisplay from './MutationDisplay.vue';
   import StateDisplay from './StateDisplay.vue';
@@ -125,6 +128,7 @@
       }
     },
     components: {
+      'navbar': Navbar,
       'emit-event-display': EmitEventDisplay,
       'mutation-display': MutationDisplay,
       'state-display': StateDisplay,
@@ -163,54 +167,61 @@
 </style>
 
 <style scoped>
-  .navbar {
-    margin-bottom: 30px;
-  }
-  .nav-header {
-    font-size: 1.5rem;
-  }
-
   .fa-icon:hover {
     opacity: 0.6;
     cursor: pointer;
   }
 
+  .event-filter-container {
+    margin-bottom: 10px;
+  }
 
   .event-filter-btn {
     color: #31B689;
+    width: auto;
+    height: 1.5em;
+    max-width: 100%;
+    max-height: 100%;
   }
 
   .event-btn {
-    margin-left: 3.5%;
-    margin-right: 3.5%;
     margin-top: -1px; /* removes overlapping borders */
     margin-bottom: -1px; /* removes overlapping borders */
     width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: #2f4b5c;
-    background-color: #EDDBB4;
-    border: 1px solid darkgray;
+    padding: 15px;
+    /* padding-top: 15px; */
+    /* padding-bottom: 15px; */
+    color: #001453;
+    background-color: white;
+    border-top: 1px solid #D8D8D8;
+    border-bottom: 1px solid #D8D8D8;
     border-radius: 0px;
     border-left: none;
     border-right: none;
-    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .event-btn:focus {
-    color: #2f4b5c !important;
+    color: #001453 !important;
     box-shadow: none;
   }
   .event-btn:active {
-    color: #2f4b5c !important;
+    color: #001453 !important;
     box-shadow: none !important;
     background-color: transparent !important;
   }
 
-  .event-btn span {
-    font-size: 1.2rem;
+  .event-btn.open {
+    color: #001453;
+    background-color: rgba(5, 248, 180, 0.31);
+    border: none;
   }
-  .event-btn .event-btn-open {
+
+  .event-btn .event-btn-text {
+    font-size: 1.2rem;
     font-weight: bold;
+    cursor: pointer;
   }
   .event-btn .inactive {
     color: darkgray;
@@ -220,19 +231,12 @@
   .event-card {
     width: 100%;
     border-radius: 0px;
-    border-bottom: 1px solid lightgray;
-    color: #2f4b5c;
-    background-color: #fcf9f2;
+    border: none;
+    color: #001453;
+    background-color: #D8D8D8;
   }
   .event-card-wrapper {
-    margin-left: 3.5%;
-    margin-right: 3.5%;
     width: 100%;
-  }
-
-  .showMoreRespBtn {
-    margin-left: 3.5%;
-    margin-right: 3.5%;
   }
 
   .padding-0 {
