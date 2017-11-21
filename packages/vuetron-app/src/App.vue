@@ -1,10 +1,10 @@
 <template>
   <b-container class="app" fluid>
     <b-row class="app">
-      <b-col id="vuetron-navbar" class="navbar" v-show="showNavbar" cols="4" md="3" lg="2">
-        <navbar></navbar>
+      <b-col id="vuetron-sidebar" class="navbar" v-show="showSidebar" cols="4" md="3" lg="2">
+        <sidebar></sidebar>
       </b-col>
-      <main v-bind:class="{ 'display padding-0 col-8 col-md-9 col-lg-10': showNavbar, 'display padding-0 col-12 col-md-12 col-lg-12': !showNavbar }">
+      <main v-bind:class="{ 'display padding-0 col-8 col-md-9 col-lg-10': showSidebar, 'display padding-0 col-12 col-md-12 col-lg-12': !showSidebar }">
         <router-view></router-view>
       </main>
     </b-row>
@@ -12,15 +12,15 @@
 </template>
 
 <script>
-  import Navbar from './components/Navbar.vue';
+  import Sidebar from './components/navigation/Sidebar.vue';
   export default {
     computed: {
-      showNavbar () {
-        return this.$store.state.displayNavbar;
+      showSidebar () {
+        return this.$store.state.displaySidebar;
       }
     },
     components: {
-      navbar: Navbar
+      sidebar: Sidebar
     }
   }
 </script>
@@ -29,39 +29,33 @@
   .app {
     height: 100%;
   }
-  .navbar {
-    height: 100% !important;
-    /* background-color:#2F4B5C; */
-    background: rgba(60,81,92,1);
-    background: -moz-linear-gradient(left, rgba(60,81,92,1) 0%, rgba(52,78,92,1) 26%, rgba(47,75,92,1) 49%, rgba(52,79,92,1) 75%, rgba(60,81,92,1) 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(60,81,92,1)), color-stop(26%, rgba(52,78,92,1)), color-stop(49%, rgba(47,75,92,1)), color-stop(75%, rgba(52,79,92,1)), color-stop(100%, rgba(60,81,92,1)));
-    background: -webkit-linear-gradient(left, rgba(60,81,92,1) 0%, rgba(52,78,92,1) 26%, rgba(47,75,92,1) 49%, rgba(52,79,92,1) 75%, rgba(60,81,92,1) 100%);
-    background: -o-linear-gradient(left, rgba(60,81,92,1) 0%, rgba(52,78,92,1) 26%, rgba(47,75,92,1) 49%, rgba(52,79,92,1) 75%, rgba(60,81,92,1) 100%);
-    background: -ms-linear-gradient(left, rgba(60,81,92,1) 0%, rgba(52,78,92,1) 26%, rgba(47,75,92,1) 49%, rgba(52,79,92,1) 75%, rgba(60,81,92,1) 100%);
-  }
+
   .display {
-    background-color: #EDDBB4;
     overflow: scroll;
   }
+
   .padding-0{
     padding-right:0;
     padding-left:0;
   }
 
-  #vuetron-navbar {
+  #vuetron-sidebar {
+    height: 100% !important;
     display: block;
+    background: #364984;
+    padding: 0;
   }
 
   #toggle-nav-btn {
-    color: #31B689;
+    color: #D8D8D8;
   }
 
   /* custom styles for object view */
   .vue-object-view {
-    color: #2F4B5C;
+    color: #001453;
   }
   .vue-object-view-open {
-    color: #2F4B5C;
+    color: #001453;
     cursor: pointer;
   }
   .vue-object-view-open:focus {
@@ -69,24 +63,24 @@
   }
   .vue-object-view-expand {
     background: transparent;
-    color: #2F4B5C;
+    color: #001453;
     border: none;
     cursor: pointer;
   }
 
   /* custom bootstrap styles */
-  .nav-header{
-    color: #31B689 !important;
-  }
-
   .btn:hover {
     cursor: pointer;
   }
   .btn-success {
-    background-color: #31B689;
+    background-color: rgba(5, 248, 180, 0.61);
+    border-color: rgba(5, 248, 180, 0.61);
+    color: #001453;
   }
   .btn-success:hover {
-    background-color: #227f5e;
+    background-color: rgba(5, 248, 180, 0.31);
+    border-color: rgba(5, 248, 180, 0.31);
+    color: #001453;
   }
   .btn-transparent {
     background-color: transparent;

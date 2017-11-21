@@ -12,7 +12,7 @@
     props: ['evIdx'],
     data() {
       return {
-        deactivateBtnHelpText: 'Updates application to reflect state if selected mutation had not occurred.'
+        deactivateBtnHelpText: 'Update application to reflect state if selected mutation had not occurred.'
       };
     },
     computed: {
@@ -34,5 +34,7 @@
 <style scoped>
   .deactivate-btn {
     color: #7f7f7f;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 </style>

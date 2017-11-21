@@ -12,7 +12,7 @@
     props: ['evIdx'],
     data() {
       return {
-        mutateBtnHelpText: 'Re-commits selected mutation on application.'
+        mutateBtnHelpText: 'Re-commit selected mutation.'
       };
     },
     computed: {
@@ -34,5 +34,7 @@
 <style scoped>
   .mutate-btn {
     color: darkgray;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 </style>

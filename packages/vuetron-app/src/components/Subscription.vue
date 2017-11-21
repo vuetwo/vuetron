@@ -1,17 +1,6 @@
 <template>
   <div id="subscriptions">
-    <nav class="navbar sticky-top navbar-light bg-faded">
-      <div class="navbar-left">
-        <b-btn @click="() => {this.$store.commit('toggleNavbarDisplay')}" variant="transparent" id="toggle-nav-btn">
-          <icon name="navicon" />
-        </b-btn>
-      </div>
-      <div class="navbar-middle">
-        <h1 class="nav-header navbar-brand mb-0">Subscriptions</h1>
-      </div>
-      <div class="navbar-right">
-      </div>
-    </nav> 
+    <navbar title="Subscriptions" />
     <b-container id="subs-content" fluid>
       <b-row>
         <b-col cols="12">
@@ -44,7 +33,7 @@
               <b-row>
                 <b-col cols="12">
                   <span><strong>Mutations: </strong></span>
-                  <VueObjectView :value="value" />    
+                  <vue-object-view :value="value" />    
                 </b-col>
               </b-row>
             </b-list-group-item>
@@ -56,6 +45,7 @@
 </template>
  
 <script>
+  import Navbar from './navigation/Navbar.vue';
   import VueObjectView from "vue-object-view";
   export default {
     data() {
@@ -83,7 +73,8 @@
       }
     },
     components: {
-      VueObjectView
+      'navbar': Navbar,
+      'vue-object-view': VueObjectView
     }
   };
 </script>

@@ -4,7 +4,7 @@ const state = {
   subscriptions: {},
   domTree: {},
   // VUETRON APP STATE PROPS
-  displayNavbar: true
+  displaySidebar: true
 };
 
 export default state;
