@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "fetch-intercept": "^2.2.3",
+    "lodash.get": "^4.4.2",
     "socket.io": "^2.0.4",
     "whatwg-fetch": "^2.0.3"
   }

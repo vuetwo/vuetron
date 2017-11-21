@@ -6,8 +6,8 @@ const pathParser = (str) => {
 
 const mutations = {
   // UI mutations
-  toggleSidebarDisplay (state) {
-    state.displaySidebar = !state.displaySidebar;
+  toggleNavbarDisplay (state) {
+    state.displayNavbar = !state.displayNavbar;
   },
   // Client State mutations
   updateClientState (state, newClientState) {
@@ -17,15 +17,18 @@ const mutations = {
     const events = state.events.slice(0);
     const payload = {};
     payload.mutationLog = [];
-    for (let i = 0; i < events.length; i++) {
-      if (i < evIdx && events[i].title === 'STATE CHANGE') {
-        events[i].status = 'inactive';
-      } else if (i >= evIdx && events[i].title === 'STATE CHANGE' && !payload.initState) {
-        payload.mutationLog.unshift(events[i].mutation);
-      } else if (i >= evIdx && events[i].title === 'STATE INITIALIZED' && !payload.initState) {
-        payload.initState = events[i].display;
+    events.forEach((event, i) => {
+      if (i < evIdx && event.title === 'STATE CHANGE') {
+        event.status = 'inactive';
+      } else if (i >= evIdx && !payload.initState) {
+        if (event.title === 'STATE CHANGE') {
+          payload.mutationLog.unshift(event.mutation);
+        } else if (event.title === 'STATE INITIALIZED') {
+          payload.initState = event.display;
+        }
       }
-    }
+    });
+
     state.events = events;
     let port = 9090;
     const socket = io('http://localhost:' + port);
@@ -40,13 +43,14 @@ const mutations = {
   deactivateStateEvent (state, evIdx) {
     const payload = {};
     payload.mutationLog = [];
-    for (let i = 0; i < state.events.length; i++) {
-      if (i !== evIdx && state.events[i].title === 'STATE CHANGE' && !payload.initState) {
-        payload.mutationLog.unshift(state.events[i].mutation);
-      } else if (i > evIdx && state.events[i].title === 'STATE INITIALIZED' && !payload.initState) {
-        payload.initState = state.events[i].display;
+    state.events.forEach((event, i) => {
+      if (i !== evIdx && event.title === 'STATE CHANGE' && !payload.initState) {
+        payload.mutationLog.unshift(event.mutation);
+      } else if (i > evIdx && event.title === 'STATE INITIALIZED' && !payload.initState) {
+        payload.initState = event.display;
       }
-    }
+    });
+
     state.events[evIdx].status = 'inactive';
     let port = 9090;
     const socket = io('http://localhost:' + port);
