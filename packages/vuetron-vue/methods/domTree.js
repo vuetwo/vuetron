@@ -1,9 +1,9 @@
 import _ from 'lodash.get';
 
 const buildObject = (component) => {
-  if (!component || !component.$vnode || !component.$vnode.hasOwnProperty('tag')) return;
-  let obj = {};
-  obj.name = component.$vnode.tag;
+  const name = _.get(component, 'component.$vnode.tag', null);
+  if (!name) return undefined;
+  let obj = { name };
   if (component.hasOwnProperty('$children') && component.$children.length > 0) {
     obj.children = [];
     for (let childComponent of component.$children) {
@@ -39,7 +39,7 @@ const grabAndEmitDOM = (socket) => {
   const children = [];
   for (let node of parents) {
     let tag = _.get(node, '__vue__.$children[0].$vnode.tag', null);
-    let routes = _.get(node, '__vue__._router.options.routes', null);
+    let routes = _.get(node, '__vue__._router.options.routes', []);
     if (routes.length > 0) {
       socket.emit('clientDomTree', buildRouterObject(tag, routes));
     } else {
