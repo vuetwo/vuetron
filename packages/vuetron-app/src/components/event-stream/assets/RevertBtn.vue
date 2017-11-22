@@ -2,7 +2,7 @@
   <b-btn class="revert-btn text-center" size="sm" variant="danger"
     v-b-popover.hover.right="revertBtnHelpText"
     @click="revertState">
-    <icon name="fast-backward" />
+    <icon name="history" />
     <br>
     <span>Revert</span>
   </b-btn>

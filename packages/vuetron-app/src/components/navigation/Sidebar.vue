@@ -24,7 +24,7 @@ export default {
         { path: "/eventstream", name: 'Event Stream' },
         { path: "/subscription", name: 'Subscriptions' },
         { path: "/state", name: 'State' },
-        { path: "/componentTree", name: 'Vue Vision' }
+        { path: "/vuevision", name: 'Vue Vision' }
       ]
     };
   },

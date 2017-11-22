@@ -6,8 +6,8 @@ const pathParser = (str) => {
 
 const mutations = {
   // UI mutations
-  toggleNavbarDisplay (state) {
-    state.displayNavbar = !state.displayNavbar;
+  toggleSidebarDisplay (state) {
+    state.displaySidebar = !state.displaySidebar;
   },
   // Client State mutations
   updateClientState (state, newClientState) {
@@ -64,9 +64,11 @@ const mutations = {
   },
   // Subscription mutations
   addSubscription (state, str) {
+    let newSubs = Object.assign({}, state.subscriptions);
     let path = pathParser(str);
     if (!state.subscriptions.hasOwnProperty(path)) {
-      state.subscriptions[path] = [];
+      newSubs[path] = [];
+      state.subscriptions = newSubs;
     }
   },
   removeSubscription (state, path) {
