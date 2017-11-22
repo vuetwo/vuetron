@@ -26,8 +26,11 @@
   "dependencies": {
     "deep-diff": "^0.3.8",
     "express": "^4.16.2",
+    "fetch-intercept": "^2.2.3",
     "http": "0.0.0",
+    "lodash.get": "^4.4.2",
     "path": "^0.12.7",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "whatwg-fetch": "^2.0.3"
   }
 }

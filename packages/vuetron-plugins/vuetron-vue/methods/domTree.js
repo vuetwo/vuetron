@@ -1,7 +1,7 @@
-import _ from 'lodash.get';
+import get from 'lodash.get';
 
 const buildObject = (component) => {
-  const name = _.get(component, 'component.$vnode.tag', null);
+  const name = get(component, 'component.$vnode.tag', null);
   if (!name) return undefined;
   let obj = { name };
   if (component.hasOwnProperty('$children') && component.$children.length > 0) {
@@ -38,12 +38,12 @@ const grabAndEmitDOM = (socket) => {
   let parents = document.body.children;
   const children = [];
   for (let node of parents) {
-    let tag = _.get(node, '__vue__.$children[0].$vnode.tag', null);
-    let routes = _.get(node, '__vue__._router.options.routes', []);
+    let tag = get(node, '__vue__.$children[0].$vnode.tag', null);
+    let routes = get(node, '__vue__._router.options.routes', []);
     if (routes.length > 0) {
       socket.emit('clientDomTree', buildRouterObject(tag, routes));
     } else {
-      let firstComp = _.get(node, '__vue__.$children', []);
+      let firstComp = get(node, '__vue__.$children', []);
       if (firstComp.length > 0) {
         children.push('mounted', firstComp[0]);
         socket.emit('clientDomTree', buildObject(firstComp[0]));
