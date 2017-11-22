@@ -7,7 +7,7 @@
             <h3>{{ key }}</h3>
           </b-col>
           <b-col cols="2" md="1" class="text-right">
-            <h3><icon name="times" id="unsub-btn"
+            <h3><icon name="times" class="unsub-btn"
               @click.native="() => {remSub(key)}" 
               v-b-popover.hover.auto="'Unsubscribe'" /></h3>
           </b-col>
@@ -15,7 +15,7 @@
         <b-row>
           <b-col cols="12">
             <span><strong>Mutations: </strong></span>
-            <VueObjectView :value="value" />    
+            <mutations :changes="value" />
           </b-col>
         </b-row>
       </b-list-group-item>
@@ -25,20 +25,21 @@
 
 
 <script>
-import VueObjectView from "vue-object-view";
+import Mutations from '../event-stream/assets/Mutations.vue';
 export default {
-    computed: {
-      subscriptions() {
-        return this.$store.state.subscriptions;
-      }
-    },
-    methods: {
-      remSub(key) {
-        this.$store.commit('removeSubscription', key);
-      }
-    },
-    components: {
-      VueObjectView,
+  computed: {
+    subscriptions() {
+      return this.$store.state.subscriptions;
     }
+  },
+  methods: {
+    remSub(key) {
+      this.$store.commit('removeSubscription', key);
+      this.$emit('toggle');
+    }
+  },
+  components: {
+    'mutations': Mutations
+  }
 };
 </script>
