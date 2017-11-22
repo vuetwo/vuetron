@@ -1,7 +1,9 @@
+import get from 'lodash.get';
+
 const buildObject = (component) => {
-  if (!component || !component.$vnode || !component.$vnode.hasOwnProperty('tag')) return;
-  let obj = {};
-  obj.name = component.$vnode.tag;
+  const name = get(component, 'component.$vnode.tag', null);
+  if (!name) return undefined;
+  let obj = { name };
   if (component.hasOwnProperty('$children') && component.$children.length > 0) {
     obj.children = [];
     for (let childComponent of component.$children) {
@@ -36,12 +38,16 @@ const grabAndEmitDOM = (socket) => {
   let parents = document.body.children;
   const children = [];
   for (let node of parents) {
-    if (node.hasOwnProperty('__vue__') && node.__vue__.hasOwnProperty('_router') && node.__vue__._router.hasOwnProperty('options') && node.__vue__._router.options.hasOwnProperty('routes') && node.__vue__._router.options.routes.length > 0) {
-      socket.emit('clientDomTree', buildRouterObject(node.__vue__.$children[0].$vnode.tag, node.__vue__._router.options.routes));
-    } else if (node.hasOwnProperty('__vue__') && node.__vue__.hasOwnProperty('$children') && node.__vue__.$children.length > 0) {
-      children.push('mounted', node.__vue__.$children[0]);
-      const firstComp = node.__vue__.$children[0];
-      socket.emit('clientDomTree', buildObject(firstComp));
+    let tag = get(node, '__vue__.$children[0].$vnode.tag', null);
+    let routes = get(node, '__vue__._router.options.routes', []);
+    if (routes.length > 0) {
+      socket.emit('clientDomTree', buildRouterObject(tag, routes));
+    } else {
+      let firstComp = get(node, '__vue__.$children', []);
+      if (firstComp.length > 0) {
+        children.push('mounted', firstComp[0]);
+        socket.emit('clientDomTree', buildObject(firstComp[0]));
+      }
     }
   }
 };
