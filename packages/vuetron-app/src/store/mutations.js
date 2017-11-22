@@ -60,9 +60,11 @@ const mutations = {
   },
   // Subscription mutations
   addSubscription (state, str) {
+    let newSubs = Object.assign({}, state.subscriptions);
     let path = pathParser(str);
     if (!state.subscriptions.hasOwnProperty(path)) {
-      state.subscriptions[path] = [];
+      newSubs[path] = [];
+      state.subscriptions = newSubs;
     }
   },
   removeSubscription (state, path) {
