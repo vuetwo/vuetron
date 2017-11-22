@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 import { store } from './store';
 // import all components
 import App from './App.vue';
-import Home from './components/Home.vue';
+import Home from './components/home/HomeContainer.vue';
 import EventStream from './components/event-stream/EventStreamContainer.vue';
 import Subscription from './components/subscriptions/SubscriptionContainer.vue';
 import State from './components/State.vue';
@@ -27,7 +27,7 @@ const routes = [
   { path: '/eventstream', component: EventStream },
   { path: '/subscription', component: Subscription },
   { path: '/state', component: State },
-  { path: '/componentTree', component: ComponentTree },
+  { path: '/vuevision', component: ComponentTree },
   { path: '*', redirect: '/' }
 ];
 const router = new VueRouter({
