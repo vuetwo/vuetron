@@ -7,7 +7,7 @@
           <div class="text-center">
             <h3>Welcome to</h3>
             <img alt="vuetron-logo-lg" id="vuetron-logo-lg"
-              src="http://i1153.photobucket.com/albums/p520/samanthasalley/vuetron/vuetron-logo-dark3x_zpshpqvhhxw.png" />
+              src="http://i1153.photobucket.com/albums/p520/samanthasalley/vuetron/vuetron-logo-dark-new4x_zpspuzykrvm.png" />
             <br><br>
             <p><em>A tool for testing and debugging your Vue/Vuex applications.</em></p>
           </div>
