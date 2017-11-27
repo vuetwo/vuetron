@@ -25,7 +25,7 @@
 
 
 <script>
-import Mutations from '../event-stream/assets/Mutations.vue';
+import Mutations from '../assets/Mutations.vue';
 export default {
   computed: {
     subscriptions() {

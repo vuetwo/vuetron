@@ -39,8 +39,8 @@
 
   import VueObjectView from "vue-object-view";
   import Navbar from '../navigation/Navbar.vue';
-  import AddSubBtn from "./assets/AddSubBtn.vue";
-  import AddSubInput from "./assets/AddSubInput.vue";
+  import AddSubBtn from "./../assets/AddSubBtn.vue";
+  import AddSubInput from "./../assets/AddSubInput.vue";
   import DisplaySubscriptions from "./DisplaySubscriptions.vue";
 
   export default {

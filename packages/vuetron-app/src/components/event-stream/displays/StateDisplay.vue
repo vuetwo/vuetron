@@ -10,7 +10,7 @@
 </template>
   
 <script>
-  import RevertBtn from './assets/RevertBtn.vue';
+  import RevertBtn from '../../assets/RevertBtn.vue';
   export default {
     name: 'StateDisplay',
     props: ['event', 'evIdx'],
