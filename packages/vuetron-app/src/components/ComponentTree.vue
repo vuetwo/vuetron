@@ -37,11 +37,11 @@
           <label for="duration"><strong>Duration:</strong></label>
         </b-col>
         <b-col cols="6">
-          <b-form-input id="duration" size="sm" type="range" min="100" max="1500" v-model.number="duration" />
-          <b-form-text>Animation duration in milliseconds (100-1500)</b-form-text>
+          <b-form-input id="duration" size="sm" type="range" min="500" max="1500" v-model.number="duration" />
+          <b-form-text>Animation duration in milliseconds (500-1500)</b-form-text>
         </b-col>
         <b-col cols="3" md="2">
-          <span>{{ duration }}px</span>
+          <span>{{ duration }}ms</span>
         </b-col>
       </b-row>
       <b-row class="tree-container">
@@ -65,7 +65,7 @@
         nodeText: "name",
         zoomable: false,
         isLoading: false,
-        MarginY: 250,
+        MarginY: 100,
         MarginX: 0,
         duration: 500
       };
@@ -119,6 +119,6 @@
 
   .tree {
     height: 80vh;
-    width: 80vw;
+    width: 100%;
   }
 </style>
