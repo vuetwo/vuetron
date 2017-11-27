@@ -9,6 +9,7 @@ import EventStream from './components/event-stream/EventStreamContainer.vue';
 import Subscription from './components/subscriptions/SubscriptionContainer.vue';
 import State from './components/State.vue';
 import ComponentTree from './components/ComponentTree.vue';
+import VueObjectView from './lib/vue-object-view/VueObjectView.vue';
 // import styles and icons
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -19,6 +20,7 @@ import 'vue-awesome/icons';
 // use Router, Bootstrap, and Icons
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
+Vue.component('vue-object-view', VueObjectView);
 Vue.component('icon', Icon);
 
 // define Router routes and instantiate router

@@ -9,7 +9,6 @@
  
 <script>
   import Navbar from './navigation/Navbar.vue';
-  import VueObjectView from "vue-object-view";
   export default {
     data() {
       return {
@@ -33,8 +32,7 @@
       }
     },
     components: {
-      'navbar': Navbar,
-      'vue-object-view': VueObjectView
+      'navbar': Navbar
     },
 };
 </script>
