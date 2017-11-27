@@ -4,6 +4,7 @@
   "description": "Vue/Vuex debugging app built on Electron",
   "main": "electron.js",
   "scripts": {
+    "test": "cross-env NODE_ENV=test mocha-webpack --webpack-config webpack.config.js --require test/setup.js test/**/*.spec.js",
     "dev-server": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --quiet --port 3000",
     "dev": "cross-env NODE_ENV=development electron ./",
     "build": "cross-env NODE_ENV=production webpack --progress --profile --colors",
@@ -19,12 +20,19 @@
     "bootstrap": "^4.0.0-beta.2",
     "bootstrap-vue": "^1.0.2",
     "electron": "^1.7.9",
+    "expect": "^21.2.1",
     "fetch-intercept": "^2.2.3",
+    "jsdom": "^11.4.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^4.0.1",
+    "mocha-webpack": "^1.0.1",
     "vue": "^2.5.2",
     "vue-object-view": "^0.4.2",
     "vue-router": "^3.0.1",
+    "vue-test-utils": "^1.0.0-beta.6",
     "vued3tree": "^3.4.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
     "N3-components": "^2.4.2",

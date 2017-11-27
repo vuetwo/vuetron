@@ -31,9 +31,14 @@ module.exports = {
           'style-loader',
           'css-loader'
         ]
+      },
+      // include a second time to let test library load vue files
+      { 
+        test: /\.vue$/, 
+        loader: "vue-loader" 
       }
     ]
-  }
+  },
 };
 
 if (process.env.NODE_ENV === 'production') {
@@ -49,6 +54,13 @@ if (process.env.NODE_ENV === 'production') {
       }
     })
   ];
-} else {
+} // test specific setups
+else if (process.env.NODE_ENV === 'test') {
+  module.exports.externals = [require('webpack-node-externals')()]
+  module.exports.devtool = 'inline-cheap-module-source-map'
+} 
+else {
   module.exports.devtool = '#source-map';
 }
+
+
