@@ -1,12 +1,9 @@
 <template>
   <div class="full-height">
     <navbar title="State" />
-    <b-container v-if="notNull && show && clientState" fluid>
-      <vue-object-view :value="clientState" /> 
-    </b-container>
     <b-container v-if="!notNull" class="full-height" fluid>
       <b-row class="full-height-middle">
-        <a class="no-state-logo text-center" v-b-modal.addSubModal>
+        <div class="no-state-logo text-center">
           <div class="no-state-icon">
             <icon name="frown-o" scale="6" />
           </div>
@@ -14,8 +11,11 @@
             <h2>No State Found</h2>
             <p>Waiting for app connection...</p>
           </div>
-        </a>
+        </div>
       </b-row>
+    </b-container>
+    <b-container v-if="notNull && show && clientState" fluid>
+      <vue-object-view :value="clientState" /> 
     </b-container>
   </div>
 </template>
