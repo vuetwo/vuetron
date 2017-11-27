@@ -147,9 +147,9 @@
     box-shadow: none;
   }
   .btn-filter {
-    color: #2F4B5C;
+    color: #001453;
     background-color: transparent;
-    border-color: #2F4B5C;
+    border-color: #001453;
     box-shadow: none;
   }
   .btn-filter.focus {
@@ -159,9 +159,9 @@
     opacity: 0.8;
   }
   .btn-filter:not([disabled]):not(.disabled).active {
-    color: #EDDBB4;
-    background-color: #2F4B5C;
-    border-color: #2F4B5C;
+    color: #001453;
+    background-color: rgba(5, 248, 180, 0.61);;
+    border-color: #001453;
     box-shadow: none;
   }
 </style>
@@ -177,7 +177,7 @@
   }
 
   .event-filter-btn {
-    color: #31B689;
+    color: #001453;
     width: auto;
     height: 1.5em;
     max-width: 100%;

@@ -2,9 +2,9 @@ const state = {
   clientState: {},
   events: [],
   subscriptions: {},
-  domTree: {},
+  domTree: null,
   // VUETRON APP STATE PROPS
-  displaySidebar: true
+  displaySidebar: false
 };
 
 export default state;

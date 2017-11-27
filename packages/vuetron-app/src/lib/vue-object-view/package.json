@@ -1,0 +1,32 @@
+{
+  "name": "vue-object-view-custom",
+  "version": "0.4.1",
+  "description": "Vue.js component for displaying JavaScript objects with circular references",
+  "main": "VueObjectView.vue",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ebuzek/vue-object-view"
+  },
+  "homepage": "https://github.com/ebuzek/vue-object-view",
+  "bugs": {
+    "url": "https://github.com/ebuzek/vue-object-view/issues",
+    "email": "emanuel.buzek@gmail.com"
+  },
+  "keywords": [
+    "VueJs",
+    "object",
+    "tree",
+    "view",
+    "json",
+    "viewer",
+    "lazy",
+    "circular",
+    "inspector"
+  ],
+  "author": {
+    "name": "Emanuel Buzek",
+    "email": "emanuel.buzek@gmail.com"
+  },
+  "license": "MIT"
+}

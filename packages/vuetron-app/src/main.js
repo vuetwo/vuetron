@@ -4,11 +4,12 @@ import VueRouter from 'vue-router';
 import { store } from './store';
 // import all components
 import App from './App.vue';
-import Home from './components/Home.vue';
+import Home from './components/home/HomeContainer.vue';
 import EventStream from './components/event-stream/EventStreamContainer.vue';
 import Subscription from './components/subscriptions/SubscriptionContainer.vue';
 import State from './components/State.vue';
 import ComponentTree from './components/ComponentTree.vue';
+import VueObjectView from './lib/vue-object-view/VueObjectView.vue';
 // import styles and icons
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -19,6 +20,7 @@ import 'vue-awesome/icons';
 // use Router, Bootstrap, and Icons
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
+Vue.component('vue-object-view', VueObjectView);
 Vue.component('icon', Icon);
 
 // define Router routes and instantiate router
@@ -27,7 +29,7 @@ const routes = [
   { path: '/eventstream', component: EventStream },
   { path: '/subscription', component: Subscription },
   { path: '/state', component: State },
-  { path: '/componentTree', component: ComponentTree },
+  { path: '/vuevision', component: ComponentTree },
   { path: '*', redirect: '/' }
 ];
 const router = new VueRouter({
