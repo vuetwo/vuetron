@@ -12,7 +12,7 @@
               v-b-popover.hover.auto="'Unsubscribe'" /></h3>
           </b-col>
         </b-row>
-        <b-row>
+        <b-row v-if="value.length > 0">
           <b-col cols="12">
             <span><strong>Mutations: </strong></span>
             <mutations :changes="value" />

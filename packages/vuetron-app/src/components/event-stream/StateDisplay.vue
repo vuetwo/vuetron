@@ -5,12 +5,11 @@
       <revert-btn v-if="event.status === 'active'" :evIdx="evIdx" />
     </p>
     <p><strong>Initial State:</strong></p>
-    <vue-object-view :value="processInfo" :nowrap="nowrapBool" />
+    <vue-object-view :value="processInfo" :nowrap="nowrapBool" :setOpen="false" />
   </div>
 </template>
   
 <script>
-  import VueObjectView from 'vue-object-view';
   import RevertBtn from './assets/RevertBtn.vue';
   export default {
     name: 'StateDisplay',
@@ -28,7 +27,6 @@
       }
     },
     components: {
-      'vue-object-view': VueObjectView,
       'revert-btn': RevertBtn
     }
   };
