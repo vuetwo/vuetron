@@ -22,36 +22,38 @@ Vuetron *NOT READY FOR DEPLOYMENT
 #### Eventstream with Time Travel Debugging:
 * Instantly time travel between previous application states, or revert a whole group of state changes at once.
 
-![](./docs/images/eventstream.gif)
+![](./docs/images/eventstream.gif | width=250)
 
 * See 5 types of events
-  - Connected to Server: Vuetron has successfully connected to the socket server.
-  - State Initialized: If using Vuex, this event is displayed when the initial state is received
-    -- This will reinitialize if your application is refreshed, but you will not lose previous state changes
-  - State Change: If using Vuex, this event is displayed for each mutation call
-    -- The expanded card displays each state change that occurred
-  - Event Emitted: This event is displayed for every $emit call
-    -- The expanded card displays the name of the $emit
-  - API Request / Response: If using the fetch API for requests, this event is displayed for any request sent
-    -- The expanded card displays the request data as well as the response data
+  * Connected to Server: Vuetron has successfully connected to the socket server.
+  * State Initialized: If using Vuex, this event is displayed when the initial state is received
+    * This will reinitialize if your application is refreshed, but you will not lose previous state changes
+  * State Change: If using Vuex, this event is displayed for each mutation call
+    * The expanded card displays each state change that occurred
+  * Event Emitted: This event is displayed for every $emit call
+    * The expanded card displays the name of the $emit
+  * API Request / Response: If using the fetch API for requests, this event is displayed for any request sent
+    * The expanded card displays the request data as well as the response data
 
-![](./docs/images/eventstream-items.gif)
+![](./docs/images/eventstream-items.gif | width=250)
 
 #### State Subscriptions:
 * Subscribe to specific parts of your application's state for faster debugging
 
-![](./docs/images/subscription.gif)
+![](./docs/images/subscription.gif | width=250)
 
 #### Component Tree:
 * Visualizing your component hierarchy has never been easier.
-  - Animation allows you to collapse or expand the tree for specific hierarchy views.
-![](./docs/images/visualization.gif)
+  * Animation allows you to collapse or expand the tree for specific hierarchy views.
+
+![](./docs/images/visualization.gif | width=250)
 
 #### Collapsable Vuex State Object:
 * View and interact with an object representation of your application's most current state.
-![](./docs/images/state.png)
-  
 
+![](./docs/images/state.png | width=250)
+
+#### Other benefits:
 * GitHub Flavored Markdown
 * Cross platform
   - Windows, Mac, and Linux ready.
@@ -59,7 +61,6 @@ Vuetron *NOT READY FOR DEPLOYMENT
 ## Getting Started
 
 To use Vuetron, you will need both the desktop application and install the library in your Vue project
-
 
 ### Installing Vuetron desktop app
 
