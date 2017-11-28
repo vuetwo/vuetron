@@ -84,6 +84,10 @@ import App from './App.vue'
 import vuetron from 'vuetron';
 
 Vue.use(vuetron.VuetronVue);
+
+new Vue({
+  // ...
+});
 ```
 
 In Vuex Store:
@@ -151,6 +155,7 @@ This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.t
 ## Acknowledgments
 
 * the Vue team for a great framework
-* vued3tree library
+* [vued3tree library](https://github.com/David-Desmaisons/Vue.D3.tree)
+* [vue-object-view library](https://github.com/ebuzek/vue-object-view)
 * Support from other open source developers
 * And the entire Vue developer community
