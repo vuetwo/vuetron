@@ -22,7 +22,7 @@ Vuetron *NOT READY FOR DEPLOYMENT
 #### Eventstream with Time Travel Debugging:
 * Instantly time travel between previous application states, or revert a whole group of state changes at once.
 
-<img src="./docs/images/eventstream.gif" alt="time travel example" width="250" />
+<img align="center" src="./docs/images/eventstream.gif" alt="time travel example" width="800" />
 
 * See 5 types of events
   * Connected to Server: Vuetron has successfully connected to the socket server.
@@ -35,23 +35,23 @@ Vuetron *NOT READY FOR DEPLOYMENT
   * API Request / Response: If using the fetch API for requests, this event is displayed for any request sent
     * The expanded card displays the request data as well as the response data
 
-![](./docs/images/eventstream-items.gif | width=250)
+<img align="center" src="./docs/images/eventstream-items.gif" alt="event items example" width="800" />
 
 #### State Subscriptions:
 * Subscribe to specific parts of your application's state for faster debugging
 
-![](./docs/images/subscription.gif | width=250)
+<img align="center" src="./docs/images/subscription.gif" alt="subscriptions example" width="800" />
 
 #### Component Tree:
 * Visualizing your component hierarchy has never been easier.
   * Animation allows you to collapse or expand the tree for specific hierarchy views.
 
-![](./docs/images/visualization.gif | width=250)
+<img align="center" src="./docs/images/visualization.gif" alt="component tree example" width="800" />
 
 #### Collapsable Vuex State Object:
 * View and interact with an object representation of your application's most current state.
 
-![](./docs/images/state.png | width=250)
+<img align="center" src="./docs/images/state.png" alt="state example" width="800" />
 
 #### Other benefits:
 * GitHub Flavored Markdown
