@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: './src/main.js',
@@ -49,9 +49,6 @@ if (process.env.NODE_ENV === 'production') {
       }
     })
   ];
-} else if (process.env.NODE_ENV === 'test') {
-  module.exports.externals = [require('webpack-node-externals')()]
-  module.exports.devtool = 'inline-cheap-module-source-map'
 } else {
   module.exports.devtool = '#source-map';
 }
