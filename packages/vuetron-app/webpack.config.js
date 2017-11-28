@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: './src/main.js',
@@ -31,14 +31,9 @@ module.exports = {
           'style-loader',
           'css-loader'
         ]
-      },
-      // include a second time to let test library load vue files
-      { 
-        test: /\.vue$/, 
-        loader: "vue-loader" 
       }
     ]
-  },
+  }
 };
 
 if (process.env.NODE_ENV === 'production') {
@@ -54,13 +49,6 @@ if (process.env.NODE_ENV === 'production') {
       }
     })
   ];
-} // test specific setups
-else if (process.env.NODE_ENV === 'test') {
-  module.exports.externals = [require('webpack-node-externals')()]
-  module.exports.devtool = 'inline-cheap-module-source-map'
-} 
-else {
+} else {
   module.exports.devtool = '#source-map';
 }
-
-
