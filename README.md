@@ -38,7 +38,7 @@ Vuetron *NOT READY FOR DEPLOYMENT
     * The expanded card displays the request data as well as the response data
 
 <div align="center">
-  <img align="center" src="./docs/images/eventstream-items.png" alt="event items example" width="800" />
+  <img align="center" src="./docs/images/eventstream-items.png" alt="event items example" width="500" />
 </div>
 
 #### State Subscriptions:
