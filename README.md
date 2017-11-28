@@ -19,22 +19,25 @@ Vuetron *NOT READY FOR DEPLOYMENT
 ## Key Features
 
 #### Eventstream with Time Travel Debugging:
+* Instantly time travel between previous application states, or revert a whole group of state changes at once.
+
 ![](./docs/images/eventstream.gif)
 
-#### Variable Subscription:
+#### State Subscriptions:
+* Subscribe to specific parts of your application's state for faster debugging
+
 ![](./docs/images/subscription.gif)
 
-#### Component Tree Visualization:
+#### Component Tree:
+* Visualizing your component hierarchy has never been easier.
+  - Animation allows you to collapse or expand the tree for specific hierarchy views.
 ![](./docs/images/visualization.png)
 
-* View your Vuex store's state
-  - Instantly time travel between previous application states
-* Subscribe to parts of your application's state
-  - While you type, LivePreview will automatically scroll to the current location you're editing.
-* GitHub Flavored Markdown  
-* Dark/Light mode
-* Emoji support in preview :tada:
-* App will keep alive in tray for quick usage
+#### Collapsable Vuex State Object:
+* View and interact with an object representation of your application's most current state.
+  
+
+* GitHub Flavored Markdown
 * Cross platform
   - Windows, Mac, and Linux ready.
 
@@ -77,22 +80,20 @@ In Vue:
 import Vue from 'vue'
 import App from './App.vue'
 
-import { VuetronVue } from 'vuetron';
+import vuetron from 'vuetron';
 
-Vue.use(VuetronVue);
+Vue.use(vuetron.VuetronVue);
 ```
 
 In Vuex Store:
 ```js
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { VuetronVuex } from 'vuetron';
-
-Vue.use(Vuex);
+import vuetron from 'vuetron';
 
 const store = new Vuex.Store({
   // ...
-  plugins: [VuetronVuex]
+  plugins: [vuetron.VuetronVuex()]
 })
 ```
 
@@ -120,6 +121,7 @@ Give an example
 
 * [Vue.js](https://vuejs.org/) - The web framework used
 * [Vuex](https://vuex.vuejs.org/en/intro.html) - State Management
+* [Vue-Router](https://router.vuejs.org/en/) - Routing
 * [Electron](https://electron.atom.io/) - Used to build desktop app
 * [Socket.io](https://socket.io/) - Used communicate between Vuetron and client's application
 
@@ -143,7 +145,7 @@ See also the list of [contributors](CONTRIBUTORS.md) who participated in this pr
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details
 
 ## Acknowledgments
 
