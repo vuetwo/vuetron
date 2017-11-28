@@ -67,13 +67,13 @@
 <script>
   import Navbar from '../navigation/Navbar.vue';
 
-  import EmitEventDisplay from './EmitEventDisplay.vue';
-  import MutationDisplay from './MutationDisplay.vue';
-  import StateDisplay from './StateDisplay.vue';
-  import APIDisplay from './APIDisplay.vue';
+  import EmitEventDisplay from './displays/EmitEventDisplay.vue';
+  import MutationDisplay from './displays/MutationDisplay.vue';
+  import StateDisplay from './displays/StateDisplay.vue';
+  import APIDisplay from './displays/APIDisplay.vue';
 
-  import DeactivateBtn from './assets/DeactivateBtn.vue';
-  import MutateBtn from './assets/MutateBtn.vue';
+  import DeactivateBtn from '../assets/DeactivateBtn.vue';
+  import MutateBtn from '../assets/MutateBtn.vue';
   export default {
     name: "EventStream",
     data() {

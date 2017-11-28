@@ -10,8 +10,8 @@
 </template>
   
 <script>
-  import Mutations from './assets/Mutations.vue';
-  import RevertBtn from './assets/RevertBtn.vue';
+  import Mutations from '../../assets/Mutations.vue';
+  import RevertBtn from '../../assets/RevertBtn.vue';
   export default {
     name: 'MutationDisplay',
     props: ['event', 'evIdx'],
