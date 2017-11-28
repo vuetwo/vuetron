@@ -4,7 +4,7 @@ node_js:
 addons:
     code_climate:
         repo_token: 0880ca66f85611d032a2aeb735ebd6f71de030fa9b968e4bae37a073510a43f3
-script: istanbul cover tape ./package/vuetron-app/test/specs/*.spec.js -r ./package/vuetron-app/test/helpers/setup.js
+script: istanbul cover ./package/vuetron-app/node_modules/tape ./package/vuetron-app/test/specs/*.spec.js -r ./package/vuetron-app/test/helpers/setup.js
 before_script:
   - npm install codeclimate-test-reporter istanbul -g
 after_script:

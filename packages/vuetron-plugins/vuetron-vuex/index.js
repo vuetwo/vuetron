@@ -36,12 +36,6 @@ const VuetronVuex = function (port = 9090) {
       mutationCache[mutation.type] += 1;
       store.commit(mutation.type, mutation.payload);
     });
-    // socket.on('updateClientState', function (newState) {
-    //   // parse the stringified new state passed from Vuetron
-    //   let parsedState = JSON.parse(newState);
-    //   // replace app's current state with the parsed Vuetron state
-    //   store.replaceState(parsedState);
-    // });
 
     // subscribe to store mutations
     store.subscribe((mutation, state) => {

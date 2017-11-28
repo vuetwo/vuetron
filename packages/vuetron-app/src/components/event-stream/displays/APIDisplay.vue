@@ -1,25 +1,27 @@
-
-<template id="apiDisplayTemplate">
+<template>
   <div>
     <p class="event-card-title">
       <strong>{{ event.title }}</strong>
     </p>
-    <p><strong>Request Method</strong>: {{ event.display.requestObj[0].method.toUpperCase() }}</p>
+    <p>
+      <strong>Request Method</strong>: {{ event.display.requestObj[0].method.toUpperCase() }}
+    </p>
     <b-list-group>
       <b-list-group-item>
         <p><strong>Request</strong>:</p>
-        <VueObjectView :value="processRequest" :nowrap="nowrapBool" />
+        <vue-object-view :value="processRequest" :nowrap="nowrapBool" 
+          :setOpen="false" />
       </b-list-group-item>
       <b-list-group-item>
         <p><strong>Response</strong>:</p>
-        <VueObjectView :value="processResponse" :nowrap="nowrapBool" />
+        <vue-object-view :value="processResponse" 
+          :nowrap="nowrapBool" :setOpen="false" />
       </b-list-group-item>
     </b-list-group>
   </div>
 </template>
   
 <script>
-  import VueObjectView from 'vue-object-view';
   export default {
     name: 'APIDisplay',
     props: ['event'],
@@ -39,9 +41,6 @@
         this.processedResponse = Object.assign({}, this.event.display.responseObj);
         return this.processedResponse;
       }
-    },
-    components: {
-      VueObjectView
     }
   };
 </script>

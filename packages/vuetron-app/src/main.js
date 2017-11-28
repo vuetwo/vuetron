@@ -47,7 +47,7 @@ new Vue({
 /* eslint-disable-line no-new */
 
 /**
- * STYLE SCHEME
+ * COLOR PALLETTE
  * mint green: #06F7B4
  * mint green-btn: rgba(5, 248, 180, 31)
  * purple-nav: #364984
