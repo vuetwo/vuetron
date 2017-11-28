@@ -20,22 +20,39 @@ Vuetron *NOT READY FOR DEPLOYMENT
 ## Key Features
 
 #### Eventstream with Time Travel Debugging:
+* Instantly time travel between previous application states, or revert a whole group of state changes at once.
+
 ![](./docs/images/eventstream.gif)
 
-#### Variable Subscription:
+* See 5 types of events
+  - Connected to Server: Vuetron has successfully connected to the socket server.
+  - State Initialized: If using Vuex, this event is displayed when the initial state is received
+    -- This will reinitialize if your application is refreshed, but you will not lose previous state changes
+  - State Change: If using Vuex, this event is displayed for each mutation call
+    -- The expanded card displays each state change that occurred
+  - Event Emitted: This event is displayed for every $emit call
+    -- The expanded card displays the name of the $emit
+  - API Request / Response: If using the fetch API for requests, this event is displayed for any request sent
+    -- The expanded card displays the request data as well as the response data
+
+![](./docs/images/eventstream-items.gif)
+
+#### State Subscriptions:
+* Subscribe to specific parts of your application's state for faster debugging
+
 ![](./docs/images/subscription.gif)
 
-#### Component Tree Visualization:
-![](./docs/images/visualization.png)
+#### Component Tree:
+* Visualizing your component hierarchy has never been easier.
+  - Animation allows you to collapse or expand the tree for specific hierarchy views.
+![](./docs/images/visualization.gif)
 
-* View your Vuex store's state
-  - Instantly time travel between previous application states
-* Subscribe to parts of your application's state
-  - While you type, LivePreview will automatically scroll to the current location you're editing.
-* GitHub Flavored Markdown  
-* Dark/Light mode
-* Emoji support in preview :tada:
-* App will keep alive in tray for quick usage
+#### Collapsable Vuex State Object:
+* View and interact with an object representation of your application's most current state.
+![](./docs/images/state.png)
+  
+
+* GitHub Flavored Markdown
 * Cross platform
   - Windows, Mac, and Linux ready.
 
@@ -78,22 +95,24 @@ In Vue:
 import Vue from 'vue'
 import App from './App.vue'
 
-import { VuetronVue } from 'vuetron';
+import vuetron from 'vuetron';
 
-Vue.use(VuetronVue);
+Vue.use(vuetron.VuetronVue);
+
+new Vue({
+  // ...
+});
 ```
 
 In Vuex Store:
 ```js
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { VuetronVuex } from 'vuetron';
-
-Vue.use(Vuex);
+import vuetron from 'vuetron';
 
 const store = new Vuex.Store({
   // ...
-  plugins: [VuetronVuex]
+  plugins: [vuetron.VuetronVuex()]
 })
 ```
 
@@ -121,6 +140,7 @@ Give an example
 
 * [Vue.js](https://vuejs.org/) - The web framework used
 * [Vuex](https://vuex.vuejs.org/en/intro.html) - State Management
+* [Vue-Router](https://router.vuejs.org/en/) - Routing
 * [Electron](https://electron.atom.io/) - Used to build desktop app
 * [Socket.io](https://socket.io/) - Used communicate between Vuetron and client's application
 
@@ -144,11 +164,12 @@ See also the list of [contributors](CONTRIBUTORS.md) who participated in this pr
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details
 
 ## Acknowledgments
 
 * the Vue team for a great framework
-* vued3tree library
+* [vued3tree library](https://github.com/David-Desmaisons/Vue.D3.tree)
+* [vue-object-view library](https://github.com/ebuzek/vue-object-view)
 * Support from other open source developers
 * And the entire Vue developer community

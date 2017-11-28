@@ -18,8 +18,8 @@
         <header class="text-center" id="test">
           <h4>Getting Started</h4>
         </header>
-        <p>
-           Here's some content.
+        <p class="text-center">
+           Use the hamburger menu in the navbar to open the sidebar navigation, or select an option below!
         </p>
       </b-container>
       <hr>

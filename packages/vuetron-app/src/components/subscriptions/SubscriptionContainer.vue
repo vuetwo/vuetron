@@ -37,7 +37,6 @@
 <script>
   import { mapGetters } from 'vuex';
 
-  import VueObjectView from "vue-object-view";
   import Navbar from '../navigation/Navbar.vue';
   import AddSubBtn from "./../assets/AddSubBtn.vue";
   import AddSubInput from "./../assets/AddSubInput.vue";
@@ -62,7 +61,6 @@
       'navbar': Navbar,
       'add-sub-btn': AddSubBtn,
       'add-sub-input': AddSubInput,
-      'vue-object-view': VueObjectView,
       'display-subscriptions': DisplaySubscriptions
     }
   };

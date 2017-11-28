@@ -1,7 +1,7 @@
 <template>
   <b-col cols="12">
     <b-list-group>
-      <b-list-group-item v-for="(value, key, index) in subscriptions" v-bind:key="index">
+      <b-list-group-item v-for="(value, key, index) in subscriptions" v-bind:key="index" class="subscription-group">
         <b-row>
           <b-col cols="10" md="11">
             <h3>{{ key }}</h3>
@@ -43,3 +43,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .subscription-group {
+    background-color: #D8D8D8;
+  }
+</style>
