@@ -10,8 +10,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.13.5",
+    "path": "^0.12.7",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
