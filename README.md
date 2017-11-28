@@ -1,5 +1,5 @@
 <h1 align="center">
-<img align="center" src="./docs/images/tands-logo.png">
+<img align="center" src="./docs/images/vuetron-logo-sm.png">
 <br>
 Vuetron *NOT READY FOR DEPLOYMENT 
 <a href="http://twitter.com/home?status=Check out Vuetron! Testing and debugging for Vue https://git.io/vFwOq"><img src="https://img.shields.io/twitter/url/https/github.com/talls-and-smalls/vuetron/.svg?style=social"></a>
