@@ -22,7 +22,7 @@ Vuetron *NOT READY FOR DEPLOYMENT
 #### Eventstream with Time Travel Debugging:
 * Instantly time travel between previous application states, or revert a whole group of state changes at once.
 
-![](./docs/images/eventstream.gif | width=250)
+<img src="./docs/images/eventstream.gif" alt="time travel example" width="250" />
 
 * See 5 types of events
   * Connected to Server: Vuetron has successfully connected to the socket server.
