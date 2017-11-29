@@ -38,6 +38,10 @@ export default {
 <style scoped>
 #user-selection {
   width: 750px;
+  background: lightgray;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #444444;
 }
 
 .user-btn {

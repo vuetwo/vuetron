@@ -19,3 +19,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#profile {
+  background: lightgray;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #444444;
+}
+</style>
