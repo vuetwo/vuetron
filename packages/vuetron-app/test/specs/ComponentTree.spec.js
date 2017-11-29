@@ -11,7 +11,6 @@ test('ComponentTree.vue renders', t => {
   let store = new Vuex.Store({
     state: {}
   })
-  // console.log('state', store.state);
   t.plan(2);
   const wrapper = mount(ComponentTree, {localVue, store});
   t.test('ComponentTree mounts', st => {
@@ -23,12 +22,5 @@ test('ComponentTree.vue renders', t => {
     const navbar = wrapper.findAll('.navbar');
     st.equal(navbar.length, 1);
   });
+
 });
-
-//test Vuex Store
-
-// test('store works'), t => {
-//     t.plan(1);
-// }
-// const localVue = createLocalVue()
-// localVue.use(Vuex)

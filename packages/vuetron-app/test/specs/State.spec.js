@@ -14,5 +14,4 @@ test('State.vue renders', t => {
     const navbar = wrapper.findAll('.navbar');
     st.equal(navbar.length, 1);
   });
-  console.log(State);
 });
