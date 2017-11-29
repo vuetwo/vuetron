@@ -34,10 +34,10 @@
         this.$nextTick(() => {
           this.show = true;
         });
-        return this.$store.state.clientState;
+        // return this.$store.state.clientState;
       },
       notNull() {
-        return Object.keys(this.$store.state.clientState).length > 0;
+        // return Object.keys(this.$store.state.clientState).length > 0;
       }
     },
     components: {
