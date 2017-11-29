@@ -8,8 +8,8 @@ Vuetron *NOT READY FOR DEPLOYMENT
 <p align="center">A <a href="https://vuejs.org/" target="_blank">Vue</a> testing and debugging desktop app built on top of <a href="http://electron.atom.io" target="_blank">Electron</a>.</p>
 
 <h4 align="center"><a href="https://google.com"><img src="https://img.shields.io/github/release/talls-and-smalls/vuetron/all.svg"></a>
-<a href="https://google.com"><img src="https://img.shields.io/travis/talls-and-smalls/vuetron.svg"></a>
-<a href="https://google.com"><img src="https://img.shields.io/npm/v/vuetron.svg"></a>
+<a href="https://travis-ci.org/talls-and-smalls/vuetron"><img src="https://img.shields.io/travis/talls-and-smalls/vuetron.svg"></a>
+<a href="https://www.npmjs.com/package/vuetron"><img src="https://img.shields.io/npm/v/vuetron.svg"></a>
 <a href="https://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg"></a>
 <a href="https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/talls-and-smalls/vuetron.svg"></a>
 <br/ >
@@ -179,7 +179,6 @@ This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.t
 
 ## Acknowledgments
 
-* the Vue team for a great framework
 * [vued3tree library](https://github.com/David-Desmaisons/Vue.D3.tree)
 * [vue-object-view library](https://github.com/ebuzek/vue-object-view)
 * Support from other open source developers
