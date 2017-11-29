@@ -46,10 +46,6 @@
     padding: 0;
   }
 
-  #toggle-nav-btn {
-    color: #D8D8D8;
-  }
-
   /* custom styles for object view */
   .vue-object-view {
     color: #001453;

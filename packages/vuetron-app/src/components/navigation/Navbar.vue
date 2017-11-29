@@ -1,7 +1,10 @@
 <template id="navbarTemplate">
   <nav class="navbar sticky-top navbar-light bg-faded">
-    <b-btn @click="() => {this.$store.commit('toggleSidebarDisplay')}" variant="transparent" id="toggle-nav-btn">
-      <icon name="navicon" />
+    <b-btn @click="() => {this.$store.commit('toggleSidebarDisplay')}" variant="transparent" class="toggle-nav-btn">
+      <icon v-if="showSidebar"
+        name="caret-left" class="open" />
+      <icon v-if="!showSidebar"
+        name="caret-right" class="closed" />
     </b-btn>
     <h3 class="nav-header">{{ title }}</h3>
     <div></div>
@@ -21,6 +24,11 @@
         required: false,
         default: null
       }
+    },
+    computed: {
+      showSidebar() {
+        return this.$store.state.displaySidebar;
+      }
     }
   };
 </script>
@@ -36,6 +44,13 @@
 
   .nav-header{
     color: #001453 !important;
+  }
+
+  .toggle-nav-btn {
+    color: #D8D8D8;
+  }
+  .toggle-nav-btn:hover {
+    color: #364984;
   }
 
   .fa-icon {
