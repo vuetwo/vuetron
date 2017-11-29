@@ -43,6 +43,10 @@ export default {
   padding: 10px;
 }
 
+.card {
+  background: white;
+}
+
 .complete {
   text-decoration: line-through;
 }

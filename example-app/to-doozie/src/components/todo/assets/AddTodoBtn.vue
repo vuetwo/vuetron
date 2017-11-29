@@ -1,5 +1,5 @@
 <template>
-  <b-btn variant="success" size="sm" class="add-todo-btn" @click="() => $emit('toggle')">
+  <b-btn variant="primary" size="sm" class="add-todo-btn" @click="() => $emit('toggle')">
     <icon name="plus" class="add-btn-icon" />
     <span class="add-btn-text">Add Todo</span>
   </b-btn>

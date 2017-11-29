@@ -28,7 +28,7 @@ export default {
 .todo-navbar {
   height: 50px;
   margin-bottom: 30px;
-  background: steelblue;
+  background: #444444;
   font-weight: bold;
   display: flex;
   justify-content: center;
