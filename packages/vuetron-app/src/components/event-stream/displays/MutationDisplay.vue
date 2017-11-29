@@ -17,7 +17,7 @@
     props: ['event', 'evIdx'],
     components: {
       'mutations': Mutations,
-      'revert-btn': RevertBtn
+      'revert-btn': RevertBtn,
     }
   };
 </script>

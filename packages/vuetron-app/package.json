@@ -17,9 +17,12 @@
   "author": "Samantha Salley",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^4.0.0-beta.2",
+    "bootstrap-vue": "^1.0.2",
     "electron": "^1.7.9",
     "fetch-intercept": "^2.2.3",
     "vue": "^2.5.2",
+    "vue-object-view": "^0.4.2",
     "vue-router": "^3.0.1",
     "vued3tree": "^3.4.3",
     "vuex": "^3.0.1"

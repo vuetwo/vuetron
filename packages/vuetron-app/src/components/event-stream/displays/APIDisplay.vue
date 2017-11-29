@@ -4,7 +4,7 @@
       <strong>{{ event.title }}</strong>
     </p>
     <p>
-      <strong>Request Method</strong>: {{ event.display.requestObj[0].method.toUpperCase() }}
+      <strong>Request Method</strong id="requestDisplay">: {{ event.display.requestObj[0].method.toUpperCase() }}
     </p>
     <b-list-group>
       <b-list-group-item>

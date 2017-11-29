@@ -1,5 +1,6 @@
 import test from 'tape';
 import { mount } from 'vue-test-utils';
+import { shallow, createLocalVue } from 'vue-test-utils';
 import HomeContainer from '../../src/components/home/HomeContainer.vue';
 
 test('HomeContainer.vue renders', t => {
