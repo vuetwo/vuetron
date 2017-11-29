@@ -1,12 +1,19 @@
 <template>
   <div id="app">
-    <router-view />
+    <navbar />
+    <b-container fluid>
+      <router-view />
+    </b-container>
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/navbar/Navbar';
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    'navbar': Navbar
+  }
 }
 </script>
 
@@ -17,6 +24,27 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+/* CUSTOM BOOTSTRAP STYLING */
+.btn-transparent {
+  background-color: transparent;
+}
+.btn-transparent:hover {
+  background-color: transparent;
+}
+.btn-transparent:active {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.btn-transparent:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.btn-transparent:active:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 </style>
