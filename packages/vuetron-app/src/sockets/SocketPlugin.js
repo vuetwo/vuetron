@@ -17,6 +17,12 @@ const SocketPlugin = function (port = 9090) {
     // if (Object.keys(store.state.clientState).length < 1) {
     //   socket.emit('requestClientState');
     // }
+
+    socket.on('clientAppConnected', function () {
+      let event = buildEvent('CLIENT APP CONNECTED', 'Successfully connected to client application.');
+      store.commit('addNewEvent', event);
+    });
+
     socket.on('setInitState', function (state) {
       let event = buildEvent('STATE INITIALIZED', state);
       // register event noting receipt of initial client state
@@ -39,12 +45,14 @@ const SocketPlugin = function (port = 9090) {
       // update client's current state to newState
       store.commit('updateClientState', newState);
       // check if any of the mutations are subscribed
-      for (let change of changes) {
-        const parsedPath = pathParser(JSON.stringify(change.path));
-        // if subscribed, push to that path's array for display
-        for (let key of Object.keys(store.state.subscriptions)) {
-          if (key === parsedPath || parsedPath.search(key) !== -1) {
-            store.commit('addEventToSubscription', { key, change });
+      if (changes) {
+        for (let change of changes) {
+          const parsedPath = pathParser(JSON.stringify(change.path));
+          // if subscribed, push to that path's array for display
+          for (let key of Object.keys(store.state.subscriptions)) {
+            if (key === parsedPath || parsedPath.search(key) !== -1) {
+              store.commit('addEventToSubscription', { key, change });
+            }
           }
         }
       }

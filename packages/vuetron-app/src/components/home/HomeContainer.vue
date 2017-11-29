@@ -9,7 +9,7 @@
             <img alt="vuetron-logo-lg" id="vuetron-logo-lg"
               src="http://i1153.photobucket.com/albums/p520/samanthasalley/vuetron/vuetron-logo-dark-new4x_zpspuzykrvm.png" />
             <br><br>
-            <p><em>A tool for testing and debugging your Vue/Vuex applications.</em></p>
+            <p><em>A tool for testing and debugging Vue.js applications</em></p>
           </div>
         </b-col>
       </b-row>
@@ -18,9 +18,17 @@
         <header class="text-center" id="test">
           <h4>Getting Started</h4>
         </header>
-        <p class="text-center">
-           Use the hamburger menu in the navbar to open the sidebar navigation, or select an option below!
-        </p>
+        <div class="text-center">
+          <p>
+            Make sure you have Vuetron <a href="https://github.com/tands/vuetron" target="_blank">properly configured</a> in your app.
+          </p>
+          <p>
+            Take a look at the options below and select where you want to begin.
+          </p>
+          <p>
+            Use the caret icon in the navbar at any point to toggle the sidebar navigation.
+          </p>
+        </div>
       </b-container>
       <hr>
       <b-container fluid>

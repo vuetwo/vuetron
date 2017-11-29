@@ -16,9 +16,16 @@ module.exports = function (server) {
         // emit event to request the current state.
         socket.broadcast.emit('requestClientState');
       } else {
-        // otherwise just respond with currently cached state
+        // otherwise emit connected event and
+        //  just respond with currently cached state
+        socket.broadcast.emit('clientAppConnected');
         socket.broadcast.emit('setInitState', currentState);
       }
+    });
+
+    // Listen for notification of client connection
+    socket.on('clientConnected', function () {
+      socket.broadcast.emit('clientAppConnected');
     });
 
     // Listens for the create of a Vuex Store and saves initial state

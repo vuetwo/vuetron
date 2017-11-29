@@ -9,6 +9,9 @@ const VuetronVue = {
     // set socket port to options or 9090 by default
     let { port = 9090 } = options;
     const socket = io('http://localhost:' + port);
+    // Emit socket event noting connection app connection to server
+    socket.emit('clientConnected');
+
     // Monkey patch $emit to be able to return emitted events to server
     patchEmit(socket, Vue);
     // Monkey patch fetch api to capture api requests and responses

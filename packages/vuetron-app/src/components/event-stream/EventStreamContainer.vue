@@ -43,16 +43,16 @@
               <template v-if="event.title === 'STATE INITIALIZED'">
                 <state-display :event="event" :evIdx="index" />
               </template>
-              <template v-if="event.title === 'STATE CHANGE'">
+              <template v-else-if="event.title === 'STATE CHANGE'">
                 <mutation-display :event="event" :evIdx="index" />
               </template>
-              <template v-if="event.title === 'API REQUEST / RESPONSE'">
+              <template v-else-if="event.title === 'API REQUEST / RESPONSE'">
                 <api-display :event="event" />
               </template>
-              <template v-if="event.title === 'EVENT EMITTED'">
+              <template v-else-if="event.title === 'EVENT EMITTED'">
                 <emit-event-display :event="event" />
               </template>
-              <div v-if="event.title === 'CONNECTED TO SERVER'">
+              <div v-else>
                 <p class="event-card-title"><strong>{{ event.title }}</strong></p>
                 <p>{{ event.display }}</p>
               </div>
