@@ -72,25 +72,9 @@ To use Vuetron, you will need both the desktop application and install the libra
 * Cross platform
   - Windows, Mac, and Linux ready.
 
-## Running the tests
+## Testing
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+Read the [TESTING.md](./docs/TESTING.md) file for more information on running tests.
 
 ## Built With
 
@@ -104,7 +88,7 @@ Give an example
 
 Found a bug? Have a suggestion? Feel free to submit issues!
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests if you're interesting in contributing to this project!
+Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests if you're interesting in contributing to this project!
 
 ## Authors
 
@@ -116,7 +100,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 * **Brandon Danh** - [https://github.com/brandondanh](https://github.com/brandondanh)
 
-See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
+See also the list of [contributors](./docs/CONTRIBUTORS.md) who participated in this project.
 
 ## License
 
