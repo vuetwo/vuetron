@@ -68,7 +68,6 @@ To use Vuetron, you will need both the desktop application and install the libra
 </div>
 
 #### Other benefits:
-* GitHub Flavored Markdown
 * Cross platform
   - Windows, Mac, and Linux ready.
 
