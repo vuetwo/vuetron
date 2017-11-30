@@ -10,11 +10,9 @@ Vuetron *NOT READY FOR DEPLOYMENT
 <h4 align="center"><a href="https://google.com"><img src="https://img.shields.io/github/release/talls-and-smalls/vuetron/all.svg"></a>
 <a href="https://travis-ci.org/talls-and-smalls/vuetron"><img src="https://img.shields.io/travis/talls-and-smalls/vuetron.svg"></a>
 <a href="https://www.npmjs.com/package/vuetron"><img src="https://img.shields.io/npm/v/vuetron.svg"></a>
+<a href="https://codeclimate.com/github/talls-and-smalls/vuetron/maintainability"><img src="https://api.codeclimate.com/v1/badges/6170d4ec90fa5cec78ae/maintainability" /></a>
 <a href="https://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg"></a>
 <a href="https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/talls-and-smalls/vuetron.svg"></a>
-<br/ >
-<a href="https://codeclimate.com/github/talls-and-smalls/vuetron/maintainability"><img src="https://api.codeclimate.com/v1/badges/6170d4ec90fa5cec78ae/maintainability" /></a>
-<a href="https://codeclimate.com/github/talls-and-smalls/vuetron/test_coverage"><img src="https://api.codeclimate.com/v1/badges/6170d4ec90fa5cec78ae/test_coverage" /></a>
 </h4>
 
 ## Getting Started
