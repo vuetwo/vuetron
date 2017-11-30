@@ -6,11 +6,11 @@ In order to use Vuetron, you have to download Vuetron and include the plugins in
 
 Here are the links:
 
-Download Mac
+[Download Mac](https://github.com/vuetwo/vuetron/releases/download/v1.0.0/Vuetron-1.0.0-osx.dmg)
 
-Download Windows
+[Download Windows](https://github.com/vuetwo/vuetron/releases/download/v1.0.0/Vuetron-1.0.0-win32-ia32.zip)
 
-Download Linux
+[Download Linux](https://github.com/vuetwo/vuetron/releases/download/v1.0.0/Vuetron-1.0.0-amd64.deb)
 
 If you want to build it yourself, follow the instructions below:
 
@@ -68,7 +68,7 @@ new Vue({
 });
 ```
 
-In Vuex Store file:
+In Vuex Store file (optional):
 ```js
 // Using ES6
 import Vue from 'vue';
