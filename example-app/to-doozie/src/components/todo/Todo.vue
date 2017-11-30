@@ -14,9 +14,7 @@
       </p>
     </b-card-body>
     <b-card-footer>
-      <div v-if="todo.status === 'active'">
-        <complete-todo-btn :todo="todo" />
-      </div>
+      <complete-todo-btn v-if="todo.status === 'active'" :todo="todo" />
       <delete-todo-btn :todoId="todo._id" />
     </b-card-footer>
   </b-card>

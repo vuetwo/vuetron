@@ -37,7 +37,7 @@ export default {
 
 <style scoped>
 #user-selection {
-  width: 750px;
+  width: 500px;
   background: lightgray;
   padding: 30px;
   border-radius: 5px;
