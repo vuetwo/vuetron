@@ -13,6 +13,10 @@
 <a href="https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/talls-and-smalls/vuetron.svg"></a>
 </h4>
 
+## Why Vuetron?
+
+We really like the current Vue dev tools for chrome and wanted a way to extend that functionality by hooking onto the vue application itself, so we built Vuetron! You’re still able to view the state and time travel debug, and now you can subscribe to state variables, observe api requests and responses, and visualize the component structure of your application.
+
 ## Getting Started
 
 To use Vuetron, you will need both the desktop application and install the library in your Vue project.  You can find the app download and installation instructions ![here](./docs/INSTALLATION.md).
