@@ -19,7 +19,7 @@
         </header>
         <div class="text-center">
           <p>
-            Make sure you have Vuetron <a href="https://github.com/vuetwo/vuetron" target="_blank">properly configured</a> in your app.
+            Make sure you have Vuetron <a href="https://github.com/vuetwo/vuetron/blob/master/docs/INSTALLATION.md" target="_blank">properly configured</a> in your app.
           </p>
           <p>
             Take a look at the options below and select where you want to begin.
