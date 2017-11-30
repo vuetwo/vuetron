@@ -7,12 +7,12 @@ const port = process.env.PORT || 9090;
 // Import sockets
 const io = require('./lib/sockets')(server);
 
+// Routing
+app.use(express.static(path.join(__dirname, 'assets')));
+
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
 });
-
-// Routing
-app.use(express.static(path.join(__dirname, 'public')));
 
 module.exports = {
   app,

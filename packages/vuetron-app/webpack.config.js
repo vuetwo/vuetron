@@ -5,17 +5,22 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: 'dist/',
     filename: 'build.js'
   },
   resolve: {
     alias: {
-      vue: 'vue/dist/vue.js'
+      vue: 'vue/dist/vue.js',
+      img: path.resolve(__dirname, './assets/logos')
     }
   },
   target: 'electron-renderer',
   module: {
     loaders: [
+      {
+        test: /\.html$/,
+        loader: 'vue-html'
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader'
@@ -33,13 +38,12 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {}
-          }
-        ]
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          limit: 10000,
+          name: '[name].[ext]?[hash]'
+        }
       }
     ]
   }
