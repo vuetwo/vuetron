@@ -63,7 +63,7 @@ export default {
 
 <style scoped>
 .todo-form {
-  width: 500px;
+  width: 75%;
   margin: auto;
 }
 

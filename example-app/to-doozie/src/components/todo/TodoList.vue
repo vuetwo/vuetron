@@ -1,6 +1,6 @@
 <template>
   <div id="todo-list">
-    <h2>Todo List</h2>
+    <h2>To-Doozie</h2>
     <div v-if="todos">
       <div v-for="(todo, index) in todos" :key="index">
         <b-row align-h="center">

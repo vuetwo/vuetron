@@ -13,14 +13,14 @@ const mutations = {
   updateClientState (state, newClientState) {
     state.clientState = newClientState;
   },
-  revertClientState (state, evIdx) {
+  revertClientState (state, eid) {
     const events = state.events.slice(0);
     const payload = {};
     payload.mutationLog = [];
     events.forEach((event, i) => {
-      if (i < evIdx && event.title === 'STATE CHANGE') {
+      if (event.id > eid && event.title === 'STATE CHANGE') {
         event.status = 'inactive';
-      } else if (i >= evIdx && !payload.initState) {
+      } else if (event.id <= eid && !payload.initState) {
         if (event.title === 'STATE CHANGE') {
           payload.mutationLog.unshift(event.mutation);
         } else if (event.title === 'STATE INITIALIZED') {
@@ -28,30 +28,39 @@ const mutations = {
         }
       }
     });
-
     state.events = events;
     let port = 9090;
     const socket = io('http://localhost:' + port);
     socket.emit('vuetronStateUpdate', payload);
   },
-  mutateClientState (state, evIdx) {
-    state.events[evIdx].status = 'active';
+  mutateClientState (state, eid) {
+    let events = state.events.slice(0);
+    let evIdx;
+    events = events.map((e, i) => {
+      if (e.id === eid) {
+        evIdx = i;
+        e.status = 'active';
+      }
+      return e;
+    });
+    state.events = events;
     let port = 9090;
     const socket = io('http://localhost:' + port);
     socket.emit('vuetronMutateState', state.events[evIdx].mutation);
   },
-  deactivateStateEvent (state, evIdx) {
+  deactivateStateEvent (state, eid) {
+    let events = state.events.slice(0);
     const payload = {};
     payload.mutationLog = [];
-    state.events.forEach((event, i) => {
-      if (i !== evIdx && event.title === 'STATE CHANGE' && !payload.initState) {
+    events.forEach((event, i) => {
+      if (event.id === eid) event.status = 'inactive';
+      if (event.id !== eid && event.title === 'STATE CHANGE' && !payload.initState) {
         payload.mutationLog.unshift(event.mutation);
-      } else if (i > evIdx && event.title === 'STATE INITIALIZED' && !payload.initState) {
+      } else if (event.id < eid && event.title === 'STATE INITIALIZED' && !payload.initState) {
         payload.initState = event.display;
       }
     });
-
-    state.events[evIdx].status = 'inactive';
+    state.events = events;
     let port = 9090;
     const socket = io('http://localhost:' + port);
     socket.emit('vuetronStateUpdate', payload);

@@ -2,7 +2,7 @@
   <div>
     <p class="event-card-title">
       <strong>{{ event.title }}  </strong>
-      <revert-btn v-if="event.status === 'active'" :evIdx="evIdx" />
+      <revert-btn v-if="event.status === 'active'" :eid="eid" />
     </p>
     <p><strong>Initial State:</strong></p>
     <vue-object-view :value="processInfo" :nowrap="nowrapBool" :setOpen="false" />
@@ -13,7 +13,7 @@
   import RevertBtn from '../../assets/RevertBtn.vue';
   export default {
     name: 'StateDisplay',
-    props: ['event', 'evIdx'],
+    props: ['event', 'eid'],
     data() {
       return {
         processedInfo: null,

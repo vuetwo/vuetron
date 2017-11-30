@@ -23,7 +23,7 @@ Vuetron *NOT READY FOR DEPLOYMENT
 * Instantly time travel between previous application states, or revert a whole group of state changes at once.
 
 <div align="center">
-  <img align="center" src="./docs/images/eventstream.gif" alt="time travel example" width="800" />
+  <img align="center" src="./docs/images/eventstream.gif" alt="time travel example" width="600" />
 </div>
 
 * See 5 types of events
@@ -38,14 +38,14 @@ Vuetron *NOT READY FOR DEPLOYMENT
     * The expanded card displays the request data as well as the response data
 
 <div align="center">
-  <img align="center" src="./docs/images/eventstream-items.png" alt="event items example" width="500" />
+  <img align="center" src="./docs/images/eventstream-items.png" alt="event items example" width="400" />
 </div>
 
 #### State Subscriptions:
 * Subscribe to specific parts of your application's state for faster debugging
 
 <div align="center">
-  <img align="center" src="./docs/images/subscription.gif" alt="subscriptions example" width="800" />
+  <img align="center" src="./docs/images/subscription.gif" alt="subscriptions example" width="700" />
 </div>
 
 #### Component Tree:
@@ -53,14 +53,14 @@ Vuetron *NOT READY FOR DEPLOYMENT
   * Animation allows you to collapse or expand the tree for specific hierarchy views.
 
 <div align="center">
-  <img align="center" src="./docs/images/visualization.gif" alt="component tree example" width="500" />
+  <img align="center" src="./docs/images/visualization.gif" alt="component tree example" width="100%" />
 </div>
 
 #### Collapsable Vuex State Object:
 * View and interact with an object representation of your application's most current state.
 
 <div align="center">
-  <img align="center" src="./docs/images/state-example.png" alt="state example" width="500" />
+  <img align="center" src="./docs/images/state-example.png" alt="state example" width="400" />
 </div>
 
 #### Other benefits:

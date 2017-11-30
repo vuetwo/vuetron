@@ -22,29 +22,29 @@
     </div>
     <div>
       <b-col cols="12">
-        <div class="row" v-for="(event, index) in filteredEvents" 
-          v-bind:event="event" v-bind:key="index">
+        <div class="row" v-for="event in filteredEvents" 
+          v-bind:event="event" v-bind:key="event.id">
           <div class="event-btn"
             :class="[event.show ? 'open collapsed' : null]">
             <div class="event-btn-content">
               <span class="event-btn-text"
                 @click="event.show=!event.show"
                 :class="[ event.status === 'inactive' ? 'inactive' : null, event.show ? 'collapsed' : null]" 
-                :aria-controls="`event-${index}`"
+                :aria-controls="`event-${event.id}`"
                 :aria-expanded="event.show ? 'true' : 'false'">
                 {{ event.title }} - {{ event.timestamp | formatTime }}
               </span>
-              <deactivate-btn v-if="event.title === 'STATE CHANGE' && event.status === 'active'" :evIdx="index" />
-              <mutate-btn v-if="event.title === 'STATE CHANGE' && event.status === 'inactive'" :evIdx="index" />
+              <deactivate-btn v-if="event.title === 'STATE CHANGE' && event.status === 'active'" :eid="event.id" />
+              <mutate-btn v-if="event.title === 'STATE CHANGE' && event.status === 'inactive'" :eid="event.id" />
             </div>
           </div>
-          <b-collapse class="event-card-wrapper" :id="`event-${index}`" v-model="event.show">
+          <b-collapse class="event-card-wrapper" :id="`event-${event.id}`" v-model="event.show">
             <b-card class="event-card">
               <template v-if="event.title === 'STATE INITIALIZED'">
-                <state-display :event="event" :evIdx="index" />
+                <state-display :event="event" :eid="event.id" />
               </template>
               <template v-else-if="event.title === 'STATE CHANGE'">
-                <mutation-display :event="event" :evIdx="index" />
+                <mutation-display :event="event" :eid="event.id" />
               </template>
               <template v-else-if="event.title === 'API REQUEST / RESPONSE'">
                 <api-display :event="event" />
@@ -101,20 +101,20 @@
       }
     },
     methods: {
-      revertState(evIdx) {
-        this.$store.commit('revertClientState', evIdx);
+      revertState(eid) {
+        this.$store.commit('revertClientState', eid);
       },
-      mutateState(evIdx) {
-        this.$store.commit('mutateClientState', evIdx);
+      mutateState(eid) {
+        this.$store.commit('mutateClientState', eid);
       },
-      deactivateSingleEvent(evIdx) {
-        this.$store.commit('deactivateStateEvent', evIdx);
+      deactivateSingleEvent(eid) {
+        this.$store.commit('deactivateStateEvent', eid);
       },
-      emitEventCollapseToggleForReqObj(evIdx) {
-        this.$store.commit('toggleEventCollapseForReqObj', evIdx);
+      emitEventCollapseToggleForReqObj(eid) {
+        this.$store.commit('toggleEventCollapseForReqObj', eid);
       },
-      emitEventCollapseToggleForResObj(evIdx) {
-        this.$store.commit('toggleEventCollapseForResObj', evIdx);
+      emitEventCollapseToggleForResObj(eid) {
+        this.$store.commit('toggleEventCollapseForResObj', eid);
       }
     },
     filters: {

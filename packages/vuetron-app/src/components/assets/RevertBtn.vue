@@ -11,7 +11,7 @@
 <script>
   export default {
     name: 'RevertButton',
-    props: ['evIdx'],
+    props: ['eid'],
     data() {
       return {
         revertBtnHelpText: 'Revert application\'s Vuex state back to selected point.'
@@ -21,7 +21,7 @@
     },
     methods: {
       revertState() {
-        this.$store.commit('revertClientState', this.evIdx);
+        this.$store.commit('revertClientState', this.eid);
       }
     },
     components: {

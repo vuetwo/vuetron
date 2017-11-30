@@ -9,7 +9,7 @@
 <script>
   export default {
     name: 'MutateButton',
-    props: ['evIdx'],
+    props: ['eid'],
     data() {
       return {
         mutateBtnHelpText: 'Re-commit selected mutation.'
@@ -19,7 +19,7 @@
     },
     methods: {
       mutateState() {
-        this.$store.commit('mutateClientState', this.evIdx);
+        this.$store.commit('mutateClientState', this.eid);
       }
     },
     components: {

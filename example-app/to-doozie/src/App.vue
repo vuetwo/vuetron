@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <navbar />
-    <b-container fluid>
+    <div class="bounce">
+      <img src="./assets/vbot-icon-light.png" alt="spinning icon"
+        class="vbot-icon spin" />
+    </div>
+    <b-container class="content" fluid>
       <router-view />
     </b-container>
   </div>
@@ -18,13 +22,49 @@ export default {
 </script>
 
 <style>
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+@keyframes ani {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 70%;
+  }
+  100% {
+    left: 0;
+  }
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   height: 100%;
-  background: steelblue;
+  background: #001453 url('./assets/space-background.jpg') repeat-y;
+  background-size: 100% 100%;
+}
+
+.spin {
+  -webkit-animation:spin 2s linear infinite;
+  -moz-animation:spin 2s linear infinite;
+  animation:spin 2s linear infinite;
+}
+
+.bounce {
+  position: absolute;
+  /* x-transition: all 5s ease-in-out; */
+  animation: ani 5s infinite;
+}
+
+.vbot-icon {
+  max-height: 150px;
+  /* margin: 30px auto; */
+}
+
+.content {
+  margin-top: 225px;
 }
 
 /* CUSTOM BOOTSTRAP STYLING */
