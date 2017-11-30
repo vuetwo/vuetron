@@ -24,6 +24,9 @@ $ cd vuetron/packages/vuetron-app
 # Install dependencies
 $ npm install
 
+# Install vuetron-server dependencies
+$ npm install ./vuetron-server
+
 # Run the app server
 $ npm run dev-server
 
