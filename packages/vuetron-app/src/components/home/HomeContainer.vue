@@ -5,9 +5,8 @@
       <b-row id="welcome-banner">
         <b-col cols="12">
           <div class="text-center">
-            <h3>Welcome to</h3>
             <img alt="vuetron-logo-lg" id="vuetron-logo-lg"
-              src="http://i1153.photobucket.com/albums/p520/samanthasalley/vuetron/vuetron-logo-dark-new4x_zpspuzykrvm.png" />
+              src="../../assets/vuetron-logo-dark-new-3x.png" />
             <br><br>
             <p><em>A tool for testing and debugging Vue.js applications</em></p>
           </div>
@@ -20,7 +19,7 @@
         </header>
         <div class="text-center">
           <p>
-            Make sure you have Vuetron <a href="https://github.com/tands/vuetron" target="_blank">properly configured</a> in your app.
+            Make sure you have Vuetron <a href="https://github.com/vuetwo/vuetron" target="_blank">properly configured</a> in your app.
           </p>
           <p>
             Take a look at the options below and select where you want to begin.
