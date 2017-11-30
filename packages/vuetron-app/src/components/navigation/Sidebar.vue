@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
       <div id="navbar-logo" class="text-center">
-        <img alt="vuetron-logo" class="text-center" src="http://i1153.photobucket.com/albums/p520/samanthasalley/vuetron/vuetron-logo-light-new-v2_zpsfksut9qb.png" />
+        <img alt="vuetron-logo" class="text-center" src="../../assets/vuetron-logo-light-new-v2.png" />
       </div>
       <b-list-group id="navbar-links" class="text-center">
         <b-list-group-item v-for="(routeObj, index) in routes" :key="index" class="router-item"
