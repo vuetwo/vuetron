@@ -14,13 +14,13 @@ function getInstallerConfig () {
   const outPath = path.join(rootPath, 'release-builds')
 
   return Promise.resolve({
-    appDirectory: path.join(outPath, 'React-Primer-win32-ia32/'),
-    authors: 'Kat Sampias, Vince Vuong, Ken Lee',
+    appDirectory: path.join(outPath, 'Vuetron-win32-ia32/'),
+    authors: 'Samantha Salley, Brandon Danh, Kelly Gilliam, Louis Rouaze',
     noMsi: true,
     outputDirectory: path.join(outPath, 'windows-installer'),
-    exe: 'react-primer.exe',
-    setupExe: 'ReactPrimerInstaller.exe',
-    setupIcon: path.join(rootPath, 'assets', 'icons', 'win', 'icon.ico')
+    exe: 'Vuetron.exe',
+    setupExe: 'VuetronInstaller.exe',
+    setupIcon: path.join(rootPath, 'assets', 'vuetron-icon.png.ico')
   })
 
 }
