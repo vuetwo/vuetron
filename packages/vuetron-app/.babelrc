@@ -1,6 +1,11 @@
 {
-  "presets": [
-      ["es2015", { "modules": false }]
-  ],
-  "plugins": ["transform-object-rest-spread"]
+  "presets": ["es2015"],
+  "env": {
+    "production": {
+      "presets": ["babili"]
+    }
+  },
+  "plugins": [
+    "transform-object-rest-spread"
+  ]
 }
