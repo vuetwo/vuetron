@@ -9,7 +9,7 @@
 <script>
   export default {
     name: 'DeactivateButton',
-    props: ['evIdx'],
+    props: ['eid'],
     data() {
       return {
         deactivateBtnHelpText: 'Update application to reflect state if selected mutation had not occurred.'
@@ -19,7 +19,8 @@
     },
     methods: {
       deactivateSingleEvent() {
-        this.$store.commit('deactivateStateEvent', this.evIdx);
+        console.log('clicked', this.eid);
+        this.$store.commit('deactivateStateEvent', this.eid);
       }
     },
     components: {

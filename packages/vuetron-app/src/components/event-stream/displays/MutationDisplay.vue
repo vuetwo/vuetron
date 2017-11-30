@@ -2,7 +2,7 @@
   <div>
     <p class="event-card-title">
       <strong>{{ event.title }}  </strong>
-      <revert-btn v-if="event.status === 'active'" :evIdx="evIdx" />
+      <revert-btn v-if="event.status === 'active'" :eid="eid" />
     </p>
     <p><strong>Change Log:</strong></p>
     <mutations :changes="event.display.changes" />
@@ -14,7 +14,7 @@
   import RevertBtn from '../../assets/RevertBtn.vue';
   export default {
     name: 'MutationDisplay',
-    props: ['event', 'evIdx'],
+    props: ['event', 'eid'],
     components: {
       'mutations': Mutations,
       'revert-btn': RevertBtn

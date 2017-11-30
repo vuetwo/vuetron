@@ -2,15 +2,24 @@ const pathParser = (str) => {
   return str.split(/[^A-Za-z0-9]/).filter(elem => elem !== null && elem !== '').join('.');
 };
 
+const idGenerator = () => {
+  let counter = 0;
+  return function () {
+    counter++;
+    return counter;
+  };
+};
+
 const io = require('socket.io-client');
 
 // setup plugin to connect vuex store to server sockets
 const SocketPlugin = function (port = 9090) {
   return store => {
+    const getId = idGenerator();
     // initialize socket connection
     const socket = io('http://localhost:' + port);
     // register event noting connection to sockets (client app)
-    let initEvent = buildEvent('CONNECTED TO SERVER', 'Successfully connected Vuetron to server.');
+    let initEvent = buildEvent(getId(), 'CONNECTED TO SERVER', 'Successfully connected Vuetron to server.');
     store.commit('addNewEvent', initEvent);
 
     // request current client state on socket connection
@@ -19,12 +28,12 @@ const SocketPlugin = function (port = 9090) {
     // }
 
     socket.on('clientAppConnected', function () {
-      let event = buildEvent('CLIENT APP CONNECTED', 'Successfully connected to client application.');
+      let event = buildEvent(getId(), 'CLIENT APP CONNECTED', 'Successfully connected to client application.');
       store.commit('addNewEvent', event);
     });
 
     socket.on('setInitState', function (state) {
-      let event = buildEvent('STATE INITIALIZED', state);
+      let event = buildEvent(getId(), 'STATE INITIALIZED', state);
       // register event noting receipt of initial client state
       store.commit('addNewEvent', event);
       // initialize client state value
@@ -35,7 +44,7 @@ const SocketPlugin = function (port = 9090) {
     //  vuetron's client state store accordingly along
     //  with mutation log
     socket.on('stateUpdate', function (changes, mutation, newState) {
-      let updatedState = buildEvent('STATE CHANGE', {'changes': changes});
+      let updatedState = buildEvent(getId(), 'STATE CHANGE', {'changes': changes});
       // add mutations
       updatedState.mutation = mutation;
       // add newState
@@ -59,7 +68,7 @@ const SocketPlugin = function (port = 9090) {
     });
 
     socket.on('eventUpdate', function (event) {
-      let newEvent = buildEvent('EVENT EMITTED', event);
+      let newEvent = buildEvent(getId(), 'EVENT EMITTED', event);
       store.commit('addNewEvent', newEvent);
     });
 
@@ -74,15 +83,16 @@ const SocketPlugin = function (port = 9090) {
         responseObj: response
       };
       delete display.responseObj.requestConfig;
-      const apiEvent = buildEvent('API REQUEST / RESPONSE', display);
+      const apiEvent = buildEvent(getId(), 'API REQUEST / RESPONSE', display);
       store.commit('addNewEvent', apiEvent);
     });
   };
 };
 
 // Build events for display in EventStream
-function buildEvent (title, display, hidden = {}) {
+function buildEvent (id, title, display, hidden = {}) {
   const eventObj = {
+    id,
     title,
     display,
     hidden,
