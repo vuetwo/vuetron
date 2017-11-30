@@ -19,7 +19,7 @@ We really like the current Vue dev tools for chrome and wanted a way to extend t
 
 ## Getting Started
 
-To use Vuetron, you will need both the desktop application and install the library in your Vue project.  You can find the app download and installation instructions ![here](./docs/INSTALLATION.md).
+To use Vuetron, you will need both the desktop application and node module in your Vue project.  You can find the app download and installation instructions ![here](./docs/INSTALLATION.md).
 
 ## Key Features
 
