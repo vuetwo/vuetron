@@ -17,6 +17,10 @@ Vuetron *NOT READY FOR DEPLOYMENT
 <a href="https://codeclimate.com/github/talls-and-smalls/vuetron/test_coverage"><img src="https://api.codeclimate.com/v1/badges/6170d4ec90fa5cec78ae/test_coverage" /></a>
 </h4>
 
+## Getting Started
+
+To use Vuetron, you will need both the desktop application and install the library in your Vue project.  You can find the app download and installation instructions ![here](./docs/INSTALLATION.md).
+
 ## Key Features
 
 #### Eventstream with Time Travel Debugging:
@@ -68,49 +72,9 @@ Vuetron *NOT READY FOR DEPLOYMENT
 * Cross platform
   - Windows, Mac, and Linux ready.
 
-## Getting Started
+## Testing
 
-To use Vuetron, you will need both the desktop application and install the library in your Vue project
-
-### Installing Vuetron desktop app
-
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
-
-```bash
-# Clone this repository
-$ git clone https://github.com/talls-and-smalls/vuetron.git
-
-# Go into the repository
-$ cd vuetron
-
-# Install dependencies
-$ npm install
-
-# Run the app
-$ npm start
-```
-
-A step by step series of examples that tell you have to get a development env running
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+Read the [TESTING.md](./docs/TESTING.md) file for more information on running tests.
 
 ## Built With
 
@@ -124,7 +88,7 @@ Give an example
 
 Found a bug? Have a suggestion? Feel free to submit issues!
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests if you're interesting in contributing to this project!
+Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests if you're interesting in contributing to this project!
 
 ## Authors
 
@@ -136,7 +100,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 * **Brandon Danh** - [https://github.com/brandondanh](https://github.com/brandondanh)
 
-See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
+See also the list of [contributors](./docs/CONTRIBUTORS.md) who participated in this project.
 
 ## License
 

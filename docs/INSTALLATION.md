@@ -16,7 +16,7 @@ If you want to build it yourself, follow the instructions below:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/talls-and-smalls/vuetron.git
+$ git clone https://github.com/vuetwo/vuetron.git
 
 # Go into the repository
 $ cd vuetron/packages/vuetron-app
@@ -40,7 +40,7 @@ Installing the Vuetron npm module
 $ npm install vuetron --save-dev
 ```
 
-In main Vue file (using ES6):
+In main Vue file:
 ```js
 // Using ES6
 import Vue from 'vue'
@@ -65,7 +65,7 @@ new Vue({
 });
 ```
 
-In Vuex Store file (using ES6):
+In Vuex Store file:
 ```js
 // Using ES6
 import Vue from 'vue';
