@@ -92,41 +92,6 @@ $ npm start
 
 A step by step series of examples that tell you have to get a development env running
 
-### Adding Vuetron plugins in your application
-
-In order for Vuetron to access the application, the vuetron library must be included
-
-Installing the Vuetron npm module
-```bash
-$ npm install vuetron
-```
-
-In Vue:
-```js
-import Vue from 'vue'
-import App from './App.vue'
-
-import vuetron from 'vuetron';
-
-Vue.use(vuetron.VuetronVue);
-
-new Vue({
-  // ...
-});
-```
-
-In Vuex Store:
-```js
-import Vue from 'vue';
-import Vuex from 'vuex';
-import vuetron from 'vuetron';
-
-const store = new Vuex.Store({
-  // ...
-  plugins: [vuetron.VuetronVuex()]
-})
-```
-
 ## Running the tests
 
 Explain how to run the automated tests for this system
