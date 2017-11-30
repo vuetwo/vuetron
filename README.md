@@ -19,7 +19,7 @@ Vuetron *NOT READY FOR DEPLOYMENT
 
 ## Getting Started
 
-To use Vuetron, you will need both the desktop application and install the library in your Vue project.  You can find full installation instructions ![here](./docs/INSTALLATION.md).
+To use Vuetron, you will need both the desktop application and install the library in your Vue project.  You can find the app download and installation instructions ![here](./docs/INSTALLATION.md).
 
 ## Key Features
 
