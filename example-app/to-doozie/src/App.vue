@@ -33,7 +33,7 @@ export default {
     left: 70%;
   }
   100% {
-    left: 0;
+    left: 5%;
   }
 }
 #app {
