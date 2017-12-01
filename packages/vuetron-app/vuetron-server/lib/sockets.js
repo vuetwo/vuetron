@@ -9,20 +9,6 @@ module.exports = function (server) {
     // with new incoming states
     let currentState;
 
-    // Listen for request for client state from Vuetron
-    socket.on('requestClientState', function () {
-      // If we have yet to store a state from client
-      if (!currentState) {
-        // emit event to request the current state.
-        socket.broadcast.emit('requestClientState');
-      } else {
-        // otherwise emit connected event and
-        //  just respond with currently cached state
-        socket.broadcast.emit('clientAppConnected');
-        socket.broadcast.emit('setInitState', currentState);
-      }
-    });
-
     // Listen for notification of client connection
     socket.on('clientConnected', function () {
       socket.broadcast.emit('clientAppConnected');

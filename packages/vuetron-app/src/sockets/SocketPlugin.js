@@ -22,11 +22,6 @@ const SocketPlugin = function (port = 9090) {
     let initEvent = buildEvent(getId(), 'CONNECTED TO SERVER', 'Successfully connected Vuetron to server.');
     store.commit('addNewEvent', initEvent);
 
-    // request current client state on socket connection
-    // if (Object.keys(store.state.clientState).length < 1) {
-    //   socket.emit('requestClientState');
-    // }
-
     socket.on('clientAppConnected', function () {
       let event = buildEvent(getId(), 'CLIENT APP CONNECTED', 'Successfully connected to client application.');
       store.commit('addNewEvent', event);
