@@ -10,6 +10,8 @@
 
 * **Brandon Danh** - [https://github.com/brandondanh](https://github.com/brandondanh)
 
+* **Janelle Wong** - [https://github.com/janellewg](https://github.com/janellewg)
+
 ## Contributors
 
 Team Vuetron welcomes any contributors to submit a pull request for review!
