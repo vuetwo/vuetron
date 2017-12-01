@@ -6,7 +6,7 @@
 <p align="center">A <a href="https://vuejs.org/" target="_blank">Vue</a> testing and debugging desktop app built on top of <a href="http://electron.atom.io" target="_blank">Electron</a>. <a href="http://twitter.com/home?status=Check out Vuetron! Testing and debugging for Vue https://git.io/vFwOq"><img src="https://img.shields.io/twitter/url/https/github.com/talls-and-smalls/vuetron/.svg?style=social"></a></p>
 
 <h4 align="center"><a href="https://google.com"><img src="https://img.shields.io/github/release/talls-and-smalls/vuetron/all.svg"></a>
-<a href="https://travis-ci.org/talls-and-smalls/vuetron"><img src="https://img.shields.io/travis/talls-and-smalls/vuetron.svg"></a>
+<a href="https://travis-ci.org/vuetwo/vuetron"><img src="https://img.shields.io/travis/vuetwo/vuetron.svg"></a>
 <a href="https://www.npmjs.com/package/vuetron"><img src="https://img.shields.io/npm/v/vuetron.svg"></a>
 <a href="https://codeclimate.com/github/talls-and-smalls/vuetron/maintainability"><img src="https://api.codeclimate.com/v1/badges/6170d4ec90fa5cec78ae/maintainability" /></a>
 <a href="https://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg"></a>
