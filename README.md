@@ -13,7 +13,7 @@
 <a href="https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/talls-and-smalls/vuetron.svg"></a>
 </h4>
 
-## Why Vuetron? 我們為什麼用[Vuetron](./docs/CHINESETRANSLATION.md)?
+## Why Vuetron? 我們為什麼用 [Vuetron](./docs/CHINESETRANSLATION.md)?
 
 We really like the current Vue dev tools for chrome and wanted a way to extend that functionality by hooking onto the vue application itself, so we built Vuetron! You’re still able to view the state and time travel debug, and now you can subscribe to state variables, observe api requests and responses, and visualize the component structure of your application.
 
