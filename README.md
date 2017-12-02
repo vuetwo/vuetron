@@ -72,7 +72,8 @@ To use Vuetron, you will need both the desktop application and node module in yo
   - Windows, Mac, and Linux ready.
   
 ## Try it out
-Once you've downloaded the app you can fork or clone our [example app](https://github.com/vuetwo/vuetron-example-app) with the plugins pre-configured so you can test out Vuetron before committing to adding it to your projects.
+
+If you want to test out Vuetron before you commit to installing it in your project, you can fork or clone our [example app](https://github.com/vuetwo/vuetron-example-app) with the plugins pre-configured. (Vuetron app download required separately)
 
 ## Testing
 
