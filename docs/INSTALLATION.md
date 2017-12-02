@@ -38,6 +38,9 @@ $ npm run dev
 
 In order for Vuetron to access the application, the Vuetron library must be included
 
+#### Try it out
+If you want to test out Vuetron before you commit to installing it in your project, you can fork or clone our [example app](https://github.com/vuetwo/vuetron-example-app) with the plugins pre-configured. (Vuetron app download required separately)
+
 Installing the Vuetron npm module
 ```bash
 $ npm install vuetron --save-dev
