@@ -15,7 +15,7 @@
 
 ## Why Vuetron? 我們為什麼用 [Vuetron](./docs/CHINESETRANSLATION.md)?
 
-We really like the current Vue dev tools for chrome and wanted a way to extend that functionality by hooking onto the vue application itself, so we built Vuetron! You’re still able to view the state and time travel debug, and now you can subscribe to state variables, observe api requests and responses, and visualize the component structure of your application.
+We really like the current Vue dev tools for chrome and wanted a way to extend that functionality by hooking onto the vue application itself, so we built Vuetron! Like the Developer Tools, you’re still able to view emitted events, view application state, and time travel debug. With Vuetron you have the added the ability to subscribe to specific state variables, observe API requests and responses, and visualize the component structure of your application giving you a larger toolkit for testing and debugging your Vue.js application.
 
 ## Getting Started
 
@@ -70,6 +70,9 @@ To use Vuetron, you will need both the desktop application and node module in yo
 #### Other benefits:
 * Cross platform
   - Windows, Mac, and Linux ready.
+  
+## Try it out
+Once you've downloaded the app you can fork or clone our [example app](https://github.com/vuetwo/vuetron-example-app) with the plugins pre-configured so you can test out Vuetron before committing to adding it to your projects.
 
 ## Testing
 
