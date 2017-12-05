@@ -3,7 +3,7 @@
 <br>
 </h1>
 
-<p align="center">A tool for testing and debugging <a href="https://vuejs.org/" target="_blank">Vue.js</a> applications. <a href="http://twitter.com/home?status=Check out #Vuetron! A tool for testing and debugging #Vuejs applications. https://git.io/vFwOq"><a href="https://github.com/vuetwo/vuetron"><img src="https://img.shields.io/github/stars/vuetwo/vuetron.svg?style=social&label=Stars" /></a></p>
+<p align="center">A tool for testing and debugging <a href="https://vuejs.org/" target="_blank">Vue.js</a> applications.<a href="https://github.com/vuetwo/vuetron"><img src="https://img.shields.io/github/stars/vuetwo/vuetron.svg?style=social&label=Stars" /></a></p>
 
 <p align="center">是一個可以幫助您 Vue.js 的項目測試及偵錯的工具, 也同時支持 Vuex及 Vue-Router.</p>
 
