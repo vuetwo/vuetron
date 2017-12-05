@@ -3,7 +3,9 @@
 <br>
 </h1>
 
-<p align="center">A <a href="https://vuejs.org/" target="_blank">Vue</a> testing and debugging desktop app built on top of <a href="http://electron.atom.io" target="_blank">Electron</a>. <a href="http://twitter.com/home?status=Check out Vuetron! Testing and debugging for Vue https://git.io/vFwOq"><img src="https://img.shields.io/twitter/url/https/github.com/talls-and-smalls/vuetron/.svg?style=social"></a></p>
+<p align="center">A tool for testing and debugging <a href="https://vuejs.org/" target="_blank">Vue.js</a> applications. <a href="http://twitter.com/home?status=Check out #Vuetron! A tool for testing and debugging #Vuejs applications. https://git.io/vFwOq"><img src="https://img.shields.io/twitter/url/https/github.com/vuetwo/vuetron/.svg?style=social"></a></p>
+
+<p align="center">是一個可以幫助您 Vue.js 的項目測試及偵錯的工具, 也同時支持 Vuex及 Vue-Router.</p>
 
 <h4 align="center"><a href="https://google.com"><img src="https://img.shields.io/github/release/talls-and-smalls/vuetron/all.svg"></a>
 <a href="https://travis-ci.org/vuetwo/vuetron"><img src="https://img.shields.io/travis/vuetwo/vuetron.svg"></a>
