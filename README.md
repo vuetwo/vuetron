@@ -7,12 +7,12 @@
 
 <p align="center">是一個可以幫助您 Vue.js 的項目測試及偵錯的工具, 也同時支持 Vuex及 Vue-Router.</p>
 
-<h4 align="center"><a href="https://google.com"><img src="https://img.shields.io/github/release/talls-and-smalls/vuetron/all.svg"></a>
+<h4 align="center"><a href="https://google.com"><img src="https://img.shields.io/github/release/vuetwo/vuetron/all.svg"></a>
 <a href="https://travis-ci.org/vuetwo/vuetron"><img src="https://img.shields.io/travis/vuetwo/vuetron.svg"></a>
 <a href="https://www.npmjs.com/package/vuetron"><img src="https://img.shields.io/npm/v/vuetron.svg"></a>
-<a href="https://codeclimate.com/github/talls-and-smalls/vuetron/maintainability"><img src="https://api.codeclimate.com/v1/badges/6170d4ec90fa5cec78ae/maintainability" /></a>
+<a href="https://codeclimate.com/github/vuetwo/vuetron/maintainability"><img src="https://api.codeclimate.com/v1/badges/6170d4ec90fa5cec78ae/maintainability" /></a>
 <a href="https://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg"></a>
-<a href="https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/talls-and-smalls/vuetron.svg"></a>
+<a href="https://github.com/talls-and-smalls/vuetron/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/vuetwo/vuetron.svg"></a>
 </h4>
 
 ## Why Vuetron? 我們為什麼用 [Vuetron](./docs/CHINESETRANSLATION.md)?
