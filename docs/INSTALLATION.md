@@ -48,18 +48,6 @@ $ npm install vuetron --save-dev
 
 In main Vue file:
 ```js
-// Using ES6
-import Vue from 'vue'
-import App from './App.vue'
-import { VuetronVue } from 'vuetron';
-
-Vue.use(VuetronVue);
-
-new Vue({
-  // ...
-});
-
-// Using ES5
 import Vue from 'vue'
 import App from './App.vue'
 import vuetron from 'vuetron';
@@ -73,17 +61,6 @@ new Vue({
 
 In Vuex Store file (optional):
 ```js
-// Using ES6
-import Vue from 'vue';
-import Vuex from 'vuex';
-import { VuetronVuex } from 'vuetron';
-
-const store = new Vuex.Store({
-  // ...
-  plugins: [VuetronVuex()]
-})
-
-// Using ES5
 import Vue from 'vue';
 import Vuex from 'vuex';
 import vuetron from 'vuetron';
