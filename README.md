@@ -97,7 +97,7 @@ Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details on our code of
 
 ## Authors
 
-* **Samantha Salley** - [https://github.com/samanthasalley](https://github.com/samanthasalley)
+* **Samantha Barli (Salley)** - [https://github.com/sbarli](https://github.com/sbarli)
 
 * **Louis Rouaze** - [https://github.com/louisrouaze](https://github.com/louisrouaze)
 
